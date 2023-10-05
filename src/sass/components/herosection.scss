@@ -1,0 +1,97 @@
+.hero_section{
+    // border: 1px solid red;
+    padding-top: 7rem;
+    position: relative;
+    height: 100vh;
+
+    &_main{
+        // border: 1px solid blue;
+        // margin-top: 6rem;
+        width: 75%;
+        margin: 0 auto;
+        height: 70vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+
+        &_center{
+            width: 60%;
+
+            &_txt{
+                position: relative;
+
+                & h5{
+                    color: white;
+                    font-family: var(--syne);
+                    font-size: 3.5rem;
+                    font-weight: 300;
+                    line-height: 2.9rem;
+                }
+
+                & img{
+                    position: absolute;
+                    bottom: -20px;
+                    left: -30px;
+                    width: 360px;
+                    object-fit: cover;
+                }
+
+            }
+
+            &_btn{
+                margin-top: 5rem;
+                // border-radius: 12px;
+                // background:none;
+                padding: .5rem 1.4rem;
+                font-family: var(--raleway);
+                font-weight: 700;
+                color: white;
+                font-size: .9rem;
+                border-radius: 5px;
+                border: 1px solid var(#7900D9);
+                background: linear-gradient(70deg, #7900D9 16.65%, #0097FF 78.93%);
+            }
+        }
+
+        &_relay{
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            & h5{
+                color: rgba(255, 255, 255, 0.346);
+                font-family: var(--syne);
+                font-size: 7rem;
+                font-style: normal;
+                font-weight: 800;
+                line-height: 74%; /* 148px */
+                // letter-spacing: 86px;
+                // border: 1px solid red;
+            }
+
+        }
+
+    }
+
+    &_bg{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        object-fit: cover;
+        object-position: top;
+        height: 100%;
+    }
+
+    &_spiral{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 40%;
+        object-fit: contain;
+        object-position: top;
+        height: 100%;
+    }
+
+}
