@@ -17,10 +17,11 @@ const HeroSectionComponents = () => {
                         <h5>
                             Innovative DeFi tool for
                             secure OTC trading 
-                            experience.
+                            <h5 style={{position:"relative"}} >  experience.
+                                <img src={roundImg} alt='vexxf' />
+                            </h5>
                         </h5>
 
-                        <img src={roundImg} alt='vexxf' />
 
                     </div>
 
