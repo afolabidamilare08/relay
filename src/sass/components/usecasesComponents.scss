@@ -126,3 +126,46 @@
     }
 
 }
+
+@media (max-width:900px){
+
+    .use_case_home{
+        width: 100%;
+    }
+
+    .use_case_home_Fpart_div{
+        width: 46%;
+    }
+
+    .use_case_home_img{
+        display: none;
+    }
+
+    .use_case_home_Fpart_div_title{
+        font-size: 1rem;
+    }
+
+    .use_case_home_Fpart_div h6{
+        font-size: .95rem;
+    }
+
+}
+
+@media (max-width:626px) {
+    
+    .use_case_home_Fpart{
+        flex-direction: column;
+        margin-top: 0;
+
+        &:first-child{
+            margin-top: 3rem;
+        }
+
+    }
+
+    .use_case_home_Fpart_div{
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+}
