@@ -20,6 +20,7 @@ body{
     padding: 0;
     background-color: var(--background_color) ;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -31,4 +32,5 @@ h1,h2,h3,h4,h5,h6{
 @import './components/header.scss';
 @import './components/herosection.scss';
 @import './components/usecasesComponents.scss';
+@import './components/roadMapComponents.scss';
 @import './pages/landingpage.scss';
