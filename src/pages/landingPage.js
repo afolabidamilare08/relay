@@ -1,5 +1,6 @@
 import RoadMapComponents from "../components/RoadMapComponents";
 import HeroSectionComponents from "../components/heroSectionComponents";
+import OurTokennomicsComponents from "../components/ourtokenNomicsComponents";
 import UsecasesComponents from "../components/usecasesComponents";
 
 const LandingPage = () => {
@@ -16,7 +17,7 @@ const LandingPage = () => {
 
                 <RoadMapComponents/>
 
-
+                <OurTokennomicsComponents/>
 
             </div>
 

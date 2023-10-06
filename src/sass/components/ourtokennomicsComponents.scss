@@ -1,0 +1,93 @@
+.our_tokenNomics_div{
+    width: 90%;
+    margin: 5rem auto;
+    // height: 100vh;
+    padding: 1rem;
+    border-radius: 10px;
+    // box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    opacity: 0.8;
+    background-color: #cfd0d22a;
+    padding-bottom: 7rem;
+
+
+    &_header{
+        
+        & h5{
+            width: fit-content;
+            color: white;
+            margin: 0 auto;
+            font-family: var(--raleway);
+            font-size: 1.8rem;
+            font-weight: 700;
+            position: relative;
+
+            & span{
+                background: linear-gradient(70deg, #7900D9 16.65%, #0097FF 78.93%);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            & img{
+                // border: 1px solid red;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+            }
+
+        }
+
+    }
+
+    &_body{
+
+        &_div{
+
+            &_top{
+                display: flex;
+                align-items: center;
+
+                & h5{
+                    font-family: var(--syne);
+                    color: rgba(225, 225, 227, 1);
+                }
+
+                & h6{
+                    color: white;
+                    font-family: var(--syne);
+                    font-weight: 700;
+                    font-size: 1.1rem;
+                    margin-top: -.6rem;
+                    margin-left: .3rem;
+                }
+
+            }
+
+            &_btm{
+                width: 100%;
+                height: .5rem;
+                border-radius: 30px;
+                background-color: rgba(225, 225, 227, 1);
+
+                &_mid{
+                    width: 45%;
+                    height: 100%;
+                    background-color: red;
+                    border-radius: 30px;
+                }
+
+            }
+
+        }
+
+    }
+
+
+}
+
+
+
+@media (max-width:1112px){
+
+
+}
