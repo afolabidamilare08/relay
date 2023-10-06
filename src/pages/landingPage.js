@@ -1,4 +1,5 @@
 import HeroSectionComponents from "../components/heroSectionComponents";
+import UsecasesComponents from "../components/usecasesComponents";
 
 const LandingPage = () => {
 
@@ -7,6 +8,12 @@ const LandingPage = () => {
         <div>
 
             <HeroSectionComponents/>
+
+            <div className="landing_page_oth" >
+
+                <UsecasesComponents/>
+
+            </div>
 
         </div>
 
