@@ -137,15 +137,15 @@
     .our_tokenNomics_div_miniRight{
         display: block;
         position: absolute;
-        top: 123px;
-        left: 0px;
+        top: 183px;
+        left: -50px;
      //   border: 1px solid red;
     }
 
     .our_tokenNomics_div_miniLeft{
         display: block;
         position: absolute;
-        top: -90px;
+        top: -190px;
         right: 0px;
     }
 
@@ -153,6 +153,11 @@
 
 
 @media (max-width:499px){
+
+    .our_tokenNomics_div_header{
+        // border: 1px solid red;
+        width: fit-content;
+    }
 
     .our_tokenNomics_div_body{
         width: 96%;

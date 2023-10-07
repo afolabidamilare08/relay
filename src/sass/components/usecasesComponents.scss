@@ -169,3 +169,16 @@
     }
 
 }
+
+@media ( max-width:499px ){
+    
+    .use_case_home{
+        margin: 0rem auto;
+    }
+
+    .use_case_home_header{
+        width: fit-content;
+        margin-bottom: 3rem;
+    }
+
+}

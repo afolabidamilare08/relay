@@ -4,3 +4,16 @@
     padding-bottom: 4rem;
     overflow-x: hidden;
 }
+
+
+@media ( max-width:499px ){
+    
+    .landing_page_oth{
+        margin-top: -7rem;
+        // border: 1px solid red;
+        background-color: #131A30;
+        border-top-right-radius: 16px;
+        border-top-left-radius: 16px;
+    }
+
+}

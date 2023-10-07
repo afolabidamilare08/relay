@@ -171,3 +171,20 @@
     }
 
 }
+
+@media (max-width:499px){
+
+    .hero_section{
+        height: fit-content;
+        // border: 1px solid red;
+        padding-bottom: 10rem;
+
+        &_main{
+            // border: 1px solid red;
+            height: fit-content;
+            margin-top: 4rem;
+        }
+
+    }
+
+}

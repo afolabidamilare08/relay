@@ -193,3 +193,13 @@
     }
 
 }
+
+@media ( max-width: 499px ){
+    .our_road_map_header{
+        width: fit-content;
+    }
+
+    .our_road_map_body{
+        margin-top: 3rem;
+    }
+}
