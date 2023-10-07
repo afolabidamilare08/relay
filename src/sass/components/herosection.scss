@@ -183,7 +183,24 @@
             // border: 1px solid red;
             height: fit-content;
             margin-top: 4rem;
+
+            &_rely{
+                display: block;
+                position: relative;
+                border: 1px solid red;
+                margin-top: 1.5rem;
+            
+                & h5{
+                    font-size: 4rem;
+                }
+            }
+
         }
+
+    }
+
+    .hero_section_main_relay{
+
 
     }
 
