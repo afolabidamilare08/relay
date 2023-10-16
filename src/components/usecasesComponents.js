@@ -113,7 +113,9 @@ const UsecasesComponents = () => {
                             leading protocols. This commitment 
                             ensures an unparalleled user experience, 
                             enhancing the overall efficiency of 
-                            the trading process. Learn more
+                            the trading process. <span style={{
+                                textDecoration:"underline"
+                            }} >Learn more</span>
                         </h6>
 
                     </div>
