@@ -8,10 +8,10 @@ const ContactSectionComponents = () => {
 
             <div className="contact_us_center" >
 
-               <h5>Contact Us</h5> 
+               <h5>Relay</h5> 
 
                <button>
-                Say Hi
+                Try Now
                </button>
 
             </div>

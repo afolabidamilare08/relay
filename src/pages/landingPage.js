@@ -9,6 +9,7 @@ import Medium from '../assets/images/Medium.png';
 import Telegram from '../assets/images/telegram.png';
 import Twitter from '../assets/images/twitter.png';
 import Discord from '../assets/images/discord.png';
+import MainpurposeComponents from "../components/mainPurposeComponents";
 
 
 
@@ -21,6 +22,8 @@ const LandingPage = () => {
             <HeroSectionComponents/>
 
             <div className="landing_page_oth" >
+
+                <MainpurposeComponents/>
 
                 <UsecasesComponents/>
 

@@ -41,15 +41,16 @@
 
     &_Fpart{
 
-        // border: 1px solid red;
-        margin-top: 4rem;
-        padding: 0rem 1rem;
+        // border: 1px solid blue;
+        width: 30%;
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: space-evenly;
 
         &_div{
-            width: 30%;
-            // height: 400px;
+            width: 100%;
+            min-height: 400px;
+            margin-top:1.5rem ;
             padding: 2rem;
             border: 1px solid #7900D9;
             border-radius: 5px;
@@ -79,20 +80,20 @@
                 }
 
             }
-
+ 
             &_title{
                 color: white;
                 font-family: var(--syne);
                 font-weight: 600;
                 margin-top: 1.5rem;
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
 
             & h6{
                 color: #E1E1E3;
                 margin-top: 1rem;
                 font-family: var(--syne);
-                font-size: 1.1rem;
+                font-size: 1rem;
                 line-height: 1.4rem;
             }
 
@@ -100,13 +101,25 @@
 
     }
 
+    &_contain{
+        // border: 1px solid green;
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+    }
 
     &_img{
         display: block;
+        // border: 1px solid red;
         margin: auto;
-        margin-top: -28%;
-        width: 100%;
-        margin-bottom: -37%;
+        width: 40rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        // margin-top: -28%;
+        // width: 100%;
+        // margin-bottom: -37%;
     }
 
 }

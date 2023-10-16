@@ -114,6 +114,25 @@ const OurTokennomicsComponents = () => {
 
             </div>
 
+            <div className='our_tokenNomics_div_btm' >
+
+                <div className='our_tokenNomics_div_btm_sec' >
+                    <h5>Token Name:</h5>
+                    <h6>$RLY</h6>
+                </div>
+
+                <div className='our_tokenNomics_div_btm_sec' >
+                    <h5>Total Supply:</h5>
+                    <h6>50,000,000</h6>
+                </div>
+
+                <div className='our_tokenNomics_div_btm_sec' >
+                    <h5>Tax:</h5>
+                    <h6>3%</h6>
+                </div>
+
+            </div>
+
             <img src={EclipseImg} alt="ss" className='our_tokenNomics_div_leftImg' />
             <img src={RightImg} alt="ss" className='our_tokenNomics_div_rightImg' />
             <img src={RightEcliImg} alt="ss" className='our_tokenNomics_div_miniRight' />

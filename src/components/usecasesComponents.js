@@ -13,7 +13,7 @@ const UsecasesComponents = () => {
 
             <div className="use_case_home_header" >
 
-                <h5>Use <span>Cases</span>
+                <h5>More <span>Features</span>
                 
                     <img src={UnderlineImg} alt="underline" />
 
@@ -22,98 +22,101 @@ const UsecasesComponents = () => {
             </div>
 
 
-            <div className='use_case_home_Fpart' >
+            <div className='use_case_home_contain' >
 
-                <div className='use_case_home_Fpart_div' >
+                <div className='use_case_home_Fpart' >
 
-                    <div className='use_case_home_Fpart_div_top' >
-                        <img src={MoneyImg} alt='money' className='' />
-                        <div className='use_case_home_Fpart_div_top_cover' >
+                    <div className='use_case_home_Fpart_div' >
 
+                        <div className='use_case_home_Fpart_div_top' >
+                            <img src={MoneyImg} alt='money' className='' />
+                            <div className='use_case_home_Fpart_div_top_cover' >
+
+                            </div>
                         </div>
+
+                        <h5 className='use_case_home_Fpart_div_title' >Pioneering a New Market Approach:</h5>
+
+                        <h6>
+                            Relay introduces an innovative and transformative approach 
+                            that addresses the longstanding challenge of 
+                            liquidity within the veTokens market.
+                        </h6>
+
                     </div>
 
-                    <h5 className='use_case_home_Fpart_div_title' >Liquidity for veTokens:</h5>
+                    <div className='use_case_home_Fpart_div' >
 
-                    <h6>
-                        Market makers and liquidity providers employ 
-                        OTC trades to enhance the trading experience 
-                        for less liquid assets. With Relay, 
-                        this capability is now at your fingertips. 
-                        This enables individuals and protocols 
-                        to attain voting power at rates below market 
-                        averages, concurrently providing immediate 
-                        liquidity to sellers for their otherwise 
-                        less-liquid assets.
-                    </h6>
+                        <div className='use_case_home_Fpart_div_top' >
+                            <img src={pricImg} alt='trade' className='' />
+                            <div className='use_case_home_Fpart_div_top_cover' >
+
+                            </div>
+                        </div>
+
+                        <h5 className='use_case_home_Fpart_div_title' >Facilitating Large Volume Transactions:</h5>
+
+                        <h6>
+                            In the realm of Over-The-Counter (OTC) trades, 
+                            Relay offers a trusted platform for institutional investors, 
+                            high-net-worth UI Fixes v1 4 individuals, 
+                            and businesses to execute substantial transactions securely. 
+                            By doing so, they can effectively mitigate market 
+                            slippage and minimize the impact of 
+                            their trades on prevailing market prices.
+                        </h6>
+
+                    </div>
 
                 </div>
 
-                <div className='use_case_home_Fpart_div' >
+                <img src={UsecaseImg} alt='dhyd' className='use_case_home_img' />
 
-                    <div className='use_case_home_Fpart_div_top' >
-                        <img src={TradeImg} alt='trade' className='' />
-                        <div className='use_case_home_Fpart_div_top_cover' >
+                <div className='use_case_home_Fpart' >
 
+                    <div className='use_case_home_Fpart_div' >
+
+                        <div className='use_case_home_Fpart_div_top' >
+                            <img src={TradeImg} alt='money' className='' />
+                            <div className='use_case_home_Fpart_div_top_cover' >
+
+                            </div>
                         </div>
+
+                        <h5 className='use_case_home_Fpart_div_title' >Efficient Price Negotiation:</h5>
+
+                        <h6>
+                            Relay empowers both buyers and sellers with the ability 
+                            to negotiate prices swiftly, streamlining the trade setup process 
+                            to under 30 seconds. This feature proves particularly 
+                            valuable when engaging with illiquid 
+                            assets or unique trading conditions.
+                        </h6>
+
                     </div>
 
-                    <h5 className='use_case_home_Fpart_div_title' >Large Volume Trades:</h5>
+                    <div className='use_case_home_Fpart_div' >
 
-                    <h6>
-                        OTC trades are commonly used for 
-                        large-volume transactions. Institutional investors, 
-                        high-net-worth individuals, and businesses 
-                        often prefer OTC trading to avoid market 
-                        slippage and minimize the impact of their 
-                        trades on market prices.
-                    </h6>
+                        <div className='use_case_home_Fpart_div_top' >
+                            <img src={ShildImg} alt='trade' className='' />
+                            <div className='use_case_home_Fpart_div_top_cover' >
 
-                </div>
-
-            </div>
-
-
-            <img src={UsecaseImg} alt='dhyd' className='use_case_home_img' />
-
-            <div className='use_case_home_Fpart' >
-
-                <div className='use_case_home_Fpart_div' >
-
-                    <div className='use_case_home_Fpart_div_top' >
-                        <img src={pricImg} alt='money' className='' />
-                        <div className='use_case_home_Fpart_div_top_cover' >
-
+                            </div>
                         </div>
+
+                        <h5 className='use_case_home_Fpart_div_title' >Strategic Integrations:</h5>
+
+                        <h6>
+                            Our primary focus revolves around expanding 
+                            our reach through strategic partnerships 
+                            and seamless backend integrations with 
+                            leading protocols. This commitment 
+                            ensures an unparalleled user experience, 
+                            enhancing the overall efficiency of 
+                            the trading process. Learn more
+                        </h6>
+
                     </div>
-
-                    <h5 className='use_case_home_Fpart_div_title' >Price Negotiation:</h5>
-
-                    <h6>
-                        OTC trades offer the flexibility to negotiate 
-                        prices directly between buyers and sellers. 
-                        This can be especially useful when dealing with 
-                        illiquid assets or unique trading terms.
-                    </h6>
-
-                </div>
-
-                <div className='use_case_home_Fpart_div' >
-
-                    <div className='use_case_home_Fpart_div_top' >
-                        <img src={ShildImg} alt='trade' className='' />
-                        <div className='use_case_home_Fpart_div_top_cover' >
-
-                        </div>
-                    </div>
-
-                    <h5 className='use_case_home_Fpart_div_title' >Privacy:</h5>
-
-                    <h6>
-                        P2P OTC trades allow parties to trade 
-                        cryptocurrencies or assets without 
-                        the need for a centralized exchange.
-                    </h6>
 
                 </div>
 

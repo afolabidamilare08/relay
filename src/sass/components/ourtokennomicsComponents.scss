@@ -5,10 +5,11 @@
     padding: 1rem;
     border-radius: 10px;
     // box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    opacity: 0.8;
+    // opacity: 0.8;
     background-color: #cfd0d22a;
-    padding-bottom: 7rem;
+    // padding-bottom: 7rem;
     position: relative;
+    // border: 1px solid red;
 
 
     &_header{
@@ -83,6 +84,35 @@
                     background: linear-gradient(70deg, #7900D9 16.65%, #0097FF 78.93%);
                 }
 
+            }
+
+        }
+
+    }
+
+    &_btm{
+        background-color: #0D1019;
+        display: flex;
+        width: fit-content;
+        border-radius: 5px;
+        padding: 1rem;
+        margin: 1rem auto;
+
+        &_sec{
+
+            &:not(:first-child){
+                margin-left:2rem ;
+            }
+
+            & h5{
+                font-family: var(--syne);
+                color: white;
+            }
+
+            & h6{
+                font-family: var(--syne);
+                color: white;
+                font-weight: 700;
             }
 
         }

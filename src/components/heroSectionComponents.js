@@ -26,7 +26,7 @@ const HeroSectionComponents = () => {
                     </div>
 
                     <button className="hero_section_main_center_btn" >
-                        Connect Wallet
+                        Open Dapp
                     </button>
 
                 </div>

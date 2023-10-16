@@ -2,6 +2,14 @@
     box-sizing: border-box;
 }
 
+@media (min-width:1500px){
+
+    .mainApp{
+        max-width: 1500px;
+        margin: 0 auto;
+    }
+
+}
 
 :root{
     --background_color: #0D1019;
@@ -31,6 +39,7 @@ h1,h2,h3,h4,h5,h6{
 
 @import './components/header.scss';
 @import './components/herosection.scss';
+@import './components/ourpurposeComponents.scss';
 @import './components/usecasesComponents.scss';
 @import './components/roadMapComponents.scss';
 @import './components/contactUsComponents.scss';

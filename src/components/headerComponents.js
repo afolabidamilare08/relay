@@ -14,7 +14,13 @@ const HeaderComponents = () => {
                     display:"block",
                     marginTop:".5rem",
                     fontSize:'1rem'
-                }} >About</Link>
+                }} >Trade</Link>
+
+                    <Link to="#" style={{
+                    display:"block",
+                    marginTop:".5rem",
+                    fontSize:'1rem'
+                }} >Stake</Link>
 
                     <Link to="#" style={{
                     display:"block",
@@ -22,18 +28,12 @@ const HeaderComponents = () => {
                     fontSize:'1rem'
                 }} >Docs</Link>
 
-                    <Link to="#" style={{
-                    display:"block",
-                    marginTop:".5rem",
-                    fontSize:'1rem'
-                }} >Links</Link>
-
                 <button className='header_wallet' style={{
                     display:"block",
                     marginTop:".5rem",
                     fontSize:'1rem'
                 }} >
-                Connect Wallet
+                Open Dapp
             </button>
           </div>
         </PopoverContent>
@@ -49,13 +49,13 @@ const HeaderComponents = () => {
             </div>
 
             <nav className='header_nav' >
-                <Link to="#" >About</Link>
+                <Link to="#" >Trade</Link>
+                <Link to="#" >Stake</Link>
                 <Link to="#" >Docs</Link>
-                <Link to="#" >Links</Link>
             </nav>
 
             <button className='header_wallet' >
-                Connect Wallet
+                Open Dapp
             </button>
 
             <Popover key={'bottom-end'} placement={'bottom-end'} color="primary">

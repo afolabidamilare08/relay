@@ -44,7 +44,7 @@
             font-family: var(--raleway);
 
             &:not(:first-child){
-                margin-left: 1rem;
+                margin-left: 2rem;
             }
 
         }
@@ -89,7 +89,7 @@
         }
 
         &::after{
-            content: 'Connect Wallet';
+            content: 'Open Dapp';
             text-align: center;
             line-height: 28px;
             font-family: var(--raleway);
