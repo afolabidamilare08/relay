@@ -56,7 +56,7 @@ const MainpurposeComponents = () => {
                                 className='our_purpose_home_main_div'  
                                 initial={{ scaleX: 0, transformOrigin: '0% 0%' }}
                                 whileInView={{ scaleX: 1, transformOrigin: '0% 0%' }}
-                                transition={{ duration: 0.6 }}
+                                transition={{ duration: 0.4 }}
                                 viewport={{ once: true }}
                             >
                                 <img alt='' src={det.img} />
