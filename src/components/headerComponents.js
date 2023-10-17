@@ -54,9 +54,9 @@ const HeaderComponents = () => {
                 <Link to="#" >Docs</Link>
             </nav>
 
-            <button className='header_wallet' >
+            <Link to={"/dapp"} className='header_wallet' >
                 Open Dapp
-            </button>
+            </Link>
 
             <Popover key={'bottom-end'} placement={'bottom-end'} color="primary">
                 <PopoverTrigger>

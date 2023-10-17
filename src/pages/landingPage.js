@@ -10,6 +10,7 @@ import Telegram from '../assets/images/telegram.png';
 import Twitter from '../assets/images/twitter.png';
 import Discord from '../assets/images/discord.png';
 import MainpurposeComponents from "../components/mainPurposeComponents";
+import HeaderComponents from "../components/headerComponents";
 
 
 
@@ -18,6 +19,8 @@ const LandingPage = () => {
     return (
 
         <div>
+
+            <HeaderComponents/>
 
             <HeroSectionComponents/>
 
