@@ -53,8 +53,9 @@ const MainpurposeComponents = () => {
                         return (
 
                             <motion.div 
+                                key={index}
                                 className='our_purpose_home_main_div'  
-                                initial={{ scaleX: 0, transformOrigin: '0% 0%' }}
+                                initial={{ scaleX: 0, transformOrigin: '0% 0%', }}
                                 whileInView={{ scaleX: 1, transformOrigin: '0% 0%' }}
                                 transition={{ duration: 0.4 }}
                                 viewport={{ once: true }}

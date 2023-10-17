@@ -3,8 +3,21 @@ import EclipseImg from '../assets/images/Ellipse.png';
 import RightImg from '../assets/images/right_img_.png';
 import RightEcliImg from '../assets/images/Ellipse_28.png';
 import LeftEcliImg from '../assets/images/Ellipse_29.png';
+import {  motion } from 'framer-motion';
+
 
 const OurTokennomicsComponents = () => {
+
+    const Details = [
+
+        { title: "Initial Liquidity", percentage: '45%' },
+        { title: "Liquidity Mining", percentage: '20%' },
+        { title: "Public Sale", percentage: '15%' },
+        { title: "Marketing and Listing", percentage: '10%' },
+        { title: "Private Sale", percentage: '6%' },
+        { title: "Team", percentage: '4%' },
+
+    ]
 
     return (
 
@@ -22,95 +35,33 @@ const OurTokennomicsComponents = () => {
 
             <div className='our_tokenNomics_div_body' >
 
-                <div className='our_tokenNomics_div_body_div' >
+                { Details.map( (det,index) => {
+                    return (
 
-                    <div className='our_tokenNomics_div_body_div_top' >
-                        <h5>Initial Liquidity</h5>
-                        <h6>45%</h6>
+                    <div className='our_tokenNomics_div_body_div' key={index} >
+
+                        <div className='our_tokenNomics_div_body_div_top' >
+                            <h5>{det.title}</h5>
+                            <h6>{det.percentage}</h6>
+                        </div>
+
+                        <div className='our_tokenNomics_div_body_div_btm' >
+                            <motion.div
+                            
+                            initial={{ width: '0%' }}
+                            whileInView={{ width: det.percentage }}
+                            transition={{ duration: 0.6 }}
+                            // viewport={{ once: true }}
+
+                            className='our_tokenNomics_div_body_div_btm_mid' style={{
+                                width:det.percentage
+                            }} ></motion.div>
+                        </div>
+
                     </div>
 
-                    <div className='our_tokenNomics_div_body_div_btm' >
-                        <div className='our_tokenNomics_div_body_div_btm_mid' style={{
-                            width:"45%"
-                        }} ></div>
-                    </div>
-
-                </div>
-
-                <div className='our_tokenNomics_div_body_div' >
-
-                    <div className='our_tokenNomics_div_body_div_top' >
-                        <h5>Liquidity Mining</h5>
-                        <h6>20%</h6>
-                    </div>
-
-                    <div className='our_tokenNomics_div_body_div_btm' >
-                        <div className='our_tokenNomics_div_body_div_btm_mid' style={{
-                            width:"20%"
-                        }} ></div>
-                    </div>
-
-                </div>
-
-                <div className='our_tokenNomics_div_body_div' >
-
-                    <div className='our_tokenNomics_div_body_div_top' >
-                        <h5>Public Sale</h5>
-                        <h6>15%</h6>
-                    </div>
-
-                    <div className='our_tokenNomics_div_body_div_btm' >
-                        <div className='our_tokenNomics_div_body_div_btm_mid' style={{
-                            width:"15%"
-                        }} ></div>
-                    </div>
-
-                </div>
-
-                <div className='our_tokenNomics_div_body_div' >
-
-                    <div className='our_tokenNomics_div_body_div_top' >
-                        <h5>Marketing and Listing</h5>
-                        <h6>10%</h6>
-                    </div>
-
-                    <div className='our_tokenNomics_div_body_div_btm' >
-                        <div className='our_tokenNomics_div_body_div_btm_mid' style={{
-                            width:"10%"
-                        }} ></div>
-                    </div>
-
-                </div>
-
-                <div className='our_tokenNomics_div_body_div' >
-
-                    <div className='our_tokenNomics_div_body_div_top' >
-                        <h5>Private Sale</h5>
-                        <h6>6%</h6>
-                    </div>
-
-                    <div className='our_tokenNomics_div_body_div_btm' >
-                        <div className='our_tokenNomics_div_body_div_btm_mid' style={{
-                            width:"6%"
-                        }} ></div>
-                    </div>
-
-                </div>
-
-                <div className='our_tokenNomics_div_body_div' >
-
-                    <div className='our_tokenNomics_div_body_div_top' >
-                        <h5>Team</h5>
-                        <h6>4%</h6>
-                    </div>
-
-                    <div className='our_tokenNomics_div_body_div_btm' >
-                        <div className='our_tokenNomics_div_body_div_btm_mid' style={{
-                            width:"4%"
-                        }} ></div>
-                    </div>
-
-                </div>
+                    );
+                } ) }
 
             </div>
 
