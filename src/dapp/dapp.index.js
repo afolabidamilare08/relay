@@ -1,6 +1,6 @@
 import { Link, 
-    // Route,
-    //  Routes
+    Route,
+     Routes
 } from 'react-router-dom';
 import '../sass/main.scss';
 import LogoImg from '../assets/images/logo.png';
@@ -8,6 +8,7 @@ import TwitterImg from '../assets/images/twitter.png';
 import TelegramImg from '../assets/images/telegram.png';
 import MyGImg from '../assets/images/my_g.png';
 import DiscordImg from '../assets/images/discord.png';
+import OtcDapp from './dapp.otc';
 
 function DappIndex() {
   return (
@@ -76,6 +77,15 @@ function DappIndex() {
             </div>
 
         </div>
+
+      </div>
+
+      <div className='dappIndex_right' >
+
+      <Routes>
+        <Route path='/' element={ <OtcDapp/> } />
+        <Route path='/otc' element={ <OtcDapp/> } />
+      </Routes>
 
       </div>
 

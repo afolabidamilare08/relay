@@ -1,0 +1,200 @@
+.Otc_main{
+    // border: 1px solid red;
+
+    &_header{
+        background-color: #111420;
+        padding: .5rem;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        & h5{
+            color: #292B36;
+            font-family: var(--syne);
+            font-size: 1.9rem;
+            letter-spacing: .4rem;
+            font-weight: 800;
+        }
+
+        &_right{
+            display: flex;
+            
+            &_live{
+                display: flex;
+                align-items: center;
+
+                & h6{
+                    color: white;
+                    font-family: var(--raleway);
+                    margin-left: .5rem;
+                }
+
+            }
+
+            &_wallet{
+                background: linear-gradient(70deg, #7900D9 16.65%, #0097FF 78.93%);
+                padding: 1.1px;
+                border-radius: 10px;
+                margin-left: 1rem;
+
+                &_center{
+                    width: 100%;
+                    background-color: #161B2B;
+                    text-align: center;
+                    color: white;
+                    font-family: var(--raleway);
+                    font-weight: 600;
+                    padding: .5rem 2rem;
+                    border-radius: 10px;
+                    height: 100%;
+                
+                }
+
+                &_btn{
+                    width: 100%;
+                    background-color: #161B2B;
+                    text-align: center;
+                    color: white;
+                    font-family: var(--raleway);
+                    font-weight: 600;
+                    padding: .5rem 1rem;
+                    border-radius: 10px;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+
+                    & img{
+                        margin-right: .5rem;
+                    }
+
+                    &_ic{
+                        margin-left: .5rem;
+                    }
+
+                }
+            }
+
+        }
+
+    }
+
+    &_modal{
+        padding: .4rem 0rem; 
+
+        &_link{
+            display: flex;
+            align-items: center;
+            // border: 1px solid red;
+            padding: .5rem;
+            border-radius: 5px;
+            transition: all .5s;
+
+            & img{
+                margin-right: 1rem;
+            }
+
+            & h6{
+                font-family: var(--raleway);
+                font-weight: 700;
+                font-size: 1rem;
+            }
+
+            &:hover{
+                background-color: #161B2B;
+            }
+
+        }
+
+    }
+
+    &_txt{
+        color: white;
+        font-size: 2.4rem;
+        margin-top: 4rem;
+        font-family: var(--syne);
+        font-weight: 700;
+    }
+
+    &_options{
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &_left{
+            display: flex;
+            align-items: center;
+        }
+
+        &_right{
+            color: white;
+            display: flex;
+            align-items: center;
+
+            & h6{
+                margin-right: 1rem;
+                font-family: var(--raleway);
+                font-weight: 700;
+            }
+
+        }
+
+        &_cov{
+            background: linear-gradient(70deg, #7900D9 16.65%, #0097FF 78.93%);
+            padding: 1.1px;
+            border-radius: 10px;
+            margin-left: 1rem;
+
+            &_btn{
+                width: 100%;
+                background-color: #161B2B;
+                text-align: center;
+                color: white;
+                font-family: var(--raleway);
+                font-weight: 600;
+                padding: .5rem 1rem;
+                border-radius: 10px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+
+                &_ic{
+                    margin-left: .5rem;
+                }
+
+                &_icbefore{
+                    margin-right: .5rem;
+                }
+
+            }
+        }
+
+    }
+
+    &_body{
+     
+        margin-top: 3rem;
+
+        &_div{
+            width: 25%;
+            height: 200px;
+            background-color: #161B2B;
+            border-radius: 12px;
+            padding: 1rem;
+
+            &_title{
+                color: #E1E1E3;
+                font-family: var(--raleway);
+                font-weight: 700;
+            }
+
+        }
+        
+    }
+
+}
+
+@media (max-width:1200px){
+
+}

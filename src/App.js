@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path='/' element={ <LandingPage/> } />
         <Route path='/dapp' element={ <DappIndex/> } />
+        <Route path='/dapp/otc' element={ <DappIndex/> } />
       </Routes>
 
     </div>

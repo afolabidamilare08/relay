@@ -22,6 +22,7 @@ module.exports = {
             foreground: "#FFFFFF",
             DEFAULT: "#333",
           },
+          modal: "red"
           // ... rest of the colors
         },
       },
