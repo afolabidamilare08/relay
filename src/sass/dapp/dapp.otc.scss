@@ -12,6 +12,10 @@
         position: sticky;
         top: .5rem;
 
+        &_spc{
+            display: none;
+        }
+
         & h5{
             color: #292B36;
             font-family: var(--syne);
@@ -58,15 +62,18 @@
                 &_btn{
                     width: 100%;
                     background-color: #161B2B;
-                    text-align: center;
-                    color: white;
-                    font-family: var(--raleway);
-                    font-weight: 600;
                     padding: .5rem 1rem;
                     border-radius: 10px;
                     height: 100%;
                     display: flex;
                     align-items: center;
+                    color: white;
+
+                    & h4{
+                        text-align: center;
+                        font-family: var(--raleway);
+                        font-weight: 700;
+                    }
 
                     & img{
                         margin-right: .5rem;
@@ -206,4 +213,109 @@
         justify-content: space-around;
     }
 
+}
+
+@media (max-width:1177px){
+
+    .Otc_main_header{
+
+        & h5{
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+        }
+
+    }
+
+    .Otc_main_body{
+        justify-content: space-around;
+    }
+
+    .Otc_main_header_right_live{
+        display: none;
+    }
+
+}
+
+@media (max-width:999px){
+
+    .otc_toph{
+        
+        & h4{
+            display: none;
+        }
+
+    }
+
+    .Otc_main_header_right_wallet_center{
+        padding: .4rem 1rem;
+    }
+
+}
+
+
+@media (max-width:858px){
+
+    .Otc_main_header h5{
+        display: none;
+    }
+
+    .Otc_main_header_right_wallet_btn img{
+        width: 1.2rem;
+        object-fit: cover;
+    }
+
+    .Otc_main_header_right_wallet_center{
+        font-size: .8rem;
+    }
+
+    .Otc_main_header_right_wallet_btn_ic{
+        font-size: .8rem;
+    }
+
+   .Otc_main_header_spc{
+        display: flex;
+        align-items: center;
+
+        &_ic{
+            color: white;
+            font-size: 2rem;
+        }
+
+        &_txt{
+            background: linear-gradient(268deg, #0097FF 1.13%, #7900D9 86.2%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-left: .6rem;
+            font-size: 1.5rem;
+            font-weight: 400;
+            font-family: var(--syne);
+        }
+
+   } 
+
+}
+
+@media ( max-width:646px ){
+    .Otc_main_options{
+        // border: 1px solid red;
+        flex-direction: column;
+
+        &_left{
+            width: 100%;
+        }
+
+        &_right{
+            margin-top: 1rem;
+            width: 100%;
+            justify-content: flex-end;
+        }
+
+    }
+}
+
+@media (max-width:500px){
+    .otc_tophdvgt{
+        display: none;
+    }
 }

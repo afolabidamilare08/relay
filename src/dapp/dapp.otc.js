@@ -2,15 +2,11 @@ import EthImg from '../assets/images/eth.png';
 import BnbImg from '../assets/images/bnb.png';
 import ArmImg from '../assets/images/arm.png';
 import {BsChevronDown, BsFunnel} from 'react-icons/bs';
-import {FaExchangeAlt} from 'react-icons/fa';
-import {FiExternalLink} from 'react-icons/fi';
-import {BiSolidCopy} from 'react-icons/bi';
 import ArrowUp from '../assets/images/Arrow_Up_Icon.png';
 import {Popover, PopoverTrigger, PopoverContent, Switch} from "@nextui-org/react";
 import { Link } from 'react-router-dom';
-import RelayIc from '../assets/images/relay_ic.png';
 import TradeComponent from '../components/trade_component';
-
+import {IoMdMenu} from 'react-icons/io'
 
 
 const OtcDapp = () => {
@@ -42,6 +38,14 @@ const OtcDapp = () => {
 
                 <h5>OTC TRADES</h5>
 
+                <Link className='Otc_main_header_spc' >
+                    
+                    <IoMdMenu className='Otc_main_header_spc_ic' />
+
+                    <div className='Otc_main_header_spc_txt' >RELAY</div>
+
+                </Link>
+
                 <div className="Otc_main_header_right" >
 
                     <div className='Otc_main_header_right_live' >
@@ -52,9 +56,9 @@ const OtcDapp = () => {
                         <PopoverTrigger>
                     <div className="Otc_main_header_right_wallet" >
                         
-                        <button className='Otc_main_header_right_wallet_btn' >
+                        <button className='Otc_main_header_right_wallet_btn otc_toph' >
                             <img src={EthImg} alt='' />
-                            Ethereum
+                            <h4>Ethereum</h4>
                             <BsChevronDown className='Otc_main_header_right_wallet_btn_ic' />
                         </button>
                         
@@ -63,7 +67,7 @@ const OtcDapp = () => {
                         {content}
                         </Popover>
 
-                    <div className="Otc_main_header_right_wallet" >
+                    <div className="Otc_main_header_right_wallet otc_tophdvgt" >
                         <div className="Otc_main_header_right_wallet_center" >0x0000...0000</div>
                     </div> 
 
