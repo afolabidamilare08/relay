@@ -28,13 +28,13 @@ const HeaderComponents = () => {
                     fontSize:'1rem'
                 }} >Docs</Link>
 
-                <button className='header_wallet' style={{
+                <Link to={"/dapp"} className='header_wallet' style={{
                     display:"block",
                     marginTop:".5rem",
                     fontSize:'1rem'
                 }} >
                 Open Dapp
-            </button>
+            </Link>
           </div>
         </PopoverContent>
       );
