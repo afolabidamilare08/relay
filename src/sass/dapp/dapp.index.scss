@@ -114,6 +114,7 @@
         width: 80%;
         padding: 1rem;
         overflow-y: auto;
+        // height: 100vh;
 
         &_btm1{
             background: linear-gradient(70deg, #7900D9 16.65%, #0097FF 78.93%);
@@ -135,6 +136,130 @@
 
 }
 
+.backDrop{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height:100vh;
+    background-color: rgba(13, 16, 25, 0.749);
+    z-index: 22;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &_contnet{
+        padding: 2rem 1.5rem;
+        width: 50%;
+        // height: 70%;
+        background-color: #161B2B;
+        border-radius: 10px;
+
+        &_top{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+
+            & h5{
+                font-family: var(--raleway);
+                color: #E1E1E3;
+                font-weight: 700;
+                font-size: 1.2rem;
+            }
+
+            &_ic{
+                color: #E1E1E3;
+                font-size: 1.1rem;
+                cursor: pointer;
+            }
+
+        }
+
+        &_div{
+            margin-top: 1rem;
+
+            &_title{
+                font-family: var(--syne);
+                color: #E1E1E3;
+            }
+
+            &_m{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #0D1019;
+                padding: .5rem;
+                margin-top: .5rem;
+                border-radius: 10px;
+                cursor: pointer;
+
+                & h4{
+                    font-family: var(--syne);
+                    color: #E1E1E3;
+                }
+
+                &_ic{
+                    color: #E1E1E3;
+                }
+
+            }
+
+        }
+
+        &_submit{
+            background: linear-gradient(70deg, #7900D9 16.65%, #0097FF 78.93%);
+            display: flex;
+            padding: .5rem;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            width: 100%;
+            margin-top: 1rem;
+
+            &_ic{
+                color: white;
+                margin-right: .3rem;
+            }
+
+            & h5{
+                color: white;
+            }
+
+        }
+
+        &_filter{
+            background: linear-gradient(70deg, #7900D9 16.65%, #0097FF 78.93%);
+            padding: 1.1px;
+            border-radius: 10px;
+            margin-top: .5rem;
+
+            &_center{
+                width: 100%;
+                background-color: #161B2B;
+                text-align: center;
+                color: white;
+                font-family: var(--raleway);
+                font-weight: 600;
+                padding: .5rem;
+                border-radius: 10px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                & h5{
+                    margin-left: .4rem;
+                    font-weight: 700;
+                }
+
+            }
+        }
+
+    }
+
+}
+
 
 @media (max-width:1200px){
 
@@ -146,6 +271,14 @@
         width: 75%;
     }
 
+    .backDrop{
+        width: 75%;
+    }
+
+    .backDrop_contnet{
+        width: 80%;
+    }
+
 }
 
 @media (max-width:1000px){
@@ -155,6 +288,10 @@
     }
 
     .dappIndex_right{
+        width: 70%;
+    }
+
+    .backDrop{
         width: 70%;
     }
 
@@ -174,10 +311,14 @@
         left: 0;
         top: 0;
         z-index:20;
-    }
+    }   
 
     .dappIndex_right{
         width:100%;
+    }
+
+    .backDrop{
+        width: 100%;
     }
 
 }
@@ -197,6 +338,10 @@
 
     .dappIndex_left{
         width: 60%;
+    }
+
+    .backDrop_contnet{
+        width: 90%;
     }
 
 }

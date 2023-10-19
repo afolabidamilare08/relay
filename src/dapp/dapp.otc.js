@@ -7,9 +7,13 @@ import {Popover, PopoverTrigger, PopoverContent, Switch} from "@nextui-org/react
 import { Link } from 'react-router-dom';
 import TradeComponent from '../components/trade_component';
 import {IoMdMenu} from 'react-icons/io'
+import {BackDrop} from '../components/backDropComponent';
+import { useState } from 'react';
 
 
 const OtcDapp = () => {
+
+    const [ openModal, setopenModal ] = useState(false)
 
     const content = (
         <PopoverContent  >
@@ -88,7 +92,7 @@ const OtcDapp = () => {
                     </div>
 
                     <div className='Otc_main_options_cov' >
-                        <button className='Otc_main_options_cov_btn' >
+                        <button className='Otc_main_options_cov_btn' onClick={ () => setopenModal(true) } >
                             <BsFunnel className='Otc_main_options_cov_btn_icbefore' />
                             Filters
                         </button>
@@ -114,6 +118,12 @@ const OtcDapp = () => {
                 <TradeComponent/>
 
             </div>
+
+            { openModal ? 
+            
+            <BackDrop closeModal={ () => setopenModal(false) } />
+
+            : <></> }
 
         </div>
 
