@@ -1,6 +1,7 @@
-import {AiOutlineClose,AiOutlineDown} from 'react-icons/ai';
+import {AiOutlineClose} from 'react-icons/ai';
 import {IoMdCheckmark} from 'react-icons/io';
 import {BsFunnel} from 'react-icons/bs';
+import {BiChevronDown} from 'react-icons/bi';
 import {  motion } from 'framer-motion';
 
 
@@ -36,7 +37,7 @@ const BackDrop = ({closeModal}) => {
 
                     <div className='backDrop_contnet_div_m' >
                         <h4>Select an asset</h4>
-                        <AiOutlineDown className='backDrop_contnet_div_m_ic' />
+                        <BiChevronDown className='backDrop_contnet_div_m_ic' />
                     </div>
 
                 </div>
@@ -47,7 +48,7 @@ const BackDrop = ({closeModal}) => {
 
                     <div className='backDrop_contnet_div_m' >
                         <h4>Select an asset</h4>
-                        <AiOutlineDown className='backDrop_contnet_div_m_ic' />
+                        <BiChevronDown className='backDrop_contnet_div_m_ic' />
                     </div>
 
                 </div>   
@@ -58,7 +59,7 @@ const BackDrop = ({closeModal}) => {
 
                     <div className='backDrop_contnet_div_m' >
                         <h4>All time</h4>
-                        <AiOutlineDown className='backDrop_contnet_div_m_ic' />
+                        <BiChevronDown className='backDrop_contnet_div_m_ic' />
                     </div>
 
                 </div> 
