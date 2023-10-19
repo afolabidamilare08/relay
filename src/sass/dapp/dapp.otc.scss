@@ -1,5 +1,6 @@
 .Otc_main{
     // border: 1px solid red;
+    position: relative;
 
     &_header{
         background-color: #111420;
@@ -8,6 +9,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: sticky;
+        top: .5rem;
 
         & h5{
             color: #292B36;
