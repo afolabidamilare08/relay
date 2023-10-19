@@ -299,9 +299,9 @@
 
 @media (max-width:787px){
 
-    // .dappIndex{
-    //     border: 5px solid red;
-    // }
+    .dappIndex{
+        // border: 5px solid red;
+    }
 
     .dappIndex_left{
         display: none;
@@ -314,8 +314,8 @@
     }  
     
     .dappIndex{
-        min-height: 100vh;
-        height: fit-content;
+        // min-height: 100vh;
+        // height: fit-content;
     }
 
     .dappIndex_right{
