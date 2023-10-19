@@ -9,6 +9,7 @@ import TelegramImg from '../assets/images/telegram.png';
 import MyGImg from '../assets/images/my_g.png';
 import DiscordImg from '../assets/images/discord.png';
 import OtcDapp from './dapp.otc';
+import { AiOutlineCopyrightCircle} from 'react-icons/ai';
 
 function DappIndex() {
   return (
@@ -82,10 +83,19 @@ function DappIndex() {
 
       <div className='dappIndex_right' >
 
-      <Routes>
-        <Route path='/' element={ <OtcDapp/> } />
-        <Route path='/otc' element={ <OtcDapp/> } />
-      </Routes>
+        <Routes>
+            <Route path='/' element={ <OtcDapp/> } />
+            <Route path='/otc' element={ <OtcDapp/> } />
+        </Routes>
+
+        <div className='dappIndex_right_btm1' >
+
+        </div>
+
+        <div className='dappIndex_right_btm' >
+            <AiOutlineCopyrightCircle color='#FDFDFE' />
+            2023.RELAY
+        </div>
 
       </div>
 

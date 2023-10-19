@@ -113,6 +113,24 @@
         // border: 1px solid red; 
         width: 80%;
         padding: 1rem;
+        overflow-y: auto;
+
+        &_btm1{
+            background: linear-gradient(70deg, #7900D9 16.65%, #0097FF 78.93%);
+            height: 2px;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        &_btm{
+            display: flex;
+            justify-content: center;
+            color: #FDFDFE;
+            align-items: center;
+            font-family: var(--syne);
+            font-weight: 700;
+        }
+
     }
 
 }
