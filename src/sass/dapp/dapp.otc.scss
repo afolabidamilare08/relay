@@ -191,6 +191,19 @@
 
 }
 
-@media (max-width:1200px){
+@media (max-width:1225px){
+
+    .Otc_main_header{
+
+        & h5{
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+        }
+
+    }
+
+    .Otc_main_body{
+        justify-content: space-around;
+    }
 
 }
