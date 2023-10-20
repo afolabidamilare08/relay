@@ -17,6 +17,7 @@
     --raleway: 'Raleway', sans-serif;
     --syne: 'Syne', sans-serif;
     --white_color: #fff ;
+    --linearBg: linear-gradient(70deg, #7900D9 16.65%, #0097FF 78.93%);
 }
 
 a{
@@ -49,3 +50,4 @@ h1,h2,h3,h4,h5,h6{
 @import './pages/landingpage.scss';
 @import './dapp/dapp.index.scss';
 @import './dapp/dapp.otc.scss';
+@import './dapp/dapp.setuptrade.scss';

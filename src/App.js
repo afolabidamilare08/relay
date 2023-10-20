@@ -11,6 +11,7 @@ function App() {
         <Route path='/' element={ <LandingPage/> } />
         <Route path='/dapp' element={ <DappIndex/> } />
         <Route path='/dapp/otc' element={ <DappIndex/> } />
+        <Route path='/dapp/setuptrade' element={ <DappIndex/> } />
       </Routes>
 
     </div>

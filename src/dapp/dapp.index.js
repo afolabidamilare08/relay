@@ -10,6 +10,7 @@ import MyGImg from '../assets/images/my_g.png';
 import DiscordImg from '../assets/images/discord.png';
 import OtcDapp from './dapp.otc';
 import { AiOutlineCopyrightCircle} from 'react-icons/ai';
+import SetuptradeDapp from './dapp.setuptrade';
 
 function DappIndex() {
   return (
@@ -84,8 +85,9 @@ function DappIndex() {
       <div className='dappIndex_right' >
 
         <Routes>
-            <Route path='/' element={ <OtcDapp/> } />
-            <Route path='/otc' element={ <OtcDapp/> } />
+            <Route path='/' element={ <SetuptradeDapp/> } />
+            <Route path='/otc' element={ <OtcDapp/> }  />
+            <Route path='/setuptrade' element={ <SetuptradeDapp/> } />
         </Routes>
 
         <div className='dappIndex_right_btm1' >
