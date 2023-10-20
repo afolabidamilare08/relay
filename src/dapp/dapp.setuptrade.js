@@ -8,13 +8,13 @@ import {Popover, PopoverTrigger, PopoverContent, Switch} from "@nextui-org/react
 import { Link } from 'react-router-dom';
 import TradeComponent from '../components/trade_component';
 import {IoMdMenu} from 'react-icons/io'
-import {BackDrop} from '../components/backDropComponent';
+import {BackDrop, SelectTokenBdrop} from '../components/backDropComponent';
 import { useState } from 'react';
 
 
 const SetuptradeDapp = () => {
 
-    const [ openModal, setopenModal ] = useState(false)
+    const [ openModal, setopenModal ] = useState(true)
 
     const content = (
         <PopoverContent  >
@@ -87,7 +87,7 @@ const SetuptradeDapp = () => {
 
                     <div className="setupTrade_main" >
                         <h5>Token to swap</h5>
-                        <h6>Select a token</h6>
+                        <h6 onClick={ () => setopenModal(true) } >Select a token</h6>
                     </div>
 
                     <div className="setupTrade_main" >
@@ -97,7 +97,7 @@ const SetuptradeDapp = () => {
 
                     <div className="setupTrade_main" >
                         <h5>Token wanted in exchange:</h5>
-                        <h6>Select a token</h6>
+                        <h6 onClick={ () => setopenModal(true) } >Select a token</h6>
                     </div>
 
                     <div className="setupTrade_main" >
@@ -130,7 +130,7 @@ const SetuptradeDapp = () => {
 
             { openModal ? 
             
-            <BackDrop closeModal={ () => setopenModal(false) } />
+                <SelectTokenBdrop closeModal={ () => setopenModal(false) } />
 
             : <></> }
 

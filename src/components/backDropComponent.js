@@ -1,9 +1,11 @@
 import {AiOutlineClose} from 'react-icons/ai';
 import {IoMdCheckmark} from 'react-icons/io';
 import {BsFunnel} from 'react-icons/bs';
-import {BiChevronDown} from 'react-icons/bi';
+import {BiChevronDown, BiSearch} from 'react-icons/bi';
 import {  motion } from 'framer-motion';
-
+import ETHimg from '../assets/images/eth.png';
+import BNBimg from '../assets/images/bnb.png';
+import ARMimg from '../assets/images/arm.png';
 
 
 
@@ -16,10 +18,10 @@ const BackDrop = ({closeModal}) => {
 
             <motion.div className="backDrop_contnet"
             
-            initial={{ scale: 0.5,}}
-            whileInView={{ scale: 1, }}
-            transition={{ duration: 0.4 }}
-            viewport={{ once: true }}
+                initial={{ scale: 0.5,}}
+                whileInView={{ scale: 1, }}
+                transition={{ duration: 0.4 }}
+                viewport={{ once: true }}
             
             >
 
@@ -85,15 +87,82 @@ const BackDrop = ({closeModal}) => {
 
 }
 
-const ModalMain = () => {
+const SelectTokenBdrop = () => {
 
     return (
 
-        <div className="Drop_main" >
+        <div className="backDrop" >
+
+            <div className='backDrop_getToken' >
+                <div className='backDrop_getToken_top' >
+                    <BiSearch className='backDrop_getToken_top_ic' />
+                    <input type='text' placeholder='Search name or paste address' />
+                </div>
+                <div className='backDrop_getToken_choices' >
+
+                    <div className='backDrop_getToken_choices_div' >
+                        <img src={ETHimg} alt='' />
+                        <h5>ETH</h5>
+                    </div>
+
+                    <div className='backDrop_getToken_choices_div' >
+                        <img src={ETHimg} alt='' />
+                        <h5>ETH</h5>
+                    </div>
+
+                    <div className='backDrop_getToken_choices_div' >
+                        <img src={ETHimg} alt='' />
+                        <h5>ETH</h5>
+                    </div>
+
+                    <div className='backDrop_getToken_choices_div' >
+                        <img src={ETHimg} alt='' />
+                        <h5>ETH</h5>
+                    </div>
+
+                </div>
+                <div className='backDrop_getToken_selections' >
+
+                    <div className='backDrop_getToken_selections_li' >
+
+                        <img src={ETHimg} alt='' />
+
+                        <div className='backDrop_getToken_selections_li_right' >
+                            <h5>Ether</h5>
+                            <h6>ETH</h6>
+                        </div>
+
+                    </div>
+
+                    <div className='backDrop_getToken_selections_li' >
+
+                        <img src={BNBimg} alt='' />
+
+                        <div className='backDrop_getToken_selections_li_right' >
+                            <h5>Ether</h5>
+                            <h6>ETH</h6>
+                        </div>
+
+                    </div>
+
+                    <div className='backDrop_getToken_selections_li' >
+
+                        <img src={ARMimg} alt='' />
+
+                        <div className='backDrop_getToken_selections_li_right' >
+                            <h5>Ether</h5>
+                            <h6>ETH</h6>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
     );
 
 }
 
-export { BackDrop, ModalMain };
+export { BackDrop, SelectTokenBdrop };
