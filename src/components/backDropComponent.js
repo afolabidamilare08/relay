@@ -6,7 +6,7 @@ import {  motion } from 'framer-motion';
 import ETHimg from '../assets/images/eth.png';
 import BNBimg from '../assets/images/bnb.png';
 import ARMimg from '../assets/images/arm.png';
-
+import CloseImg from '../assets/images/close.png';
 
 
 
@@ -87,13 +87,31 @@ const BackDrop = ({closeModal}) => {
 
 }
 
-const SelectTokenBdrop = () => {
+const SelectTokenBdrop = ({closeModal}) => {
 
     return (
 
         <div className="backDrop" >
 
-            <div className='backDrop_getToken' >
+            <motion.div className='backDrop_getToken'
+            
+                initial={{ scale: 0.5,}}
+                whileInView={{ scale: 1, }}
+                transition={{ duration: 0.4 }}
+                viewport={{ once: true }}
+            
+            >
+
+                <div className="backDrop_getToken_close" style={{
+                    display:"flex",
+                    justifyContent:"flex-end",
+                    marginBottom:"1rem"
+                }} >
+                    <AiOutlineClose color='white' style={{
+                        cursor:"pointer"
+                    }} onClick={closeModal} />
+                </div>
+
                 <div className='backDrop_getToken_top' >
                     <BiSearch className='backDrop_getToken_top_ic' />
                     <input type='text' placeholder='Search name or paste address' />
@@ -157,7 +175,7 @@ const SelectTokenBdrop = () => {
                     </div>
 
                 </div>
-            </div>
+            </motion.div>
 
         </div>
 
@@ -165,4 +183,37 @@ const SelectTokenBdrop = () => {
 
 }
 
-export { BackDrop, SelectTokenBdrop };
+const ErrorModal = ({closeModal}) => {
+
+    return (
+
+        <div className="backDrop" >
+
+            <motion.div className='backDrop_getToken'
+                        
+                initial={{ scale: 0.5,}}
+                whileInView={{ scale: 1, }}
+                transition={{ duration: 0.4 }}
+                viewport={{ once: true }}
+            
+            >
+
+                <img className='errorImg' alt='' src={CloseImg} />
+
+                <h3 className='errorImg_top' >There has been an error</h3>
+
+                <h2 className='errorImg_btm' >
+                    We're sorry, but we were unable to connect to your wallet. 
+                    If you continue to experience issues, please contact our 
+                    support team for further assistance.
+                </h2>
+
+            </motion.div>
+
+        </div>
+
+    );
+
+}
+
+export { BackDrop, SelectTokenBdrop, ErrorModal };

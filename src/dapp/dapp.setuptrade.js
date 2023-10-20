@@ -1,39 +1,17 @@
-import EthImg from '../assets/images/eth.png';
-import BnbImg from '../assets/images/bnb.png';
-import ArmImg from '../assets/images/arm.png';
+
 import {BsIncognito} from 'react-icons/bs';
 import {BiInfoCircle} from 'react-icons/bi';
-import ArrowUp from '../assets/images/Arrow_Up_Icon.png';
-import {Popover, PopoverTrigger, PopoverContent, Switch} from "@nextui-org/react";
 import { Link } from 'react-router-dom';
-import TradeComponent from '../components/trade_component';
-import {IoMdMenu} from 'react-icons/io'
-import {BackDrop, SelectTokenBdrop} from '../components/backDropComponent';
+import {IoMdMenu} from 'react-icons/io';
+import {ErrorModal, SelectTokenBdrop} from '../components/backDropComponent';
 import { useState } from 'react';
 
 
 const SetuptradeDapp = () => {
 
-    const [ openModal, setopenModal ] = useState(true)
+    const [ openModal, setopenModal ] = useState(false)
+    const [ openMessage, setopenMessage ] = useState(true)
 
-    const content = (
-        <PopoverContent  >
-          <div className="Otc_main_modal" >
-            <Link to={"#"} className='Otc_main_modal_link' >
-                <img src={EthImg} alt='' />
-                <h6>Ethereum</h6>
-            </Link>
-            <Link to={"#"} className='Otc_main_modal_link' >
-                <img src={BnbImg} alt='' />
-                <h6>BSC</h6>
-            </Link>
-            <Link to={"#"} className='Otc_main_modal_link' >
-                <img src={ArmImg} alt='' />
-                <h6>Arbitrum</h6>
-            </Link>
-          </div>
-        </PopoverContent>
-      );
 
     return (
 
@@ -131,6 +109,12 @@ const SetuptradeDapp = () => {
             { openModal ? 
             
                 <SelectTokenBdrop closeModal={ () => setopenModal(false) } />
+
+            : <></> }
+
+            { openMessage ? 
+                
+                <ErrorModal closeModal={ () => setopenMessage(false) } />
 
             : <></> }
 

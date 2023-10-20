@@ -142,7 +142,8 @@
     right: 0;
     width: 80%;
     height:100vh;
-    background-color: rgba(13, 16, 25, 0.749);
+    // background-color: rgba(13, 16, 25, 0.749);
+    background-color: #182031ab;
     z-index: 22;
     display: flex;
     align-items: center;
@@ -376,8 +377,40 @@
 
     }
 
+    &_message{
+        background-color: #111420;
+        width: 50%;
+        height: 400px;
+    }
+
 }
 
+.errorImg{
+    width: 5rem;
+    height: 5rem;
+    display: block;
+    margin: 0 auto;
+    // border: 1px solid red;
+
+    &_top{
+        color: #FFFFFF;
+        text-align: center;
+        margin-top: 2rem;
+        font-weight: 600;
+        font-family: var(--syne);
+    }
+
+    &_btm{
+        font-family: var(--raleway);
+        color: #FFFFFF;
+        margin-top: 2rem;
+        text-align: center;
+        width: 70%;
+        margin: 2rem auto;
+        font-weight: 400;
+    }
+
+}
 
 @media (max-width:1200px){
 
