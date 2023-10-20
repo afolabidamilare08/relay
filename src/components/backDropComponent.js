@@ -187,7 +187,7 @@ const ErrorModal = ({closeModal}) => {
 
     return (
 
-        <div className="backDrop" >
+        <div className="backDrop" onClick={closeModal} >
 
             <motion.div className='backDrop_getToken'
                         

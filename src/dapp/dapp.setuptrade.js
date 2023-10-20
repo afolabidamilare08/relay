@@ -10,7 +10,7 @@ import { useState } from 'react';
 const SetuptradeDapp = () => {
 
     const [ openModal, setopenModal ] = useState(false)
-    const [ openMessage, setopenMessage ] = useState(true)
+    const [ openMessage, setopenMessage ] = useState(false)
 
 
     return (
@@ -65,7 +65,10 @@ const SetuptradeDapp = () => {
 
                     <div className="setupTrade_main" >
                         <h5>Token to swap</h5>
-                        <h6 onClick={ () => setopenModal(true) } >Select a token</h6>
+                        <h6 onClick={ () => {
+                            setopenMessage(false)
+                            setopenModal(true)
+                        } }>Select a token</h6>
                     </div>
 
                     <div className="setupTrade_main" >
@@ -75,7 +78,10 @@ const SetuptradeDapp = () => {
 
                     <div className="setupTrade_main" >
                         <h5>Token wanted in exchange:</h5>
-                        <h6 onClick={ () => setopenModal(true) } >Select a token</h6>
+                        <h6 onClick={ () => {
+                            setopenMessage(false)
+                            setopenModal(true)
+                        } } >Select a token</h6>
                     </div>
 
                     <div className="setupTrade_main" >
@@ -98,7 +104,10 @@ const SetuptradeDapp = () => {
                         <h6>0x0000...0000</h6>
                     </div>
 
-                    <button className='setupTrade_btn' >
+                    <button className='setupTrade_btn' onClick={ () => {
+                            setopenMessage(true)
+                            setopenModal(false)
+                        } } >
                         Setup a Trade
                     </button>
 
@@ -108,13 +117,19 @@ const SetuptradeDapp = () => {
 
             { openModal ? 
             
-                <SelectTokenBdrop closeModal={ () => setopenModal(false) } />
+                <SelectTokenBdrop closeModal={ () => {
+                    setopenModal(false)
+                    setopenMessage(false)
+                } } />
 
             : <></> }
 
             { openMessage ? 
                 
-                <ErrorModal closeModal={ () => setopenMessage(false) } />
+                <ErrorModal closeModal={ () => {
+                    setopenMessage(false)
+                    setopenModal(false)
+                } } />
 
             : <></> }
 
