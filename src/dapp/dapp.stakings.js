@@ -112,6 +112,8 @@ const StakingPage = () => {
 
                     <h6 className='stake_t_holding_subTitle' >Holders Reward History</h6>
 
+                    
+                    <div className='covering' >
                     <div className='stake_t_holding_tableTop' >
                         <div className='stake_t_holding_tableTop_div' >Time</div>
                         <div className='stake_t_holding_tableTop_div' >Rewards From Protocol</div>
@@ -140,6 +142,8 @@ const StakingPage = () => {
                         <div className='stake_t_holding_tableTop_div' >2023-10-11 09:37:59</div>
                         <div className='stake_t_holding_tableTop_div' >0.00001</div>
                         <div className='stake_t_holding_tableTop_div' >0.00002</div>
+                    </div>
+
                     </div>
 
                 </div>

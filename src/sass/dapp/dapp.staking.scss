@@ -170,4 +170,20 @@
         align-items: center;
     }
 
+    .covering{
+        overflow-x: auto;
+    }
+
+    .stake_t_holding_tableTop, .stake_t_holding_body{
+        width: 500px;
+    }
+
+}
+
+@media (max-width:400px) {
+    .stake_t_holding_tableTop_div{
+        font-size: .7rem;
+    }
+
+
 }
