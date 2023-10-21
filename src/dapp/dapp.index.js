@@ -1,4 +1,5 @@
 import { Link, 
+    NavLink, 
     Route,
      Routes
 } from 'react-router-dom';
@@ -13,7 +14,9 @@ import { AiOutlineCopyrightCircle} from 'react-icons/ai';
 import SetuptradeDapp from './dapp.setuptrade';
 import StakingPage from './dapp.stakings';
 
-function DappIndex() {
+function DappIndex({ component }) {
+
+
   return (
 
     <div className='dappIndex' >
@@ -29,17 +32,32 @@ function DappIndex() {
 
             <div className='dappIndex_left_div' >
 
-                <Link className='dappIndex_left_div_link' >
+                <NavLink 
+                    to={'/setuptrade'} 
+                    className={({ isActive, isPending }) =>
+                        isPending ? "dappIndex_left_div_link" : isActive ? "dappIndex_left_div_link_active" : "dappIndex_left_div_link"
+                    }
+                >
                     <span>💰</span>Setup a trade
-                </Link>
+                </NavLink>
 
-                <Link className='dappIndex_left_div_link' >
+                <NavLink
+                    className={({ isActive, isPending }) =>
+                    isPending ? "dappIndex_left_div_link" : isActive ? "dappIndex_left_div_link_active" : "dappIndex_left_div_link"
+                    }
+                    to={'/trades'} 
+                >
                     <span>🤝</span>OTC Trades
-                </Link>
+                </NavLink>
 
-                <Link className='dappIndex_left_div_link' >
+                <NavLink 
+                    className={({ isActive, isPending }) =>
+                    isPending ? "dappIndex_left_div_link" : isActive ? "dappIndex_left_div_link_active" : "dappIndex_left_div_link"
+                    }
+                    to={"/staking"} 
+                >
                     <span>🏦</span>Staking
-                </Link>
+                </NavLink>
 
                 <Link className='dappIndex_left_div_link' >
                     <span>🪙</span>Get $RLY
@@ -84,14 +102,7 @@ function DappIndex() {
       </div>
 
       <div className='dappIndex_right' >
-
-        <Routes>
-            <Route path='/' element={ <StakingPage/> } />
-            <Route path='/otc' element={ <OtcDapp/> }  />
-            {/* <Route path='/setuptrade' element={ <SetuptradeDapp/> } /> */}
-            <Route path='/setuptrade' element={ <StakingPage/> } />
-        </Routes>
-
+        { component }
         <div className='dappIndex_right_btm1' >
 
         </div>
