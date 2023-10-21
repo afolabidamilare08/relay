@@ -113,7 +113,7 @@ function DappIndex({ component }) {
         <motion.div className='dappIndex_left special_sidenav'
             initial={{ scaleX: 0,transformOrigin:"0% 0%", opacity:1}}
             whileInView={{ scaleX: 1,transformOrigin:"0% 0%", opacity:1 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.2 }}
             viewport={{ once: true }}
         >
 
