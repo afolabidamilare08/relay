@@ -216,4 +216,21 @@ const ErrorModal = ({closeModal}) => {
 
 }
 
-export { BackDrop, SelectTokenBdrop, ErrorModal };
+const NormalBackdrop = ({closeModal}) => {
+ 
+    return (
+        <motion.div className="backDrop"
+            // initial={{ scale: 0.5,}}
+            // whileInView={{ scale: 1, }}
+            // transition={{ duration: 0.4 }}
+            // viewport={{ once: true }}
+            onClick={closeModal}
+        >
+                
+
+        </motion.div>
+    );
+    
+}
+
+export { BackDrop, SelectTokenBdrop, ErrorModal, NormalBackdrop };

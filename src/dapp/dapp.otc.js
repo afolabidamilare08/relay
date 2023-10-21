@@ -11,7 +11,7 @@ import {BackDrop} from '../components/backDropComponent';
 import { useState } from 'react';
 
 
-const OtcDapp = () => {
+const OtcDapp = ({closeHeader}) => {
 
     const [ openModal, setopenModal ] = useState(false)
 
@@ -42,13 +42,15 @@ const OtcDapp = () => {
 
                 <h5>OTC TRADES</h5>
 
-                <Link className='Otc_main_header_spc' >
+                <div className='Otc_main_header_spc' >
                     
-                    <IoMdMenu className='Otc_main_header_spc_ic' />
+                    <IoMdMenu className='Otc_main_header_spc_ic' style={{
+                        cursor:"pointer"
+                    }} onClick={closeHeader} />
 
-                    <div className='Otc_main_header_spc_txt' >RELAY</div>
+                    <Link className='Otc_main_header_spc_txt' >RELAY</Link>
 
-                </Link>
+                </div>
 
                 <div className="Otc_main_header_right" >
 

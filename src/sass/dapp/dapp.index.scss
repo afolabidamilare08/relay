@@ -166,6 +166,10 @@
     }
 }
 
+.special_sidenav{
+    display: none;
+}
+
 .backDrop{
     position: fixed;
     top: 0;
@@ -497,6 +501,12 @@
         top: 0;
         z-index:20;
     }  
+
+    .special_sidenav{
+        display: flex;
+        z-index: 222;
+        // border: 2px solid red
+    }
     
     .dappIndex{
         // min-height: 100vh;

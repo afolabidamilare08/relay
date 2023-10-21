@@ -7,7 +7,7 @@ import {ErrorModal, SelectTokenBdrop} from '../components/backDropComponent';
 import { useState } from 'react';
 
 
-const StakingPage = () => {
+const StakingPage = ({closeHeader}) => {
 
     const [ openModal, setopenModal ] = useState(false)
     const [ openMessage, setopenMessage ] = useState(false)
@@ -21,13 +21,15 @@ const StakingPage = () => {
 
                 <h5>STAKING</h5>
 
-                <Link className='Otc_main_header_spc' >
+                <div className='Otc_main_header_spc' >
                     
-                    <IoMdMenu className='Otc_main_header_spc_ic' />
- 
-                    <div className='Otc_main_header_spc_txt' >RELAY</div>
+                    <IoMdMenu className='Otc_main_header_spc_ic' style={{
+                        cursor:"pointer"
+                    }} onClick={closeHeader} />
 
-                </Link>
+                    <Link className='Otc_main_header_spc_txt' >RELAY</Link>
+
+                </div>
 
                 <div className="Otc_main_header_right" >
 
