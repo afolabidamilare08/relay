@@ -11,6 +11,7 @@ import DiscordImg from '../assets/images/discord.png';
 import OtcDapp from './dapp.otc';
 import { AiOutlineCopyrightCircle} from 'react-icons/ai';
 import SetuptradeDapp from './dapp.setuptrade';
+import StakingPage from './dapp.stakings';
 
 function DappIndex() {
   return (
@@ -85,9 +86,10 @@ function DappIndex() {
       <div className='dappIndex_right' >
 
         <Routes>
-            <Route path='/' element={ <SetuptradeDapp/> } />
+            <Route path='/' element={ <StakingPage/> } />
             <Route path='/otc' element={ <OtcDapp/> }  />
-            <Route path='/setuptrade' element={ <SetuptradeDapp/> } />
+            {/* <Route path='/setuptrade' element={ <SetuptradeDapp/> } /> */}
+            <Route path='/setuptrade' element={ <StakingPage/> } />
         </Routes>
 
         <div className='dappIndex_right_btm1' >
