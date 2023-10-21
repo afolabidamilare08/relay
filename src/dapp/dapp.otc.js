@@ -48,7 +48,7 @@ const OtcDapp = ({closeHeader}) => {
                         cursor:"pointer"
                     }} onClick={closeHeader} />
 
-                    <Link className='Otc_main_header_spc_txt' >RELAY</Link>
+                    <Link className='Otc_main_header_spc_txt' to={'/trades'} >RELAY</Link>
 
                 </div>
 

@@ -10,13 +10,13 @@ const HeaderComponents = () => {
         <PopoverContent>
           <div className="px-1 py-2" >
 
-                <Link to="#" style={{
+                <Link to={'/trades'} style={{
                     display:"block",
                     marginTop:".5rem",
                     fontSize:'1rem'
                 }} >Trade</Link>
 
-                    <Link to="#" style={{
+                    <Link to={'/staking'} style={{
                     display:"block",
                     marginTop:".5rem",
                     fontSize:'1rem'
@@ -28,7 +28,7 @@ const HeaderComponents = () => {
                     fontSize:'1rem'
                 }} >Docs</Link>
 
-                <Link to={"/dapp"} className='header_wallet' style={{
+                <Link to={"/trades"} className='header_wallet' style={{
                     display:"block",
                     marginTop:".5rem",
                     fontSize:'1rem'
@@ -49,12 +49,12 @@ const HeaderComponents = () => {
             </div>
 
             <nav className='header_nav' >
-                <Link to="#" >Trade</Link>
-                <Link to="#" >Stake</Link>
+                <Link to={'/trades'} >Trade</Link>
+                <Link to={'/staking'} >Stake</Link>
                 <Link to="#" >Docs</Link>
             </nav>
 
-            <Link to={"/dapp"} className='header_wallet' >
+            <Link to={"/trades"} className='header_wallet' >
                 Open Dapp
             </Link>
 

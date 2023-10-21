@@ -1,6 +1,7 @@
 import HeroBg from '../assets/images/hero_bg.png';
 import roundImg from '../assets/images/hero_vector.png'
 import HeroSprial from '../assets/images/hero_spiral.png'
+import { Link } from 'react-router-dom';
 
 const HeroSectionComponents = () => {
 
@@ -25,9 +26,9 @@ const HeroSectionComponents = () => {
 
                     </div>
 
-                    <button className="hero_section_main_center_btn" >
+                    <Link to="/trades" className="hero_section_main_center_btn" >
                         Open Dapp
-                    </button>
+                    </Link>
 
                 </div>
 

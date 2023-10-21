@@ -32,7 +32,7 @@ function DappIndex({ component }) {
 
             <div>
 
-                <Link className='dappIndex_left_logo' >
+                <Link className='dappIndex_left_logo' to={'/trades'} >
                     <img src={LogoImg} alt='log' />
                     <h5>Relay</h5>
                 </Link>
@@ -119,7 +119,10 @@ function DappIndex({ component }) {
 
             <div>
 
-                <Link className='dappIndex_left_logo' >
+                <Link className='dappIndex_left_logo' to={'/trades'} 
+                        onClick={ () => UpdatesideNav() }
+            
+                >
                     <img src={LogoImg} alt='log' />
                     <h5>Relay</h5>
                 </Link>

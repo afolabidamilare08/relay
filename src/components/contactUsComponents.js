@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 const ContactSectionComponents = () => {
@@ -10,9 +11,9 @@ const ContactSectionComponents = () => {
 
                <h5>Relay</h5> 
 
-               <button>
+               <Link to={"/trades"} className="contact_us_center_button" >
                 Try Now
-               </button>
+               </Link>
 
             </div>
 
