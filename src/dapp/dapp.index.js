@@ -84,7 +84,10 @@ function DappIndex({ component }) {
                     
                         <div className='dappIndex_left_btm_wallet_center' style={{
                             cursor:"pointer"
-                        }} onClick={ () => enableWeb3() } >Connect Wallet</div>
+                        }} onClick={ () => {
+                            UpdatesideNav()
+                            enableWeb3()
+                        } } >Connect Wallet</div>
 
                     }
 
@@ -196,7 +199,10 @@ function DappIndex({ component }) {
 
                     <div className='dappIndex_left_btm_wallet_center' style={{
                         cursor:"pointer"
-                    }} onClick={ () => enableWeb3() } >Connect Wallet</div>
+                    }} onClick={ () => () => {
+                        UpdatesideNav()
+                        enableWeb3()
+                    } } >Connect Wallet</div>
 
                 }
 
