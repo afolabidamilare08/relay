@@ -8,18 +8,40 @@ import StakingPage from './dapp/dapp.stakings';
 import { useState } from 'react';
 import AppContext from './context/Appcontext';
 import { useMoralis, useWeb3Contract } from 'react-moralis';
+import { createWeb3Modal, defaultConfig, useWeb3Modal, useWeb3ModalAccount } from '@web3modal/ethers5/react'
+
+const projectId = 'a6b30bc12f5a5db7c09d0b165d354ca9'
+
+// 2. Set chains
+const chains = [42161]
+
+// 3. Create modal
+const metadata = {
+  name: 'Relay',
+  description: 'Innovative DeFi tool for secure OTC trading experience',
+  url: 'http://localhost:3000',
+  icons: ['https://avatars.mywebsite.com/']
+}
+
+createWeb3Modal({
+  ethersConfig: defaultConfig({ metadata }),
+  chains,
+  projectId
+})
 
 function App() {
 
-  const [ openSideNav, setopenSideNav ] = useState(false)
+  const [ openSideNav, setopenSideNav ] = useState(false);
 
-  const { enableWeb3, isWeb3Enabled, account } = useMoralis()
+  const { open } = useWeb3Modal();
+
+  const { address, chainId, isConnected  } = useWeb3ModalAccount();
 
   var userWalletAddress ;
 
-  if ( account ) {
-      var addressLength = account.length - 1
-      userWalletAddress = `${account[0]}${account[1]}${account[2]}${account[3]}${account[4]}${account[5]}...${account[addressLength-3]}${account[addressLength-2]}${account[addressLength-1]}${account[addressLength]}`
+  if ( address ) {
+      var addressLength = address.length - 1
+      userWalletAddress = `${address[0]}${address[1]}${address[2]}${address[3]}${address[4]}${address[5]}...${address[addressLength-3]}${address[addressLength-2]}${address[addressLength-1]}${address[addressLength]}`
   }else{
     userWalletAddress = null
   }
@@ -30,9 +52,9 @@ function App() {
           value={{
             sideNav: openSideNav,
             UpdatesideNav: () => setopenSideNav(!openSideNav),
-            enableWeb3: () => enableWeb3(),
-            isWeb3Enabled: isWeb3Enabled,
-            user_account: account,
+            enableWeb3: () => open(),
+            isWeb3Enabled: isConnected,
+            user_account: address,
             displayAccount: userWalletAddress
           }}
         >
