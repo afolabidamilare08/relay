@@ -1,7 +1,5 @@
 import { Link, 
     NavLink, 
-    Route,
-     Routes
 } from 'react-router-dom';
 import '../sass/main.scss';
 import LogoImg from '../assets/images/logo.png';
@@ -9,10 +7,7 @@ import TwitterImg from '../assets/images/twitter.png';
 import TelegramImg from '../assets/images/telegram.png';
 import MyGImg from '../assets/images/my_g.png';
 import DiscordImg from '../assets/images/discord.png';
-import OtcDapp from './dapp.otc';
 import { AiOutlineCopyrightCircle} from 'react-icons/ai';
-import SetuptradeDapp from './dapp.setuptrade';
-import StakingPage from './dapp.stakings';
 import { useContext } from 'react';
 import AppContext from '../context/Appcontext';
 import { NormalBackdrop } from '../components/backDropComponent';
@@ -21,12 +16,11 @@ import {  motion } from 'framer-motion';
 
 function DappIndex({ component }) {
 
-    const { sideNav, UpdatesideNav } = useContext(AppContext)
+    const { sideNav, UpdatesideNav, enableWeb3, displayAccount } = useContext(AppContext)
 
   return (
 
     <div className='dappIndex' >
-      
       
         <div className='dappIndex_left' >
 
@@ -81,7 +75,20 @@ function DappIndex({ component }) {
             <div className='dappIndex_left_btm' >  
 
                 <div className='dappIndex_left_btm_wallet' >
-                    <div className='dappIndex_left_btm_wallet_center' >0x0000...0000</div>
+
+                    { displayAccount ? 
+
+                        <div className='dappIndex_left_btm_wallet_center' >{ displayAccount ? displayAccount : '' }</div>
+
+                    :
+                    
+                        <div className='dappIndex_left_btm_wallet_center' style={{
+                            cursor:"pointer"
+                        }} onClick={ () => enableWeb3() } >Connect Wallet</div>
+
+                    }
+
+    
                 </div>
 
                 <div className='dappIndex_left_btm_socials' >
@@ -180,7 +187,19 @@ function DappIndex({ component }) {
             <div className='dappIndex_left_btm' >  
 
                 <div className='dappIndex_left_btm_wallet' >
-                    <div className='dappIndex_left_btm_wallet_center' >0x0000...0000</div>
+                   
+                { displayAccount ? 
+
+                    <div className='dappIndex_left_btm_wallet_center' >{ displayAccount ? displayAccount : '' }</div>
+
+                    :
+
+                    <div className='dappIndex_left_btm_wallet_center' style={{
+                        cursor:"pointer"
+                    }} onClick={ () => enableWeb3() } >Connect Wallet</div>
+
+                }
+
                 </div>
 
                 <div className='dappIndex_left_btm_socials' >

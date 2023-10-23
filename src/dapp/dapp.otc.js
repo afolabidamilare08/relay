@@ -8,12 +8,14 @@ import { Link } from 'react-router-dom';
 import TradeComponent from '../components/trade_component';
 import {IoMdMenu} from 'react-icons/io'
 import {BackDrop} from '../components/backDropComponent';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import AppContext from '../context/Appcontext';
 
 
 const OtcDapp = ({closeHeader}) => {
 
     const [ openModal, setopenModal ] = useState(false)
+    const { enableWeb3, displayAccount } = useContext(AppContext)
 
     const content = (
         <PopoverContent  >
@@ -74,7 +76,22 @@ const OtcDapp = ({closeHeader}) => {
                         </Popover>
 
                     <div className="Otc_main_header_right_wallet otc_tophdvgt" >
-                        <div className="Otc_main_header_right_wallet_center" >0x0000...0000</div>
+                        
+
+                        { displayAccount 
+                        
+                            ? 
+                            
+                            <div className="Otc_main_header_right_wallet_center" >{displayAccount}</div> 
+
+                            :
+                        
+                            <div className="Otc_main_header_right_wallet_center" style={{
+                                cursor:"pointer"
+                            }} onClick={ () => enableWeb3() } >Connect Wallet</div> 
+                            
+                        }
+
                     </div> 
 
                 </div>

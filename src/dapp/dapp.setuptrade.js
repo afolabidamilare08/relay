@@ -5,12 +5,15 @@ import { Link } from 'react-router-dom';
 import {IoMdMenu} from 'react-icons/io';
 import {ErrorModal, SelectTokenBdrop} from '../components/backDropComponent';
 import { useState } from 'react';
+import { useContext } from 'react';
+import AppContext from '../context/Appcontext';
 
 
 const SetuptradeDapp = ({closeHeader}) => {
 
     const [ openModal, setopenModal ] = useState(false)
     const [ openMessage, setopenMessage ] = useState(false)
+    const { enableWeb3, displayAccount } = useContext(AppContext)
 
 
     return (
@@ -34,7 +37,19 @@ const SetuptradeDapp = ({closeHeader}) => {
                 <div className="Otc_main_header_right" >
 
                     <div className="Otc_main_header_right_wallet otc_tophdvgt" >
-                        <div className="Otc_main_header_right_wallet_center" >0x0000...0000</div>
+                        { displayAccount 
+                            
+                            ? 
+                            
+                            <div className="Otc_main_header_right_wallet_center" >{displayAccount}</div> 
+
+                            :
+                        
+                            <div className="Otc_main_header_right_wallet_center" style={{
+                                cursor:"pointer"
+                            }} onClick={ () => enableWeb3() } >Connect Wallet</div> 
+                            
+                        }
                     </div> 
 
                 </div>

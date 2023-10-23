@@ -5,13 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {NextUIProvider} from "@nextui-org/react";
 import { BrowserRouter } from 'react-router-dom';
+import { MoralisProvider } from 'react-moralis';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
     <NextUIProvider>
+      <MoralisProvider initializeOnMount={false} >
       <App />
+      </MoralisProvider>
     </NextUIProvider>
     </BrowserRouter>
   </React.StrictMode>
