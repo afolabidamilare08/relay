@@ -7,6 +7,8 @@ import {ErrorModal, SelectTokenBdrop} from '../components/backDropComponent';
 import { useState } from 'react';
 import { useContext } from 'react';
 import AppContext from '../context/Appcontext';
+// import { useWeb3Contract } from 'react-moralis';
+
 
 
 const SetuptradeDapp = ({closeHeader}) => {
@@ -14,6 +16,7 @@ const SetuptradeDapp = ({closeHeader}) => {
     const [ openModal, setopenModal ] = useState(false)
     const [ openMessage, setopenMessage ] = useState(false)
     const { enableWeb3, displayAccount } = useContext(AppContext)
+    
 
 
     return (
