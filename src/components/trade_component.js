@@ -11,9 +11,10 @@ import { commonToken } from '../constants/tokens';
 const TradeComponent = ({ receivingToken, givingToken  }) => {
 
     const [ recieveTok, setrecieveTok ] = useState()
+    const [ givingTok, setgivingTok ] = useState()
 
 
-    const getTokenDetails = async (token) => {
+    const getTokenDetails = async (token,number) => {
         
         console.log(token)
 
@@ -53,7 +54,11 @@ const TradeComponent = ({ receivingToken, givingToken  }) => {
 
             console.log(tokendet)
 
-            setrecieveTok(tokendet)
+            if ( number === 1 ) {
+                setrecieveTok(tokendet)
+            }else{
+                setgivingTok(tokendet)
+            }
 
 
         }
@@ -65,16 +70,17 @@ const TradeComponent = ({ receivingToken, givingToken  }) => {
 
     useEffect( () => {
 
-        getTokenDetails(receivingToken)
+        getTokenDetails(receivingToken,1)
+        getTokenDetails(givingToken,2)
 
-    } , [receivingToken] )
+    } , [receivingToken,givingToken] )
 
     return (
 
         <div className='trade_div' >
 
                     <div className='trade_div_top' >
-                        <h5 className='trade_div_top_left' >{ recieveTok ? recieveTok.tokenSymbol : '' } / ETH</h5>
+                        <h5 className='trade_div_top_left' >{ recieveTok ? recieveTok.tokenSymbol : '' } / { givingTok ? givingTok.tokenSymbol : '' }</h5>
                         <div className='trade_div_top_right' >
                             <h6 className='trade_div_top_right_txt' >Copy Trade URL</h6>
                             <BiSolidCopy className='trade_div_top_right_ic' />
@@ -88,7 +94,7 @@ const TradeComponent = ({ receivingToken, givingToken  }) => {
                         </h6>
                         <h6 className='trade_div_GW_txt' >
                             <span>Wants:</span>
-                            5.00
+                            { givingTok ? givingTok.value : '' }
                         </h6>
                     </div>
 
@@ -98,7 +104,7 @@ const TradeComponent = ({ receivingToken, givingToken  }) => {
 
                         <FaExchangeAlt className='trade_div_mid_ic' />
 
-                        <h5>($7,742.85)</h5>
+                        <h5>(${ givingTok ? Math.round(givingTok.value * givingTok.usdPrice) : '' })</h5>
 
                     </div>
 
@@ -120,9 +126,11 @@ const TradeComponent = ({ receivingToken, givingToken  }) => {
 
                             <FiExternalLink className='trade_div_lst_pt_ic' />
 
-                            <img src={EthImg} alt='' />
+                            <img src={ givingTok ? givingTok.tokenLogo : RelayIc } alt='' style={{
+                                width:'1.3rem'
+                            }} />
 
-                            <h5>ETH</h5>
+                            <h5>{ givingTok ? givingTok.tokenSymbol : '' }</h5>
 
                         </div>
 
