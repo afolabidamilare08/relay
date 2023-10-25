@@ -6,7 +6,9 @@ const AppContext = React.createContext({
   enableWeb3: () => {},
   isWeb3Enabled: false,
   user_account: false,
-  displayAccount: false
+  displayAccount: false,
+  signer: false,
+  walletProvider:false
 });
 
 export default AppContext;

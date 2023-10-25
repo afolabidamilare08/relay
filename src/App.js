@@ -8,7 +8,11 @@ import StakingPage from './dapp/dapp.stakings';
 import { useState } from 'react';
 import AppContext from './context/Appcontext';
 import { useMoralis, useWeb3Contract } from 'react-moralis';
-import { createWeb3Modal, defaultConfig, useWeb3Modal, useWeb3ModalAccount } from '@web3modal/ethers5/react'
+import { createWeb3Modal, defaultConfig, useWeb3Modal, useWeb3ModalAccount, useWeb3ModalSigner } from '@web3modal/ethers5/react'
+import { abi } from './constants/abi';
+import { ethers } from 'ethers';
+import { formatEther } from '@ethersproject/units';
+import { useEffect } from 'react';
 
 const projectId = 'a6b30bc12f5a5db7c09d0b165d354ca9'
 
@@ -30,6 +34,9 @@ createWeb3Modal({
   projectId
 })
 
+
+
+
 function App() {
 
   const [ openSideNav, setopenSideNav ] = useState(false);
@@ -37,6 +44,39 @@ function App() {
   const { open } = useWeb3Modal();
 
   const { address, chainId, isConnected  } = useWeb3ModalAccount();
+
+  const { signer, walletProvider } = useWeb3ModalSigner()
+
+
+//   const unhashTradeId = async () => {
+//     const hexToDecimal = hex => parseInt(hex, 16)
+// const dec1 = hexToDecimal("0x0000000000000000000000000000000000000000000000000000000000000014");
+// console.log(dec1)
+
+// var hashedAddress = '0x000000000000000000000000633872d6346f4c6d0f38e9d6a492ce96c6c9c38d'
+
+// console.log(hashedAddress.toString(16).toUpperCase())
+//   }
+
+
+
+  const getHistory = async () => {
+
+    const ethersScanProvider = await walletProvider.getTransactionReceipt('0x9c55603b7f8ae1823cf656b4fd6361792aa4df28ca0dd89ffd7dab1dfe2ee9f8')
+
+    console.log(ethersScanProvider)
+
+
+
+  }
+
+  const decodeAddress = async () => {
+
+    const decodedAddress = await ethers.utils.defaultAbiCoder.decode(['address'], '0x000000000000000000000000633872d6346f4c6d0f38e9d6a492ce96c6c9c38d')
+
+    console.log(decodedAddress)
+
+  }
 
   var userWalletAddress ;
 
@@ -47,6 +87,25 @@ function App() {
     userWalletAddress = null
   }
 
+
+  const getTransactionLogs = async () => {
+
+    try{
+
+      const response = await fetch(`https://api.arbiscan.io/api?module=logs&action=getLogs&address=0x84b4017433611e6E66fa20C6A425b1B291dd87E3&page=1&offset=1000&apikey=57M724ZAHNA23XSWNF7RTRP4AJRT17NB28`)
+
+      const json = await response.json();
+ 
+      console.log(json)
+
+    }
+    catch (error) {
+      console.log(error)
+    }
+
+  }
+
+
   return (
       <div className='mainApp' >
         <AppContext.Provider
@@ -56,7 +115,9 @@ function App() {
             enableWeb3: () => open(),
             isWeb3Enabled: isConnected,
             user_account: address,
-            displayAccount: userWalletAddress
+            displayAccount: userWalletAddress,
+            signer:signer,
+            walletProvider:walletProvider
           }}
         >
 

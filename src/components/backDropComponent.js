@@ -1,12 +1,14 @@
-import {AiOutlineClose} from 'react-icons/ai';
+import {AiOutlineClose,AiFillWarning} from 'react-icons/ai';
 import {IoMdCheckmark} from 'react-icons/io';
 import {BsFunnel} from 'react-icons/bs';
 import {BiChevronDown, BiSearch} from 'react-icons/bi';
 import {  motion } from 'framer-motion';
 import ETHimg from '../assets/images/eth.png';
-import BNBimg from '../assets/images/bnb.png';
-import ARMimg from '../assets/images/arm.png';
 import CloseImg from '../assets/images/close.png';
+import { useState } from 'react';
+import { commonToken } from '../constants/tokens';
+// import Moralis from 'moralis';
+// import { EvmChain } from '@moralisweb3/common-evm-utils';
 
 
 
@@ -89,90 +91,167 @@ const BackDrop = ({closeModal}) => {
 
 const SelectTokenBdrop = ({closeModal}) => {
 
+    const [ Alltokens, setAlltokens ] = useState([])
+    const [ Loading, setLoading ] = useState(false)
+    const [ Query, setQuery ] = useState('')
+    const [ selectedToken, setselectedToken ] = useState(null)
+
+    const GetTokenbyAddress = async () => {
+
+        try{
+
+            const response = await fetch(`https://deep-index.moralis.io/api/v2.2/erc20/metadata?chain=eth&addresses%5B0%5D=${Query}`,{
+                method: 'GET',
+                headers:{
+                "accept":"application/json",
+                "X-API-Key":"lAoj7I9S6dCu2l4jbbIUGDSyssYJ0Rxe6zaZhdlkhwZTj1ot8rtjuqE5x28Z9NRU"
+                }
+            })
+
+            const json = await response.json()
+
+            if ( json.length > 0 ) {
+                setselectedToken(json)
+            }
+
+
+        }
+        catch(error){
+            console.log(error)
+        }
+
+    }
+
+    const GetTokenbySymbol = async () => {
+
+        try{
+
+            const response = await fetch(`https://deep-index.moralis.io/api/v2.2/erc20/metadata/symbols?chain=eth&symbols=${Query}`,{
+                method: 'GET',
+                headers:{
+                "accept":"application/json",
+                "X-API-Key":"lAoj7I9S6dCu2l4jbbIUGDSyssYJ0Rxe6zaZhdlkhwZTj1ot8rtjuqE5x28Z9NRU"
+                }
+            })
+
+            const json = await response.json()
+
+            if ( json.length > 0 ) {
+                setselectedToken(json)
+            }
+
+
+        }
+        catch(error){
+            console.log(error)
+        }
+
+    }
+
+
+
+    if ( Query.length > 35 && !selectedToken ) {
+        GetTokenbyAddress()
+    }
+
+    if ( Query.length > 2 && !selectedToken && Query.length < 12 ) {
+        GetTokenbySymbol()
+    }
+
+
+    
+
     return (
 
         <div className="backDrop" >
 
             <motion.div className='backDrop_getToken'
-            
                 initial={{ scale: 0.5,}}
                 whileInView={{ scale: 1, }}
                 transition={{ duration: 0.4 }}
                 viewport={{ once: true }}
-            
             >
 
                 <div className="backDrop_getToken_close" style={{
                     display:"flex",
-                    justifyContent:"flex-end",
-                    marginBottom:"1rem"
+                    justifyContent:"space-between",
+                    marginBottom:"1rem",
+                    alignItems:"center"
                 }} >
+
+                    <h1 style={{
+                        color:"white"
+                    }} >Select Token</h1>
+
                     <AiOutlineClose color='white' style={{
                         cursor:"pointer"
-                    }} onClick={closeModal} />
+                    }} onClick={ () => closeModal(selectedToken) } />
                 </div>
 
                 <div className='backDrop_getToken_top' >
                     <BiSearch className='backDrop_getToken_top_ic' />
-                    <input type='text' placeholder='Search name or paste address' />
+                    <input type='text' placeholder='Search name or paste address' value={Query} onChange={ (e) => {
+                        setQuery(e.target.value)
+                        setselectedToken(null)
+                    } }  />
                 </div>
-                <div className='backDrop_getToken_choices' >
 
-                    <div className='backDrop_getToken_choices_div' >
-                        <img src={ETHimg} alt='' />
-                        <h5>ETH</h5>
-                    </div>
+                <div className='backDrop_getToken_choices' style={{
+                    borderBottom: selectedToken ? '2px' : "0px"
 
-                    <div className='backDrop_getToken_choices_div' >
-                        <img src={ETHimg} alt='' />
-                        <h5>ETH</h5>
-                    </div>
+                }} >
 
-                    <div className='backDrop_getToken_choices_div' >
-                        <img src={ETHimg} alt='' />
-                        <h5>ETH</h5>
-                    </div>
+                    { commonToken.map( (token,index) => {
+                        return (
 
-                    <div className='backDrop_getToken_choices_div' >
-                        <img src={ETHimg} alt='' />
-                        <h5>ETH</h5>
-                    </div>
+                            <div className='backDrop_getToken_choices_div' key={index} onClick={ () => {
+                                setselectedToken(token)
+                                closeModal(token)
+                            } } >
+                                <img src={token.logo} alt='' style={{
+                                    width:"1.1rem"
+                                }} />
+                                <h5>{token.name}</h5>
+                            </div>
+
+                        );
+                    } ) }
 
                 </div>
-                <div className='backDrop_getToken_selections' >
 
-                    <div className='backDrop_getToken_selections_li' >
+                <div className='backDrop_getToken_selections' style={{
+                    maxHeight:"50vh",
+                    overflowY:"auto",
+                }} >
 
-                        <img src={ETHimg} alt='' />
+                    { selectedToken ?
+                    
+                    
+                        selectedToken.map( (token,index) => {
 
-                        <div className='backDrop_getToken_selections_li_right' >
-                            <h5>Ether</h5>
-                            <h6>ETH</h6>
-                        </div>
+                            if ( (!token.address_label || !token.logo) && Query.length < 10  ) {
+                                return <></>
+                            }
 
-                    </div>
+                            return (
+                                <div className='backDrop_getToken_selections_li' key={index} onClick={ () => {
+                                    setselectedToken(token)
+                                    closeModal(token)
+                                } } >
 
-                    <div className='backDrop_getToken_selections_li' >
+                                    <img src={ token.logo ? token.logo : ETHimg } alt='' />
 
-                        <img src={BNBimg} alt='' />
+                                    <div className='backDrop_getToken_selections_li_right' >
+                                        <h5>{token.name}</h5>
+                                        <h6>{token.symbol}</h6>
+                                    </div>
 
-                        <div className='backDrop_getToken_selections_li_right' >
-                            <h5>Ether</h5>
-                            <h6>ETH</h6>
-                        </div>
+                                </div>
+                            );
+                        } )
 
-                    </div>
-
-                    <div className='backDrop_getToken_selections_li' >
-
-                        <img src={ARMimg} alt='' />
-
-                        <div className='backDrop_getToken_selections_li_right' >
-                            <h5>Ether</h5>
-                            <h6>ETH</h6>
-                        </div>
-
-                    </div>
+                    
+                    : <></>  }
 
                 </div>
             </motion.div>
@@ -233,4 +312,42 @@ const NormalBackdrop = ({closeModal}) => {
     
 }
 
-export { BackDrop, SelectTokenBdrop, ErrorModal, NormalBackdrop };
+
+
+
+
+const SliderModal = ({ display, closeModal}) => {
+
+    return (
+        <div className='sliderMain' style={{
+            right: display ? '0rem' : '-20rem',
+            display:"flex",
+            alignItems:"center",
+            cursor:"pointer"
+        }} onClick={closeModal} >
+            <div className='sliderMain_center' >
+                Trade setup successful  🎉
+            </div>
+        </div>
+    );
+
+}
+
+const ErrorSlideModal = ({error_msg, display, closeModal}) => {
+
+    return (
+        <div className='sliderError' style={{
+            right: display ? '0rem' : '-20rem',
+            display:"flex",
+            alignItems:"center"
+        }} onClick={ closeModal } >
+            {error_msg} <AiFillWarning style={{
+                marginLeft:'1rem'
+            }} />
+        </div>
+    );
+
+}
+
+
+export { BackDrop, SelectTokenBdrop, ErrorModal, NormalBackdrop, SliderModal, ErrorSlideModal };
