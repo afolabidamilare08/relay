@@ -47,28 +47,9 @@ function App() {
 
   const { signer, walletProvider } = useWeb3ModalSigner()
 
-
-//   const unhashTradeId = async () => {
-//     const hexToDecimal = hex => parseInt(hex, 16)
-// const dec1 = hexToDecimal("0x0000000000000000000000000000000000000000000000000000000000000014");
-// console.log(dec1)
-
-// var hashedAddress = '0x000000000000000000000000633872d6346f4c6d0f38e9d6a492ce96c6c9c38d'
-
-// console.log(hashedAddress.toString(16).toUpperCase())
-//   }
+  const TradeFactorycontractAddress  = '0x84b4017433611e6E66fa20C6A425b1B291dd87E3';
 
 
-
-  const getHistory = async () => {
-
-    const ethersScanProvider = await walletProvider.getTransactionReceipt('0x9c55603b7f8ae1823cf656b4fd6361792aa4df28ca0dd89ffd7dab1dfe2ee9f8')
-
-    console.log(ethersScanProvider)
-
-
-
-  }
 
   const decodeAddress = async () => {
 
@@ -117,7 +98,8 @@ function App() {
             user_account: address,
             displayAccount: userWalletAddress,
             signer:signer,
-            walletProvider:walletProvider
+            walletProvider:walletProvider,
+            TradeFactorycontractAddress:TradeFactorycontractAddress
           }}
         >
 

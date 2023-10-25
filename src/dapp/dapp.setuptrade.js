@@ -18,7 +18,7 @@ const SetuptradeDapp = ({closeHeader}) => {
 
     const [ openModal, setopenModal ] = useState(false)
     const [ openMessage, setopenMessage ] = useState(false)
-    const { enableWeb3, displayAccount,signer, user_account, walletProvider } = useContext(AppContext)
+    const { enableWeb3, displayAccount,signer, user_account, walletProvider, TradeFactorycontractAddress } = useContext(AppContext)
     const [ PrivateTrade, setPrivateTrade ] = useState(false)
 
 
@@ -54,7 +54,6 @@ const SetuptradeDapp = ({closeHeader}) => {
 
         try{
 
-            const TradeFactorycontractAddress  = '0x84b4017433611e6E66fa20C6A425b1B291dd87E3';
             const contract = new ethers.Contract(TradeFactorycontractAddress,abi,signer)
     
             var params;
@@ -176,8 +175,6 @@ const SetuptradeDapp = ({closeHeader}) => {
         }
 
     }
-
-
 
 
     return (

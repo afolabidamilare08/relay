@@ -8,7 +8,9 @@ const AppContext = React.createContext({
   user_account: false,
   displayAccount: false,
   signer: false,
-  walletProvider:false
+  walletProvider:false,
+  TradeFactorycontractAddress:false
+
 });
 
 export default AppContext;
