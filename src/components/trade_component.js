@@ -81,7 +81,7 @@ const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction
                         <h5 className='trade_div_top_left' >{ recieveTok ? recieveTok.tokenSymbol : '' } / { givingTok ? givingTok.tokenSymbol : '' }</h5>
                         <div className='trade_div_top_right'  >
                             <h6 className='trade_div_top_right_txt' >Copy Trade URL</h6>
-                            <CopyToClipboard text={`http://localhost:3000/trade_detail/${trade.tradeId}`} onCopy={ () => alert("Link Copied") } >
+                            <CopyToClipboard text={`https://relay-three.vercel.app/trade_detail/${trade.tradeId}`} onCopy={ () => alert("Link Copied") } >
                                 <BiSolidCopy className='trade_div_top_right_ic' style={{
                                     cursor:"pointer"
                                 }} />
@@ -231,7 +231,7 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
                         <h5 className='trade_div_top_left' >{ recieveTok ? recieveTok.tokenSymbol : '' } / { givingTok ? givingTok.tokenSymbol : '' }</h5>
                         <div className='trade_div_top_right'  >
                             <h6 className='trade_div_top_right_txt' >Copy Trade URL</h6>
-                            <CopyToClipboard text={`http://localhost:3000/trade_detail/${trade.tradeId}`} onCopy={ () => alert("Link Copied") } >
+                            <CopyToClipboard text={`https://relay-three.vercel.app/trade_detail/${trade.tradeId}`} onCopy={ () => alert("Link Copied") } >
                                 <BiSolidCopy className='trade_div_top_right_ic' style={{
                                     cursor:"pointer"
                                 }} />
