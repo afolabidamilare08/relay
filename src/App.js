@@ -14,6 +14,8 @@ import { ethers } from 'ethers';
 import { formatEther } from '@ethersproject/units';
 import { useEffect } from 'react';
 import TradeOtc from './dapp/Trade.otc';
+import Logo from './assets/images/logo.png';
+import { Spinner } from '@nextui-org/react';
 
 const projectId = 'a6b30bc12f5a5db7c09d0b165d354ca9'
 
@@ -52,15 +54,8 @@ function App() {
 
   const MainControllercontractAddress = '0xa138a388cbd9796e9C08A159c40b6896b8538115'
 
+  const [ preLoader, setpreLoader ] = useState(true)
 
-
-  const decodeAddress = async () => {
-
-    const decodedAddress = await ethers.utils.defaultAbiCoder.decode(['address'], '0x000000000000000000000000633872d6346f4c6d0f38e9d6a492ce96c6c9c38d')
-
-    console.log(decodedAddress)
-
-  }
 
   var userWalletAddress ;
 
@@ -89,6 +84,10 @@ function App() {
 
   }
 
+  setTimeout(() => {
+    setpreLoader(false)
+  }, 4000);
+
 
       // const clearCacheData = () => {
       //   caches.keys().then((names) => {
@@ -116,6 +115,30 @@ function App() {
           }}
         >
 
+        { preLoader ?
+        
+        <div style={{
+          width:'100%',
+          height:"100vh",
+          display:"flex",
+          justifyContent:"center",
+          alignItems:"center",
+          flexDirection:"column",
+          backgroundColor:"#0D1019"
+        }} >
+
+            <img src={Logo} alt='' style={{
+              width:"4rem",
+              display:"block",
+            }} />
+
+            <Spinner size='lg' color='default' style={{
+              marginTop:"2rem"
+            }} />
+
+        </div>
+      
+      :
         <Routes>
           <Route path='/' element={ <LandingPage/> } />
 
@@ -127,15 +150,18 @@ function App() {
             component={ <OtcDapp closeHeader={ () => setopenSideNav(!openSideNav) } /> }
           /> } />
 
-          <Route path='/trade/:tradeId' element={ <DappIndex
+          <Route path='/trade_detail/:tradeId' element={ <DappIndex
             component={ <TradeOtc closeHeader={ () => setopenSideNav(!openSideNav) } /> }
           /> } />
 
           <Route path='/setuptrade' element={<DappIndex
             component={ <SetuptradeDapp closeHeader={ () => setopenSideNav(!openSideNav) } /> }
           />} />
+      </Routes>
+      
+      
+      }
 
-        </Routes>
         </AppContext.Provider>
 
       </div>

@@ -297,7 +297,7 @@ const ErrorModal = ({closeModal}) => {
 
 }
 
-const SuccessModal = ({closeModal,tradeId}) => {
+const SuccessModal = ({closeModal}) => {
 
 
     return (
@@ -327,12 +327,12 @@ const SuccessModal = ({closeModal,tradeId}) => {
 
                 <img className='errorImg' alt='' src={CeleberationImg} />
 
-                <h3 className='errorImg_top' >Trade Created</h3>
+                <h3 className='errorImg_top' >Trade Compelete</h3>
 
                 <h2 className='errorImg_btm' >
-                    Your Trade was successfully created. You can share the link with your friends.  
+                    You have successfully completed the trade.  
                 </h2>
-
+{/* 
                 <div style={{
                     display:"flex",
                     alignItems:"center",
@@ -348,7 +348,7 @@ const SuccessModal = ({closeModal,tradeId}) => {
                             cursor:"pointer"
                         }} />
                     </CopyToClipboard>
-                </div>
+                </div> */}
 
             </motion.div>
 

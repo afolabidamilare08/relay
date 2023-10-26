@@ -5,7 +5,7 @@ import {BsChevronDown, BsFunnel, BsIncognito} from 'react-icons/bs';
 import ArrowUp from '../assets/images/Arrow_Up_Icon.png';
 import {Popover, PopoverTrigger, PopoverContent, Switch} from "@nextui-org/react";
 import { Link, useParams } from 'react-router-dom';
-import TradeComponent from '../components/trade_component';
+import { TradeDetail } from '../components/trade_component';
 import {IoMdMenu} from 'react-icons/io'
 import {BackDrop} from '../components/backDropComponent';
 import { useContext, useEffect, useState } from 'react';
@@ -26,6 +26,8 @@ const TradeOtc = ({closeHeader}) => {
 
     const [ LoadingTransactions, setLoadingTransactions ] = useState(false)
     const [ Erorr, setErorr ] = useState(null)
+    const [ successMsg, setsuccessMsg ] = useState(false)
+
 
 
     const { tradeId } = useParams()
@@ -37,6 +39,8 @@ const TradeOtc = ({closeHeader}) => {
         var TradeID = parseInt(tradeId)
 
         try{
+
+            console.log(signer)
 
             const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
             const response = await contract.getTrade(TradeID)
@@ -62,15 +66,65 @@ const TradeOtc = ({closeHeader}) => {
 
     useEffect( () => {
 
-        // console.log(user_account)
+            // console.log(tradeId)
+            // console.log(user_account)
 
         if ( tradeId && signer ) {
-            console.log(signer)
             GetTrade(tradeId)
         }
 
     }, [ tradeId, signer ] )
 
+
+    const WithdrawalHandler = async (tradeID) => {
+
+        try{
+
+            var id = parseInt(tradeID)
+
+            const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
+            const response = await contract.withdraw({
+                withdraw:0,
+                TradeId: id
+            })
+
+            setsuccessMsg(true)
+
+        }
+        catch(error){
+            console.log(error)
+        }
+        
+    }
+
+    const acceptHandler = async (tradeID) => {
+
+        try{
+
+            var id = parseInt(tradeID)
+
+            const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
+            const response = await contract.execute(id)
+            
+            if( response ){
+
+                const contrac2t = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
+                const response2 = await contrac2t.swap(id)
+
+                if ( response2 ) {
+                    GetTrade(id)
+                }
+
+            }
+
+            // setsuccessMsg(true)
+
+        }
+        catch(error){
+            console.log(error)
+        }
+        
+    }
 
     return (
 
@@ -161,9 +215,13 @@ const TradeOtc = ({closeHeader}) => {
                 
                 :  
                 
-                    <TradeComponent 
+                    <TradeDetail 
                         givingToken={Trade.givingToken}
                         receivingToken={Trade.receivingToken}
+                        trade={Trade}
+                        withdrawalFunction={ () => WithdrawalHandler(Trade.tradeId) }
+                        // cancelFunction={}
+                        acceptFunction={ () => acceptHandler(Trade.tradeId) }
                     />
              
              }

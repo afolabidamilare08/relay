@@ -5,9 +5,9 @@ import {BsChevronDown, BsFunnel, BsIncognito} from 'react-icons/bs';
 import ArrowUp from '../assets/images/Arrow_Up_Icon.png';
 import {Popover, PopoverTrigger, PopoverContent, Switch} from "@nextui-org/react";
 import { Link } from 'react-router-dom';
-import TradeComponent from '../components/trade_component';
+import {TradeComponent} from '../components/trade_component';
 import {IoMdMenu} from 'react-icons/io'
-import {BackDrop} from '../components/backDropComponent';
+import {BackDrop, SuccessModal} from '../components/backDropComponent';
 import { useContext, useEffect, useState } from 'react';
 import AppContext from '../context/Appcontext';
 import { ethers } from 'ethers';
@@ -34,6 +34,13 @@ const OtcDapp = ({closeHeader}) => {
     const [ FilteredResult, setFilteredResult ] = useState(null)
 
     const [ ListOfasset, setListOfasset ] = useState([]);
+
+    const [ successMsg, setsuccessMsg ] = useState(false)
+
+    const [ Filters, setFilters ] = useState({
+        status:"All Trades",
+
+    })
 
 
     const GetUserTransactions = async () => {
@@ -155,6 +162,49 @@ const OtcDapp = ({closeHeader}) => {
 
     }
 
+
+    const WithdrawalHandler = async (tradeID) => {
+
+        try{
+
+            var id = parseInt(tradeID)
+
+            const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
+            const response = await contract.withdraw({
+                withdraw:0,
+                TradeId: id
+            })
+
+            setsuccessMsg(true)
+
+        }
+        catch(error){
+            console.log(error)
+        }
+        
+    }
+
+    // const CancelHandler = async (tradeID) => {
+
+    //     try{
+
+    //         var id = parseInt(tradeID)
+
+    //         const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
+    //         const response = await contract.withdraw({
+    //             withdraw:0,
+    //             TradeId: id
+    //         })
+
+    //         setsuccessMsg(true)
+
+    //     }
+    //     catch(error){
+    //         console.log(error)
+    //     }
+        
+    // }
+
     useEffect( () => {
 
         // console.log(user_account)
@@ -169,14 +219,14 @@ const OtcDapp = ({closeHeader}) => {
     const content = (
         <PopoverContent  >
           <div className="Otc_main_modal" >
-            <Link to={"#"} className='Otc_main_modal_link' >
+            {/* <Link to={"#"} className='Otc_main_modal_link' >
                 <img src={EthImg} alt='' />
                 <h6>Ethereum</h6>
             </Link>
             <Link to={"#"} className='Otc_main_modal_link' >
                 <img src={BnbImg} alt='' />
                 <h6>BSC</h6>
-            </Link>
+            </Link> */}
             <Link to={"#"} className='Otc_main_modal_link' >
                 <img src={ArmImg} alt='' />
                 <h6>Arbitrum</h6>
@@ -184,6 +234,24 @@ const OtcDapp = ({closeHeader}) => {
           </div>
         </PopoverContent>
       );
+
+
+      const content4Trades = (
+        <PopoverContent  >
+          <div className="Otc_main_modal" >
+            <Link to={"#"} className='Otc_main_modal_link' >
+                <h6>All Trades</h6>
+            </Link>
+            <Link to={"#"} className='Otc_main_modal_link' >
+                <h6>Pending</h6>
+            </Link>
+            <Link to={"#"} className='Otc_main_modal_link' >
+                <h6>Completed</h6>
+            </Link>
+          </div>
+        </PopoverContent>
+      );
+
 
     return (
 
@@ -214,8 +282,8 @@ const OtcDapp = ({closeHeader}) => {
                     <div className="Otc_main_header_right_wallet" >
                         
                         <button className='Otc_main_header_right_wallet_btn otc_toph' >
-                            <img src={EthImg} alt='' />
-                            <h4>Ethereum</h4>
+                            <img src={ArmImg} alt='' />
+                            <h4>Arbitrum</h4>
                             <BsChevronDown className='Otc_main_header_right_wallet_btn_ic' />
                         </button>
                         
@@ -252,19 +320,24 @@ const OtcDapp = ({closeHeader}) => {
             <div className='Otc_main_options' >
 
                 <div className='Otc_main_options_left' >
-                    <div className='Otc_main_options_cov' >
-                        <button className='Otc_main_options_cov_btn' >
-                            All trades
-                            <BsChevronDown className='Otc_main_options_cov_btn_ic' />
-                        </button>
-                    </div>
+                    <Popover key={'bottom-end'} placement={'bottom'} color="primary" >
+                        <PopoverTrigger>
+                            <div className='Otc_main_options_cov' >
+                                <button className='Otc_main_options_cov_btn' >
+                                    All Trades
+                                    <BsChevronDown className='Otc_main_options_cov_btn_ic' />
+                                </button>
+                            </div>
+                        </PopoverTrigger>
+                        {content4Trades}
+                    </Popover>
 
-                    <div className='Otc_main_options_cov' >
+                    {/* <div className='Otc_main_options_cov' >
                         <button className='Otc_main_options_cov_btn' onClick={ () => setopenModal(true) } >
                             <BsFunnel className='Otc_main_options_cov_btn_icbefore' />
                             Filters
                         </button>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className='Otc_main_options_right' >
@@ -302,8 +375,10 @@ const OtcDapp = ({closeHeader}) => {
                                 else{
                                     return (
                                         <TradeComponent 
-                                            key={index} 
+                                            key={index}
+                                            trade={trade}
                                             givingToken={trade.givingToken}
+                                            withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
                                             receivingToken={trade.receivingToken}
                                         />
                                     );
@@ -342,6 +417,8 @@ const OtcDapp = ({closeHeader}) => {
                             return (
                                 <TradeComponent 
                                     key={index} 
+                                    trade={trade}
+                                    withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
                                     givingToken={trade.givingToken}
                                     receivingToken={trade.receivingToken}
                                 />
@@ -407,6 +484,12 @@ const OtcDapp = ({closeHeader}) => {
             
             <BackDrop closeModal={ () => setopenModal(false) } />
 
+            : <></> }
+
+            { successMsg ?
+            
+                <SuccessModal closeModal={ () => setsuccessMsg(false) } />
+            
             : <></> }
 
         </div>
