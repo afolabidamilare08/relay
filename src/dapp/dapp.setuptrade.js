@@ -80,7 +80,7 @@ const SetuptradeDapp = ({closeHeader}) => {
                         {
                             from: user_account,
                             to:owner2,
-                            token:tokenToswap.address,
+                            token:tokenToswap.tokenAddress,
                             count:count2
                         }
                     ],
@@ -97,7 +97,7 @@ const SetuptradeDapp = ({closeHeader}) => {
                         {
                             from:owner2,
                             to:user_account,
-                            token:tokenToreceive.address,
+                            token:tokenToreceive.tokenAddress,
                             count:count
                         }
                     ],
@@ -121,14 +121,14 @@ const SetuptradeDapp = ({closeHeader}) => {
                         {
                             from: owner2,
                             to:user_account,
-                            token:tokenToreceive.address,
+                            token:tokenToreceive.tokenAddress,
                             count:count
                         },
                         {
                             from: user_account,
                             to: owner2,
                             count: count2,
-                            token:tokenToswap.address,
+                            token:tokenToswap.tokenAddress,
                         }
                     ],
                     erc721Item: [],
@@ -144,16 +144,14 @@ const SetuptradeDapp = ({closeHeader}) => {
 
                 if ( ethersScanProvider.logs[0].topics ) {
                     const hexToDecimal = hex => parseInt(hex, 16)
-                    const TradeId = hexToDecimal(ethersScanProvider.logs[0].topics[1]);
+                    let TradeId = hexToDecimal(ethersScanProvider.logs[0].topics[1]);
                     // console.log(dec1)
 
+                    TradeId = parseInt(TradeId)
 
                     const executecontract = new ethers.Contract(MainControllercontractAddress,abi2,signer)
 
-                    const executeresponse = await executecontract.execute({
-                        payableAmount:0,
-                        TradeId:TradeId
-                    })
+                    const executeresponse = await executecontract.execute(TradeId)
 
                     console.log(executeresponse)
 
@@ -262,11 +260,11 @@ const SetuptradeDapp = ({closeHeader}) => {
                             display:'flex',
                             alignItems:"center"
                         }} >
-                        { tokenToswap ? <img src={tokenToswap.logo} alt="" style={{
+                        {/* { tokenToswap ? <img src={tokenToswap.logo} alt="" style={{
                             width:'1.2rem',
                             display:"block",
                             marginRight:'.3rem'
-                        }} /> : <></> }
+                        }} /> : <></> } */}
                         <h6 onClick={ () => {
                             setopenMessage(false)
                             settokenToOpen(false)
@@ -288,11 +286,11 @@ const SetuptradeDapp = ({closeHeader}) => {
                             display:'flex',
                             alignItems:"center"
                         }} >
-                        { tokenToreceive ? <img src={tokenToreceive.logo} alt="" style={{
+                        {/* { tokenToreceive ? <img src={tokenToreceive.logo} alt="" style={{
                             width:'1.2rem',
                             display:"block",
                             marginRight:'.3rem'
-                        }} /> : <></> }
+                        }} /> : <></> } */}
                         <h6 onClick={ () => {
                             setopenMessage(false)
                             settokenToOpen(true)

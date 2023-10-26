@@ -11,8 +11,8 @@ const AppContext = React.createContext({
   signer: false,
   walletProvider:false,
   TradeFactorycontractAddress:false,
-  MainControllercontractAddress:false
-
+  MainControllercontractAddress:false,
+  RpcUrl: false
 });
 
 export default AppContext;

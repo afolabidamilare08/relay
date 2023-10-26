@@ -368,11 +368,9 @@ const OtcDapp = ({closeHeader}) => {
 
                             UserPublicTrades.map( (trade,index) => {
 
-                                if(trade.receivingToken.tokenAddress === '0x810756d3aE32b8c0446e5E107c4e797022940258'){
-                                    return <></>
-                                }
-
-                                else{
+                                // if(trade.receivingToken.tokenAddress === '0x810756d3aE32b8c0446e5E107c4e797022940258'){
+                                //     return <></>
+                                // }
                                     return (
                                         <TradeComponent 
                                             key={index}
@@ -380,9 +378,10 @@ const OtcDapp = ({closeHeader}) => {
                                             givingToken={trade.givingToken}
                                             withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
                                             receivingToken={trade.receivingToken}
+                                            // cancelFunction={}
                                         />
                                     );
-                                }
+                                
                             } )
                         
                         : <div onClick={ 
@@ -410,9 +409,9 @@ const OtcDapp = ({closeHeader}) => {
                     
                         UserPrivateTrades.map( (trade,index) => {
 
-                            if(trade.receivingToken.tokenAddress === '0x810756d3aE32b8c0446e5E107c4e797022940258'){
-                                return <></>
-                            }
+                            // if(trade.receivingToken.tokenAddress === '0x810756d3aE32b8c0446e5E107c4e797022940258'){
+                            //     return <></>
+                            // }
 
                             return (
                                 <TradeComponent 

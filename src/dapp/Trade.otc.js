@@ -7,11 +7,11 @@ import {Popover, PopoverTrigger, PopoverContent, Switch} from "@nextui-org/react
 import { Link, useParams } from 'react-router-dom';
 import { TradeDetail } from '../components/trade_component';
 import {IoMdMenu} from 'react-icons/io'
-import {BackDrop} from '../components/backDropComponent';
+import {BackDrop, ErrorModal} from '../components/backDropComponent';
 import { useContext, useEffect, useState } from 'react';
 import AppContext from '../context/Appcontext';
 import { ethers } from 'ethers';
-import { abi2 } from '../constants/abi';
+import { ERC20ABI, abi2 } from '../constants/abi';
 import {Spinner} from "@nextui-org/react";
 import TransactionImg from '../assets/images/transaction.png';
 
@@ -27,7 +27,6 @@ const TradeOtc = ({closeHeader}) => {
     const [ LoadingTransactions, setLoadingTransactions ] = useState(false)
     const [ Erorr, setErorr ] = useState(null)
     const [ successMsg, setsuccessMsg ] = useState(false)
-
 
 
     const { tradeId } = useParams()
@@ -101,7 +100,7 @@ const TradeOtc = ({closeHeader}) => {
 
         try{
 
-            var id = parseInt(tradeID)
+            var id = parseInt(tradeId)
 
             const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
             const response = await contract.execute(id)
@@ -122,6 +121,7 @@ const TradeOtc = ({closeHeader}) => {
         }
         catch(error){
             console.log(error)
+            setopenModal(true)
         }
         
     }
@@ -230,7 +230,7 @@ const TradeOtc = ({closeHeader}) => {
 
             { openModal ? 
             
-            <BackDrop closeModal={ () => setopenModal(false) } />
+            <ErrorModal closeModal={ () => setopenModal(false) } />
 
             : <></> }
 

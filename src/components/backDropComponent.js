@@ -11,6 +11,11 @@ import { commonToken } from '../constants/tokens';
 // import { EvmChain } from '@moralisweb3/common-evm-utils';
 import CeleberationImg from '../assets/images/firework.png';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import { ethers } from 'ethers';
+import { useContext } from 'react';
+import AppContext from '../context/Appcontext';
+import { ERC20ABI } from '../constants/abi';
+import { Spinner } from '@nextui-org/react';
 
 
 
@@ -97,68 +102,73 @@ const SelectTokenBdrop = ({closeModal}) => {
     const [ Loading, setLoading ] = useState(false)
     const [ Query, setQuery ] = useState('')
     const [ selectedToken, setselectedToken ] = useState(null)
+    const { RpcUrl } = useContext(AppContext)
 
     const GetTokenbyAddress = async () => {
 
+        setLoading(true)
+
         try{
 
-            const response = await fetch(`https://deep-index.moralis.io/api/v2.2/erc20/metadata?chain=eth&addresses%5B0%5D=${Query}`,{
-                method: 'GET',
-                headers:{
-                "accept":"application/json",
-                "X-API-Key":"lAoj7I9S6dCu2l4jbbIUGDSyssYJ0Rxe6zaZhdlkhwZTj1ot8rtjuqE5x28Z9NRU"
-                }
-            })
+            const provider = new ethers.providers.JsonRpcProvider(RpcUrl)
+            const erc20 = new ethers.Contract(Query,ERC20ABI,provider)
 
-            const json = await response.json()
+            const symbol = await erc20.symbol()
+            const name = await erc20.name()
+            const tokenAddress = Query
 
-            if ( json.length > 0 ) {
-                setselectedToken(json)
-            }
+            setselectedToken([{
+                symbol:symbol,
+                name:name,
+                tokenAddress:tokenAddress
+            }])
+
+            setLoading(false)
 
 
         }
         catch(error){
+            setLoading(false)
             console.log(error)
         }
 
     }
 
-    const GetTokenbySymbol = async () => {
+    // const GetTokenbySymbol = async () => {
 
-        try{
+    //     try{
 
-            const response = await fetch(`https://deep-index.moralis.io/api/v2.2/erc20/metadata/symbols?chain=eth&symbols=${Query}`,{
-                method: 'GET',
-                headers:{
-                "accept":"application/json",
-                "X-API-Key":"lAoj7I9S6dCu2l4jbbIUGDSyssYJ0Rxe6zaZhdlkhwZTj1ot8rtjuqE5x28Z9NRU"
-                }
-            })
+    //         const response = await fetch(`https://deep-index.moralis.io/api/v2.2/erc20/metadata/symbols?chain=eth&symbols=${Query}`,{
+    //             method: 'GET',
+    //             headers:{
+    //             "accept":"application/json",
+    //             "X-API-Key":"lAoj7I9S6dCu2l4jbbIUGDSyssYJ0Rxe6zaZhdlkhwZTj1ot8rtjuqE5x28Z9NRU"
+    //             }
+    //         })
 
-            const json = await response.json()
+    //         const json = await response.json()
 
-            if ( json.length > 0 ) {
-                setselectedToken(json)
-            }
-
-
-        }
-        catch(error){
-            console.log(error)
-        }
-
-    }
+    //         if ( json.length > 0 ) {
+    //             setselectedToken(json)
+    //         }
 
 
+    //     }
+    //     catch(error){
+    //         console.log(error)
+    //     }
 
-    if ( Query.length > 35 && !selectedToken ) {
+    // }
+
+
+
+    if ( Query.length === 42 && !selectedToken && !Loading  ) {
         GetTokenbyAddress()
     }
 
-    if ( Query.length > 2 && !selectedToken && Query.length < 12 ) {
-        GetTokenbySymbol()
-    }
+    // if ( Query.length > 2 && !selectedToken && Query.length < 12 ) {
+    //     GetTokenbySymbol()
+    // }
 
 
     
@@ -192,13 +202,13 @@ const SelectTokenBdrop = ({closeModal}) => {
 
                 <div className='backDrop_getToken_top' >
                     <BiSearch className='backDrop_getToken_top_ic' />
-                    <input type='text' placeholder='Search name or paste address' value={Query} onChange={ (e) => {
+                    <input type='text' placeholder='Search name or paste address' value={Query} on onChange={ (e) => {
                         setQuery(e.target.value)
                         setselectedToken(null)
                     } }  />
                 </div>
 
-                <div className='backDrop_getToken_choices' style={{
+                {/* <div className='backDrop_getToken_choices' style={{
                     borderBottom: selectedToken ? '2px' : "0px"
 
                 }} >
@@ -219,7 +229,7 @@ const SelectTokenBdrop = ({closeModal}) => {
                         );
                     } ) }
 
-                </div>
+                </div> */}
 
                 <div className='backDrop_getToken_selections' style={{
                     maxHeight:"50vh",
@@ -241,7 +251,7 @@ const SelectTokenBdrop = ({closeModal}) => {
                                     closeModal(token)
                                 } } >
 
-                                    <img src={ token.logo ? token.logo : ETHimg } alt='' />
+                                    {/* <img src={ token.logo ? token.logo : ETHimg } alt='' /> */}
 
                                     <div className='backDrop_getToken_selections_li_right' >
                                         <h5>{token.name}</h5>
@@ -253,7 +263,13 @@ const SelectTokenBdrop = ({closeModal}) => {
                         } )
 
                     
-                    : <></>  }
+                    : Loading ? 
+                    
+                        <Spinner size='md' color='default' style={{
+                            margin:'1rem auto'
+                        }} />
+                    
+                    : <></> }
 
                 </div>
             </motion.div>

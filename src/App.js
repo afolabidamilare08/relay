@@ -54,6 +54,8 @@ function App() {
 
   const MainControllercontractAddress = '0xa138a388cbd9796e9C08A159c40b6896b8538115'
 
+  const RpcUrl = 'https://arbitrum-goerli.infura.io/v3/a9999d0d4a744c9b893ae34318117d25'
+
   const [ preLoader, setpreLoader ] = useState(true)
 
 
@@ -111,7 +113,8 @@ function App() {
             signer:signer,
             walletProvider:walletProvider,
             TradeFactorycontractAddress:TradeFactorycontractAddress,
-            MainControllercontractAddress:MainControllercontractAddress
+            MainControllercontractAddress:MainControllercontractAddress,
+            RpcUrl:RpcUrl
           }}
         >
 

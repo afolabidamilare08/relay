@@ -8,42 +8,39 @@ import { useState } from 'react';
 import { commonToken } from '../constants/tokens';
 import {  motion } from 'framer-motion';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import { useContext } from 'react';
+import AppContext from '../context/Appcontext';
+import { ethers } from 'ethers';
+import { ERC20ABI } from '../constants/abi';
 
 
 const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction, cancelFunction  }) => {
 
     const [ recieveTok, setrecieveTok ] = useState()
     const [ givingTok, setgivingTok ] = useState()
+    const { RpcUrl } = useContext(AppContext)
 
 
     const getTokenDetails = async (token,number) => {
 
         try{
-            var tokendet = null
-            const response = await fetch(`https://deep-index.moralis.io/api/v2.2/erc20/${token.tokenAddress}/price?chain=eth`,{
-                method: 'GET',
-                headers:{
-                "accept":"application/json",
-                "X-API-Key":"lAoj7I9S6dCu2l4jbbIUGDSyssYJ0Rxe6zaZhdlkhwZTj1ot8rtjuqE5x28Z9NRU"
-                }
-            })
 
-            const json = await response.json()
+            const provider = new ethers.providers.JsonRpcProvider(RpcUrl)
+            const erc20 = new ethers.Contract(token.tokenAddress,ERC20ABI,provider)
 
-            if ( json.message ) {
-                return
-            }
+            const symbol = await erc20.symbol()
+            const name = await erc20.name()
+            const tokenAddress = token.tokenAddress
 
-            tokendet = {
-                ...json
-            }
 
             const hexToDecimal = hex => parseInt(hex, 16)
             let value = hexToDecimal(token.value._hex);
             value = value / 1000000
 
-            tokendet = {
-                ...tokendet,
+            let tokendet = {
+                name:name,
+                symbol:symbol,
+                tokenAddress:tokenAddress,
                 value: value
             }
 
@@ -78,7 +75,7 @@ const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction
         >
 
                     <div className='trade_div_top' >
-                        <h5 className='trade_div_top_left' >{ recieveTok ? recieveTok.tokenSymbol : '' } / { givingTok ? givingTok.tokenSymbol : '' }</h5>
+                        <h5 className='trade_div_top_left' >{ recieveTok ? recieveTok.symbol : '' } / { givingTok ? givingTok.symbol : '' }</h5>
                         <div className='trade_div_top_right'  >
                             <h6 className='trade_div_top_right_txt' >Copy Trade URL</h6>
                             <CopyToClipboard text={`https://relay-three.vercel.app/trade_detail/${trade.tradeId}`} onCopy={ () => alert("Link Copied") } >
@@ -102,11 +99,11 @@ const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction
 
                     <div className='trade_div_mid' >
 
-                        <h5>(${ recieveTok ? Math.round(recieveTok.value * recieveTok.usdPrice) : '' })</h5>
+                        <h5>(${ recieveTok ? Math.round(recieveTok.value * 1) : '' })</h5>
 
                         <FaExchangeAlt className='trade_div_mid_ic' />
 
-                        <h5>(${ givingTok ? Math.round(givingTok.value * givingTok.usdPrice) : '' })</h5>
+                        <h5>(${ givingTok ? Math.round(givingTok.value * 1) : '' })</h5>
 
                     </div>
 
@@ -114,11 +111,11 @@ const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction
 
                         <div className='trade_div_lst_pt' >
 
-                            <img src={ recieveTok ? recieveTok.tokenLogo : RelayIc } style={{
+                            {/* <img src={ recieveTok ? recieveTok.tokenLogo : RelayIc } style={{
                                 width:'1.3rem'
-                            }} alt='' />
+                            }} alt='' /> */}
 
-                            <h5>{recieveTok ? recieveTok.tokenSymbol : ''}</h5>
+                            <h5>{recieveTok ? recieveTok.name : ''}</h5>
 
                             {/* <FiExternalLink className='trade_div_lst_pt_ic' /> */}
 
@@ -128,11 +125,11 @@ const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction
 
                             {/* <FiExternalLink className='trade_div_lst_pt_ic' /> */}
 
-                            <img src={ givingTok ? givingTok.tokenLogo : RelayIc } alt='' style={{
+                            {/* <img src={ givingTok ? givingTok.tokenLogo : RelayIc } alt='' style={{
                                 width:'1.3rem'
-                            }} />
+                            }} /> */}
 
-                            <h5>{ givingTok ? givingTok.tokenSymbol : '' }</h5>
+                            <h5>{ givingTok ? givingTok.name : '' }</h5>
 
                         </div>
 
@@ -164,36 +161,29 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
 
     const [ recieveTok, setrecieveTok ] = useState()
     const [ givingTok, setgivingTok ] = useState()
+    const { RpcUrl } = useContext(AppContext)
 
 
     const getTokenDetails = async (token,number) => {
 
         try{
-            var tokendet = null
-            const response = await fetch(`https://deep-index.moralis.io/api/v2.2/erc20/${token.tokenAddress}/price?chain=eth`,{
-                method: 'GET',
-                headers:{
-                "accept":"application/json",
-                "X-API-Key":"lAoj7I9S6dCu2l4jbbIUGDSyssYJ0Rxe6zaZhdlkhwZTj1ot8rtjuqE5x28Z9NRU"
-                }
-            })
 
-            const json = await response.json()
+            const provider = new ethers.providers.JsonRpcProvider(RpcUrl)
+            const erc20 = new ethers.Contract(token.tokenAddress,ERC20ABI,provider)
 
-            if ( json.message ) {
-                return
-            }
+            const symbol = await erc20.symbol()
+            const name = await erc20.name()
+            const tokenAddress = token.tokenAddress
 
-            tokendet = {
-                ...json
-            }
 
             const hexToDecimal = hex => parseInt(hex, 16)
             let value = hexToDecimal(token.value._hex);
             value = value / 1000000
 
-            tokendet = {
-                ...tokendet,
+            let tokendet = {
+                name:name,
+                symbol:symbol,
+                tokenAddress:tokenAddress,
                 value: value
             }
 
@@ -228,7 +218,7 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
         >
 
                     <div className='trade_div_top' >
-                        <h5 className='trade_div_top_left' >{ recieveTok ? recieveTok.tokenSymbol : '' } / { givingTok ? givingTok.tokenSymbol : '' }</h5>
+                        <h5 className='trade_div_top_left' >{ recieveTok ? recieveTok.symbol : '' } / { givingTok ? givingTok.symbol : '' }</h5>
                         <div className='trade_div_top_right'  >
                             <h6 className='trade_div_top_right_txt' >Copy Trade URL</h6>
                             <CopyToClipboard text={`https://relay-three.vercel.app/trade_detail/${trade.tradeId}`} onCopy={ () => alert("Link Copied") } >
@@ -252,23 +242,23 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
 
                     <div className='trade_div_mid' >
 
-                        <h5>(${ recieveTok ? Math.round(recieveTok.value * recieveTok.usdPrice) : '' })</h5>
+                        <h5>(${ recieveTok ? Math.round(recieveTok.value * 1) : '' })</h5>
 
                         <FaExchangeAlt className='trade_div_mid_ic' />
 
-                        <h5>(${ givingTok ? Math.round(givingTok.value * givingTok.usdPrice) : '' })</h5>
+                        <h5>(${ givingTok ? Math.round(givingTok.value * 1) : '' })</h5>
 
                     </div>
 
                     <div className='trade_div_lst' >
 
                         <div className='trade_div_lst_pt' >
-
+{/* 
                             <img src={ recieveTok ? recieveTok.tokenLogo : RelayIc } style={{
                                 width:'1.3rem'
-                            }} alt='' />
+                            }} alt='' /> */}
 
-                            <h5>{recieveTok ? recieveTok.tokenSymbol : ''}</h5>
+                            <h5>{recieveTok ? recieveTok.name : ''}</h5>
 
                             {/* <FiExternalLink className='trade_div_lst_pt_ic' /> */}
 
@@ -277,12 +267,12 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
                         <div className='trade_div_lst_pt' >
 
                             {/* <FiExternalLink className='trade_div_lst_pt_ic' /> */}
-
+{/* 
                             <img src={ givingTok ? givingTok.tokenLogo : RelayIc } alt='' style={{
                                 width:'1.3rem'
-                            }} />
+                            }} /> */}
 
-                            <h5>{ givingTok ? givingTok.tokenSymbol : '' }</h5>
+                            <h5>{ givingTok ? givingTok.name : '' }</h5>
 
                         </div>
 
