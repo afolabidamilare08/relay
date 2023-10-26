@@ -118,13 +118,13 @@ const TradeComponent = ({ receivingToken, givingToken  }) => {
 
                             <h5>{recieveTok ? recieveTok.tokenSymbol : ''}</h5>
 
-                            <FiExternalLink className='trade_div_lst_pt_ic' />
+                            {/* <FiExternalLink className='trade_div_lst_pt_ic' /> */}
 
                         </div>
 
                         <div className='trade_div_lst_pt' >
 
-                            <FiExternalLink className='trade_div_lst_pt_ic' />
+                            {/* <FiExternalLink className='trade_div_lst_pt_ic' /> */}
 
                             <img src={ givingTok ? givingTok.tokenLogo : RelayIc } alt='' style={{
                                 width:'1.3rem'

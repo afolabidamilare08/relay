@@ -31,6 +31,9 @@ const OtcDapp = ({closeHeader}) => {
     const [ pagStartNumber, setpagStartNumber ] = useState(0)
     const [ pagStopNumber, setpagStopNumber ] = useState(5)
     const [ initialTxlist, setinitialTxlist ] = useState(null)
+    const [ FilteredResult, setFilteredResult ] = useState(null)
+
+    const [ ListOfasset, setListOfasset ] = useState([]);
 
 
     const GetUserTransactions = async () => {

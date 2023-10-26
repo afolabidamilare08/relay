@@ -3,12 +3,12 @@ import {BsIncognito} from 'react-icons/bs';
 import {BiInfoCircle} from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import {IoMdMenu} from 'react-icons/io';
-import {ErrorModal, ErrorSlideModal, SelectTokenBdrop, SliderModal} from '../components/backDropComponent';
+import {ErrorModal, ErrorSlideModal, SelectTokenBdrop, SliderModal, SuccessModal} from '../components/backDropComponent';
 import { useState } from 'react';
 import { useContext } from 'react';
 import AppContext from '../context/Appcontext';
 import { ethers } from 'ethers';
-import {abi} from '../constants/abi';
+import {abi, abi2} from '../constants/abi';
 import {Spinner} from "@nextui-org/react";
 // import { useWeb3Contract } from 'react-moralis';
 
@@ -18,7 +18,7 @@ const SetuptradeDapp = ({closeHeader}) => {
 
     const [ openModal, setopenModal ] = useState(false)
     const [ openMessage, setopenMessage ] = useState(false)
-    const { enableWeb3, displayAccount,signer, user_account, walletProvider, TradeFactorycontractAddress } = useContext(AppContext)
+    const { enableWeb3, displayAccount,signer, user_account, walletProvider, TradeFactorycontractAddress, MainControllercontractAddress } = useContext(AppContext)
     const [ PrivateTrade, setPrivateTrade ] = useState(false)
 
 
@@ -144,8 +144,19 @@ const SetuptradeDapp = ({closeHeader}) => {
 
                 if ( ethersScanProvider.logs[0].topics ) {
                     const hexToDecimal = hex => parseInt(hex, 16)
-                    const dec1 = hexToDecimal(ethersScanProvider.logs[0].topics[1]);
+                    const TradeId = hexToDecimal(ethersScanProvider.logs[0].topics[1]);
                     // console.log(dec1)
+
+
+                    const executecontract = new ethers.Contract(MainControllercontractAddress,abi2,signer)
+
+                    const executeresponse = await executecontract.execute({
+                        payableAmount:0,
+                        TradeId:TradeId
+                    })
+
+                    console.log(executeresponse)
+
                     
                     setTradeCreated(true)
                     setisLoading(false)
@@ -386,6 +397,8 @@ const SetuptradeDapp = ({closeHeader}) => {
                 closeModal={ () => setTradeCreated(false) }
                 display={TradeCreated}
             />
+
+            {/* <SuccessModal/> */}
 
         </div>
 

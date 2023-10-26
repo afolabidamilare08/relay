@@ -8,11 +8,12 @@ import StakingPage from './dapp/dapp.stakings';
 import { useState } from 'react';
 import AppContext from './context/Appcontext';
 import { useMoralis, useWeb3Contract } from 'react-moralis';
-import { createWeb3Modal, defaultConfig, useWeb3Modal, useWeb3ModalAccount, useWeb3ModalSigner } from '@web3modal/ethers5/react'
+import { createWeb3Modal, defaultConfig, useWeb3Modal, useWeb3ModalAccount, useWeb3ModalSigner,  } from '@web3modal/ethers5/react'
 import { abi } from './constants/abi';
 import { ethers } from 'ethers';
 import { formatEther } from '@ethersproject/units';
 import { useEffect } from 'react';
+import TradeOtc from './dapp/Trade.otc';
 
 const projectId = 'a6b30bc12f5a5db7c09d0b165d354ca9'
 
@@ -41,13 +42,15 @@ function App() {
 
   const [ openSideNav, setopenSideNav ] = useState(false);
 
-  const { open } = useWeb3Modal();
+  const { open, close } = useWeb3Modal();
 
-  const { address, chainId, isConnected  } = useWeb3ModalAccount();
+  const { address, chainId, isConnected,   } = useWeb3ModalAccount();
 
   const { signer, walletProvider } = useWeb3ModalSigner()
 
   const TradeFactorycontractAddress  = '0x84b4017433611e6E66fa20C6A425b1B291dd87E3';
+
+  const MainControllercontractAddress = '0xa138a388cbd9796e9C08A159c40b6896b8538115'
 
 
 
@@ -87,6 +90,14 @@ function App() {
   }
 
 
+      // const clearCacheData = () => {
+      //   caches.keys().then((names) => {
+      //     names.forEach( (name) => {
+      //       caches.delete(name)
+      //     } )
+      //   })
+      // }
+
   return (
       <div className='mainApp' >
         <AppContext.Provider
@@ -94,12 +105,14 @@ function App() {
             sideNav: openSideNav,
             UpdatesideNav: () => setopenSideNav(!openSideNav),
             enableWeb3: () => open(),
+            // closeWeb3: () => clearCacheData(),
             isWeb3Enabled: isConnected,
             user_account: address,
             displayAccount: userWalletAddress,
             signer:signer,
             walletProvider:walletProvider,
-            TradeFactorycontractAddress:TradeFactorycontractAddress
+            TradeFactorycontractAddress:TradeFactorycontractAddress,
+            MainControllercontractAddress:MainControllercontractAddress
           }}
         >
 
@@ -112,6 +125,10 @@ function App() {
 
           <Route path='/trades' element={ <DappIndex
             component={ <OtcDapp closeHeader={ () => setopenSideNav(!openSideNav) } /> }
+          /> } />
+
+          <Route path='/trade/:tradeId' element={ <DappIndex
+            component={ <TradeOtc closeHeader={ () => setopenSideNav(!openSideNav) } /> }
           /> } />
 
           <Route path='/setuptrade' element={<DappIndex

@@ -1,7 +1,7 @@
 import {AiOutlineClose,AiFillWarning} from 'react-icons/ai';
 import {IoMdCheckmark} from 'react-icons/io';
 import {BsFunnel} from 'react-icons/bs';
-import {BiChevronDown, BiSearch} from 'react-icons/bi';
+import {BiChevronDown, BiSearch, BiSolidCopy} from 'react-icons/bi';
 import {  motion } from 'framer-motion';
 import ETHimg from '../assets/images/eth.png';
 import CloseImg from '../assets/images/close.png';
@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { commonToken } from '../constants/tokens';
 // import Moralis from 'moralis';
 // import { EvmChain } from '@moralisweb3/common-evm-utils';
+import CeleberationImg from '../assets/images/firework.png';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 
 
@@ -295,6 +297,67 @@ const ErrorModal = ({closeModal}) => {
 
 }
 
+const SuccessModal = ({closeModal,tradeId}) => {
+
+
+    return (
+
+        <div className="backDrop" >
+
+            <motion.div className='backDrop_getToken'
+                        
+                initial={{ scale: 0.5,}}
+                whileInView={{ scale: 1, }}
+                transition={{ duration: 0.4 }}
+                viewport={{ once: true }}
+            
+            >
+
+                <div className="backDrop_getToken_close" style={{
+                    display:"flex",
+                    justifyContent:"flex-end",
+                    marginBottom:"1rem",
+                    alignItems:"center"
+                }} >
+                    <AiOutlineClose color='white' style={{
+                        cursor:"pointer"
+                    }} onClick={ closeModal } />
+                </div>
+
+
+                <img className='errorImg' alt='' src={CeleberationImg} />
+
+                <h3 className='errorImg_top' >Trade Created</h3>
+
+                <h2 className='errorImg_btm' >
+                    Your Trade was successfully created. You can share the link with your friends.  
+                </h2>
+
+                <div style={{
+                    display:"flex",
+                    alignItems:"center",
+                    justifyContent:"center"
+                }} >
+                    <h5 style={{
+                        color:"white"
+                    }} >http://localhost:3000/trade/{tradeId}</h5>
+                    <CopyToClipboard text={`http://localhost:3000/trade/${tradeId}`} onCopy={ () => alert("Link Copied") } >
+                        <BiSolidCopy style={{
+                            color:"white",
+                            marginLeft:"1.1rem",
+                            cursor:"pointer"
+                        }} />
+                    </CopyToClipboard>
+                </div>
+
+            </motion.div>
+
+        </div>
+
+    );
+
+}
+
 const NormalBackdrop = ({closeModal}) => {
  
     return (
@@ -311,8 +374,6 @@ const NormalBackdrop = ({closeModal}) => {
     );
     
 }
-
-
 
 
 
@@ -350,4 +411,4 @@ const ErrorSlideModal = ({error_msg, display, closeModal}) => {
 }
 
 
-export { BackDrop, SelectTokenBdrop, ErrorModal, NormalBackdrop, SliderModal, ErrorSlideModal };
+export { BackDrop, SelectTokenBdrop, ErrorModal, NormalBackdrop, SliderModal, ErrorSlideModal, SuccessModal };
