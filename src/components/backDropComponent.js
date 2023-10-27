@@ -307,9 +307,7 @@ const ErrorModal = ({closeModal}) => {
                 <h3 className='errorImg_top' >There has been an error</h3>
 
                 <h2 className='errorImg_btm' >
-                    We're sorry, but we were unable to connect to your wallet. 
-                    If you continue to experience issues, please contact our 
-                    support team for further assistance.
+                Transaction failed due to low gas limit. Please top up your wallet
                 </h2>
 
             </motion.div>

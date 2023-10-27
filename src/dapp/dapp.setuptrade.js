@@ -1,7 +1,7 @@
 
 import {BsIncognito} from 'react-icons/bs';
 import {BiInfoCircle} from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {IoMdMenu} from 'react-icons/io';
 import {ErrorModal, ErrorSlideModal, SelectTokenBdrop, SliderModal, SuccessModal} from '../components/backDropComponent';
 import { useState } from 'react';
@@ -15,6 +15,8 @@ import {Spinner} from "@nextui-org/react";
 
 
 const SetuptradeDapp = ({closeHeader}) => {
+
+    const navigate = useNavigate();
 
     const [ openModal, setopenModal ] = useState(false)
     const [ openMessage, setopenMessage ] = useState(false)
@@ -163,6 +165,11 @@ const SetuptradeDapp = ({closeHeader}) => {
                     settokenToreceive(null)
                     settokenToswap(null)
                     setrecepientWalletAddress('')
+
+                    setTimeout(() => {
+                        navigate('/trades')
+                    }, 2000);
+
                     return
                 }else{
                     setisLoading(false)

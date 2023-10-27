@@ -22,11 +22,11 @@ const HeaderComponents = () => {
                     fontSize:'1rem'
                 }} >Stake</Link>
 
-                    <Link to="#" style={{
+                    <a href="https://relay-2.gitbook.io/relay/" style={{
                     display:"block",
                     marginTop:".5rem",
                     fontSize:'1rem'
-                }} >Docs</Link>
+                }} >Docs</a>
 
                 <Link to={"/trades"} className='header_wallet' style={{
                     display:"block",
@@ -51,7 +51,7 @@ const HeaderComponents = () => {
             <nav className='header_nav' >
                 <Link to={'/trades'} >Trade</Link>
                 <Link to={'/staking'} >Stake</Link>
-                <Link to="#" >Docs</Link>
+                <a href="https://relay-2.gitbook.io/relay/" >Docs</a>
             </nav>
 
             <Link to={"/trades"} className='header_wallet' >

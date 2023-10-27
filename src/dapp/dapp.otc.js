@@ -29,7 +29,7 @@ const OtcDapp = ({closeHeader}) => {
     const [ showPrivate, setshowPrivate ] = useState(false)
 
     const [ pagStartNumber, setpagStartNumber ] = useState(0)
-    const [ pagStopNumber, setpagStopNumber ] = useState(5)
+    const [ pagStopNumber, setpagStopNumber ] = useState()
     const [ initialTxlist, setinitialTxlist ] = useState(null)
     const [ FilteredResult, setFilteredResult ] = useState(null)
 
@@ -49,7 +49,7 @@ const OtcDapp = ({closeHeader}) => {
             var PublicTrades = []
             var PrivateTrades = []
 
-            if ( !initialTxlist ) {
+            // if ( !initialTxlist ) {
                 const response = await fetch(`https://api-goerli.arbiscan.io/api?module=account&action=txlist&address=${user_account}&startblock=0&endblock=99999999&page=1&offset=990&sort=dsc&apikey=57M724ZAHNA23XSWNF7RTRP4AJRT17NB28`)
 
                 var json = await response.json()
@@ -60,16 +60,16 @@ const OtcDapp = ({closeHeader}) => {
                     return
                 }
 
-                setinitialTxlist(json.result)
-            }
+                // setinitialTxlist(json.result)
+            // }
 
-            if ( initialTxlist ) {
-                json = {
-                    result: initialTxlist
-                }
-            }
+            // if ( initialTxlist ) {
+            //     json = {
+            //         result: initialTxlist
+            //     }
+            // }
 
-            for (let f = pagStartNumber; f < pagStopNumber; f++) {
+            for (let f = 0; f < json.result.length; f++) {
                 var trx = json.result[f];                
 
 

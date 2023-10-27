@@ -96,9 +96,9 @@ function DappIndex({ component }) {
 
                 <div className='dappIndex_left_btm_socials' >
 
-                    <Link className='dappIndex_left_btm_socials_link' >
+                    <a href="https://x.com/relaydapp?s=21" className='dappIndex_left_btm_socials_link' >
                         <img src={TwitterImg} alt='twitter' />
-                    </Link>
+                    </a>
 
                     <Link className='dappIndex_left_btm_socials_link' >
                         <img src={TelegramImg} alt='telegram' />
@@ -108,9 +108,9 @@ function DappIndex({ component }) {
                         <img src={MyGImg} alt='myg' />
                     </Link>
 
-                    <Link className='dappIndex_left_btm_socials_link' >
+                    <a href='https://discord.com/invite/5swAHHqEXQ' className='dappIndex_left_btm_socials_link' >
                         <img src={DiscordImg} alt='discord' />
-                    </Link>
+                    </a>
 
                 </div>
 
@@ -211,9 +211,9 @@ function DappIndex({ component }) {
 
                 <div className='dappIndex_left_btm_socials' >
 
-                    <Link className='dappIndex_left_btm_socials_link' >
+                    <a href="https://x.com/relaydapp?s=21" className='dappIndex_left_btm_socials_link' >
                         <img src={TwitterImg} alt='twitter' />
-                    </Link>
+                    </a>
 
                     <Link className='dappIndex_left_btm_socials_link' >
                         <img src={TelegramImg} alt='telegram' />
@@ -223,9 +223,9 @@ function DappIndex({ component }) {
                         <img src={MyGImg} alt='myg' />
                     </Link>
 
-                    <Link className='dappIndex_left_btm_socials_link' >
+                    <a href="https://discord.com/invite/5swAHHqEXQ" className='dappIndex_left_btm_socials_link' >
                         <img src={DiscordImg} alt='discord' />
-                    </Link>
+                    </a>
 
                 </div>
 

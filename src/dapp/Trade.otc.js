@@ -79,19 +79,20 @@ const TradeOtc = ({closeHeader}) => {
 
         try{
 
-            var id = parseInt(tradeID)
+            var id = parseInt(tradeId)
 
             const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
-            const response = await contract.withdraw({
-                withdraw:0,
-                TradeId: id
-            })
+            const response = await contract.withdraw(id)
 
-            setsuccessMsg(true)
+            if ( response ) {
+                console.log(response)
+                setsuccessMsg(true)
+            }
 
         }
         catch(error){
             console.log(error)
+            setopenModal(true)
         }
         
     }
@@ -105,6 +106,8 @@ const TradeOtc = ({closeHeader}) => {
             const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
             const response = await contract.execute(id)
             
+            console.log("")
+
             if( response ){
 
                 const contrac2t = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
