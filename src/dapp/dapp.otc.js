@@ -50,7 +50,7 @@ const OtcDapp = ({closeHeader}) => {
             var PrivateTrades = []
 
             if ( !initialTxlist ) {
-                const response = await fetch(`https://api-goerli.arbiscan.io/api?module=account&action=txlist&address=${user_account}&startblock=0&endblock=99999999&page=1&offset=990&sort=asc&apikey=57M724ZAHNA23XSWNF7RTRP4AJRT17NB28`)
+                const response = await fetch(`https://api-goerli.arbiscan.io/api?module=account&action=txlist&address=${user_account}&startblock=0&endblock=99999999&page=1&offset=990&sort=dsc&apikey=57M724ZAHNA23XSWNF7RTRP4AJRT17NB28`)
 
                 var json = await response.json()
 
@@ -354,7 +354,8 @@ const OtcDapp = ({closeHeader}) => {
             </div>
 
             <div className='Otc_main_body' style={{
-                // minHeight:"80vh"
+                minHeight:"80vh",
+                alignItems:"flex-start"
             }} >
 
                 { !showPrivate ?
