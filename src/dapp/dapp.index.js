@@ -16,7 +16,7 @@ import {  motion } from 'framer-motion';
 
 function DappIndex({ component }) {
 
-    const { sideNav, UpdatesideNav, enableWeb3, displayAccount } = useContext(AppContext)
+    const { sideNav, UpdatesideNav, enableWeb3, displayAccount, closeWeb3 } = useContext(AppContext)
 
   return (
 
@@ -78,7 +78,9 @@ function DappIndex({ component }) {
 
                     { displayAccount ? 
 
-                        <div className='dappIndex_left_btm_wallet_center' >{ displayAccount ? displayAccount : '' }</div>
+                        <div className='dappIndex_left_btm_wallet_center' style={{
+                            cursor:"pointer"
+                        }} onClick={ closeWeb3 } >{ displayAccount ? displayAccount : '' }</div>
 
                     :
                     
@@ -193,7 +195,9 @@ function DappIndex({ component }) {
                    
                 { displayAccount ? 
 
-                    <div className='dappIndex_left_btm_wallet_center' >{ displayAccount ? displayAccount : '' }</div>
+                    <div className='dappIndex_left_btm_wallet_center' style={{
+                        cursor:"pointer"
+                    }} onClick={ () => closeWeb3()} >{ displayAccount ? displayAccount : '' }</div>
 
                     :
 

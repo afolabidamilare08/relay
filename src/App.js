@@ -75,12 +75,8 @@ function App() {
 
 
   const clearCacheData = () => {
-    caches.keys().then((names) => {
-        names.forEach((name) => {
-            caches.delete(name);
-        });
-    });
-    alert("Complete Cache Cleared");
+    localStorage.clear()
+    window.location.reload()
 };
 
   return (
@@ -90,7 +86,7 @@ function App() {
             sideNav: openSideNav,
             UpdatesideNav: () => setopenSideNav(!openSideNav),
             enableWeb3: () => open(),
-            closeWeb3: () => clearCacheData(),
+            closeWeb3:clearCacheData,
             isWeb3Enabled: isConnected,
             user_account: address,
             displayAccount: userWalletAddress,
@@ -153,9 +149,6 @@ function App() {
       }
 
         </AppContext.Provider>
-        <button onClick={ () => clearCacheData() } >
-discnened
-</button>
       </div>
   );
 }
