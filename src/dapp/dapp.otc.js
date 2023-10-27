@@ -37,10 +37,7 @@ const OtcDapp = ({closeHeader}) => {
 
     const [ successMsg, setsuccessMsg ] = useState(false)
 
-    const [ Filters, setFilters ] = useState({
-        status:"All Trades",
-
-    })
+    const [ Filters, setFilters ] = useState('')
 
 
     const GetUserTransactions = async () => {
@@ -240,13 +237,13 @@ const OtcDapp = ({closeHeader}) => {
       const content4Trades = (
         <PopoverContent  >
           <div className="Otc_main_modal" >
-            <Link to={"#"} className='Otc_main_modal_link' >
+            <Link to={"#"} className='Otc_main_modal_link' onClick={ () => setFilters('') } >
                 <h6>All Trades</h6>
             </Link>
-            <Link to={"#"} className='Otc_main_modal_link' >
+            <Link to={"#"} className='Otc_main_modal_link' onClick={ () => setFilters('pending') } >
                 <h6>Pending</h6>
             </Link>
-            <Link to={"#"} className='Otc_main_modal_link' >
+            <Link to={"#"} className='Otc_main_modal_link' onClick={ () => setFilters('completed') } >
                 <h6>Completed</h6>
             </Link>
           </div>
@@ -372,16 +369,53 @@ const OtcDapp = ({closeHeader}) => {
                                 // if(trade.receivingToken.tokenAddress === '0x810756d3aE32b8c0446e5E107c4e797022940258'){
                                 //     return <></>
                                 // }
-                                    return (
-                                        <TradeComponent 
-                                            key={index}
-                                            trade={trade}
-                                            givingToken={trade.givingToken}
-                                            withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
-                                            receivingToken={trade.receivingToken}
-                                            // cancelFunction={}
-                                        />
-                                    );
+
+                                    if ( Filters === 'pending' ) {
+                                        
+                                        if ( !trade.givingToken.isSwapped || !trade.receivingToken.isSwapped ) {
+                                            return (
+                                                <TradeComponent 
+                                                    key={index}
+                                                    trade={trade}
+                                                    givingToken={trade.givingToken}
+                                                    withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
+                                                    receivingToken={trade.receivingToken}
+                                                    // cancelFunction={}
+                                                />
+                                            );
+                                        }
+
+                                    }
+
+                                    if ( Filters === 'completed' ) {
+                                        
+                                        if ( trade.givingToken.isSwapped || trade.receivingToken.isSwapped ) {
+                                            return (
+                                                <TradeComponent 
+                                                    key={index}
+                                                    trade={trade}
+                                                    givingToken={trade.givingToken}
+                                                    withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
+                                                    receivingToken={trade.receivingToken}
+                                                    // cancelFunction={}
+                                                />
+                                            );
+                                        }
+
+                                    }
+
+                                    else{
+                                        return (
+                                            <TradeComponent 
+                                                key={index}
+                                                trade={trade}
+                                                givingToken={trade.givingToken}
+                                                withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
+                                                receivingToken={trade.receivingToken}
+                                                // cancelFunction={}
+                                            />
+                                        );
+                                    }
                                 
                             } )
                         
@@ -414,15 +448,52 @@ const OtcDapp = ({closeHeader}) => {
                             //     return <></>
                             // }
 
-                            return (
-                                <TradeComponent 
-                                    key={index} 
-                                    trade={trade}
-                                    withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
-                                    givingToken={trade.givingToken}
-                                    receivingToken={trade.receivingToken}
-                                />
-                            );
+                            if ( Filters === 'pending' ) {
+                                        
+                                if ( !trade.givingToken.isSwapped || !trade.receivingToken.isSwapped ) {
+                                    return (
+                                        <TradeComponent 
+                                            key={index}
+                                            trade={trade}
+                                            givingToken={trade.givingToken}
+                                            withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
+                                            receivingToken={trade.receivingToken}
+                                            // cancelFunction={}
+                                        />
+                                    );
+                                }
+
+                            }
+
+                            if ( Filters === 'completed' ) {
+                                
+                                if ( trade.givingToken.isSwapped || trade.receivingToken.isSwapped ) {
+                                    return (
+                                        <TradeComponent 
+                                            key={index}
+                                            trade={trade}
+                                            givingToken={trade.givingToken}
+                                            withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
+                                            receivingToken={trade.receivingToken}
+                                            // cancelFunction={}
+                                        />
+                                    );
+                                }
+
+                            }
+
+                            else{
+                                return (
+                                    <TradeComponent 
+                                        key={index}
+                                        trade={trade}
+                                        givingToken={trade.givingToken}
+                                        withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
+                                        receivingToken={trade.receivingToken}
+                                        // cancelFunction={}
+                                    />
+                                );
+                            }
                         } )
 
                     : <div style={{
