@@ -7,7 +7,7 @@ import {Popover, PopoverTrigger, PopoverContent, Switch} from "@nextui-org/react
 import { Link, useParams } from 'react-router-dom';
 import { TradeDetail } from '../components/trade_component';
 import {IoMdMenu} from 'react-icons/io'
-import {BackDrop, ErrorModal} from '../components/backDropComponent';
+import {BackDrop, ErrorModal, SuccessModal} from '../components/backDropComponent';
 import { useContext, useEffect, useState } from 'react';
 import AppContext from '../context/Appcontext';
 import { ethers } from 'ethers';
@@ -115,6 +115,7 @@ const TradeOtc = ({closeHeader}) => {
 
                 if ( response2 ) {
                     GetTrade(id)
+                    setsuccessMsg(true)
                 }
 
             }
@@ -235,6 +236,13 @@ const TradeOtc = ({closeHeader}) => {
             
             <ErrorModal closeModal={ () => setopenModal(false) } />
 
+            : <></> }
+
+
+            { successMsg ?
+            
+                <SuccessModal closeModal={ () => setsuccessMsg(false) } />
+            
             : <></> }
 
         </div>
