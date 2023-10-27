@@ -64,9 +64,9 @@ function DappIndex({ component }) {
                         <span>🪙</span>Get $RLY
                     </Link>
 
-                    <Link className='dappIndex_left_div_link' >
+                    <a href="https://relay-2.gitbook.io/relay/" className='dappIndex_left_div_link' >
                         <span>📚</span>Documentation
-                    </Link>
+                    </a>
 
                 </div>
 
@@ -104,9 +104,9 @@ function DappIndex({ component }) {
                         <img src={TelegramImg} alt='telegram' />
                     </Link>
 
-                    <Link className='dappIndex_left_btm_socials_link' >
+                    <a href="https://relay-2.gitbook.io/relay/" className='dappIndex_left_btm_socials_link' >
                         <img src={MyGImg} alt='myg' />
-                    </Link>
+                    </a>
 
                     <a href='https://discord.com/invite/5swAHHqEXQ' className='dappIndex_left_btm_socials_link' >
                         <img src={DiscordImg} alt='discord' />
@@ -176,12 +176,12 @@ function DappIndex({ component }) {
                         <span>🪙</span>Get $RLY
                     </Link>
 
-                    <Link 
+                    <a href="https://relay-2.gitbook.io/relay/" 
                         className='dappIndex_left_div_link'
                         onClick={ () => UpdatesideNav() }
                     >
                         <span>📚</span>Documentation
-                    </Link>
+                    </a>
 
                 </div>
 
@@ -219,9 +219,9 @@ function DappIndex({ component }) {
                         <img src={TelegramImg} alt='telegram' />
                     </Link>
 
-                    <Link className='dappIndex_left_btm_socials_link' >
+                    <a href="https://relay-2.gitbook.io/relay/" className='dappIndex_left_btm_socials_link' >
                         <img src={MyGImg} alt='myg' />
-                    </Link>
+                    </a>
 
                     <a href="https://discord.com/invite/5swAHHqEXQ" className='dappIndex_left_btm_socials_link' >
                         <img src={DiscordImg} alt='discord' />

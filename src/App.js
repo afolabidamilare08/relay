@@ -69,35 +69,19 @@ function App() {
   }
 
 
-  const getTransactionLogs = async () => {
-
-    try{
-
-      const response = await fetch(`https://api.arbiscan.io/api?module=logs&action=getLogs&address=0x84b4017433611e6E66fa20C6A425b1B291dd87E3&page=1&offset=1000&apikey=57M724ZAHNA23XSWNF7RTRP4AJRT17NB28`)
-
-      const json = await response.json();
- 
-      console.log(json)
-
-    }
-    catch (error) {
-      console.log(error)
-    }
-
-  }
-
   setTimeout(() => {
     setpreLoader(false)
   }, 4000);
 
 
-      // const clearCacheData = () => {
-      //   caches.keys().then((names) => {
-      //     names.forEach( (name) => {
-      //       caches.delete(name)
-      //     } )
-      //   })
-      // }
+  const clearCacheData = () => {
+    caches.keys().then((names) => {
+        names.forEach((name) => {
+            caches.delete(name);
+        });
+    });
+    alert("Complete Cache Cleared");
+};
 
   return (
       <div className='mainApp' >
@@ -106,7 +90,7 @@ function App() {
             sideNav: openSideNav,
             UpdatesideNav: () => setopenSideNav(!openSideNav),
             enableWeb3: () => open(),
-            // closeWeb3: () => clearCacheData(),
+            closeWeb3: () => clearCacheData(),
             isWeb3Enabled: isConnected,
             user_account: address,
             displayAccount: userWalletAddress,
@@ -160,13 +144,18 @@ function App() {
           <Route path='/setuptrade' element={<DappIndex
             component={ <SetuptradeDapp closeHeader={ () => setopenSideNav(!openSideNav) } /> }
           />} />
+
+
       </Routes>
-      
+
+
       
       }
 
         </AppContext.Provider>
-
+        <button onClick={ () => clearCacheData() } >
+discnened
+</button>
       </div>
   );
 }
