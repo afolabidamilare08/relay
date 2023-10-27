@@ -73,13 +73,14 @@ const OtcDapp = ({closeHeader}) => {
             }
 
             for (let f = pagStartNumber; f < pagStopNumber; f++) {
-                var trx = json.result[f];
-                
+                var trx = json.result[f];                
 
 
                 if ( trx ) {
                     
-                    if ( trx.to === '0x84b4017433611e6e66fa20c6a425b1b291dd87e3' ) {
+                    if ( trx.to === '0x84b4017433611e6e66fa20c6a425b1b291dd87e3' && trx.functionName === 'createTrade(tuple data)' ) {
+
+                        console.log(trx)
                     
                         const ethersScanProvider = await walletProvider.getTransactionReceipt(trx.hash)
     

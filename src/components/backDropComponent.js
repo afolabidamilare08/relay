@@ -265,9 +265,16 @@ const SelectTokenBdrop = ({closeModal}) => {
                     
                     : Loading ? 
                     
-                        <Spinner size='md' color='default' style={{
-                            margin:'1rem auto'
-                        }} />
+                        <div style={{
+                            width:"100%",
+                            display:"flex",
+                            justifyContent:"center",
+                            alignItems:"center",
+                        }} >  
+                            <Spinner size='md' color='default' style={{
+                                margin:'1rem auto'
+                            }} />
+                        </div>
                     
                     : <></> }
 
