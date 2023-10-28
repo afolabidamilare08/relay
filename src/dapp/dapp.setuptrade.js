@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import AppContext from '../context/Appcontext';
 import { ethers } from 'ethers';
-import {ERC20ABI, abi, abi2} from '../constants/abi';
+import {ERC20ABI, ERC721, abi, abi2} from '../constants/abi';
 import {Spinner} from "@nextui-org/react";
 // import { useWeb3Contract } from 'react-moralis';
 
@@ -40,19 +40,19 @@ const SetuptradeDapp = ({closeHeader}) => {
     const HandleCreateTrade = async () => {
         setisLoading(true)
 
-        if ( !tokenToswap || !tokenToreceive || amountTokenToReceive === '0' || amountTokenToReceive === '' || amountTokenToSwap === '0' || amountTokenToSwap === '' ) {
-            setdisplayError(true)
-            seterrorMessage('Please fill all fields')
-            setisLoading(false)
-            return
-        }
+        // if ( !tokenToswap || !tokenToreceive || amountTokenToReceive === '0' || amountTokenToReceive === '' || amountTokenToSwap === '0' || amountTokenToSwap === '' ) {
+        //     setdisplayError(true)
+        //     seterrorMessage('Please fill all fields')
+        //     setisLoading(false)
+        //     return
+        // }
 
-        if ( PrivateTrade && recepientWalletAddress === '' ) {
-            setdisplayError(true)
-            seterrorMessage('Please fill all fields')
-            setisLoading(false)
-            return
-        }
+        // if ( PrivateTrade && recepientWalletAddress === '' ) {
+        //     setdisplayError(true)
+        //     seterrorMessage('Please fill all fields')
+        //     setisLoading(false)
+        //     return
+        // }
         
 
         try{
@@ -143,18 +143,40 @@ const SetuptradeDapp = ({closeHeader}) => {
 
             // 0x810756d3aE32b8c0446e5E107c4e797022940258
 
-            const response = await contract.createTrade(params)
+            const response = await contract.createTrade(
+                {
+                    owner2: '0x0000000000000000000000000000000000000000',
+                    eth: [],
+                    erc20: [
+                      {
+                        from: '0x0000000000000000000000000000000000000000',
+                        to: user_account,
+                        token: '0x810756d3aE32b8c0446e5E107c4e797022940258',
+                        count: 90000000,
+                      }
+                    ],
+                    erc721Item: [{
+                      from: user_account,
+                      to: "0x0000000000000000000000000000000000000000",
+                      token: "0xB1A8e8b908F6c0c86052eA88892Bc7628a14B64A",
+                      tokenId: 34
+                    }],
+                    erc721Count: []
+                  }
+            )
 
             console.log(response)
 
             if ( response.hash ) {
 
-                const ApproveToken = new ethers.Contract(tokenToswap.tokenAddress,ERC20ABI,signer)
+                // count2  = count2 * 1000000
+
+                const ApproveToken = new ethers.Contract('0xB1A8e8b908F6c0c86052eA88892Bc7628a14B64A',ERC721,signer)
                 const approveResponse = await ApproveToken.approve(
                     user_account,
-                    count2
+                    34
                 )
-    
+                    
                 if (approveResponse) {
                     
                 }
@@ -172,11 +194,11 @@ const SetuptradeDapp = ({closeHeader}) => {
 
 
 
-                    // const executecontract = new ethers.Contract(MainControllercontractAddress,abi2,signer)
+                    const executecontract = new ethers.Contract(MainControllercontractAddress,abi2,signer)
 
-                    // const executeresponse = await executecontract.execute(TradeId)
+                    const executeresponse = await executecontract.execute(TradeId)
 
-                    // console.log(executeresponse)
+                    console.log(executeresponse)
 
                     
                     setTradeCreated(true)
@@ -433,3 +455,5 @@ const SetuptradeDapp = ({closeHeader}) => {
 }
 
 export default SetuptradeDapp;
+
+// {owner2: '0x0000000000000000000000000000000000000000',eth:[],erc20:[{from:"0x0000000000000000000000000000000000000000",to:"0x7d3Ac7EC7E4d942Af9Efd63ce19cF0d7C29f7b9e",token:"0x810756d3aE32b8c0446e5E107c4e797022940258",count:90000000}],erc721Item:[{from:"0x7d3Ac7EC7E4d942Af9Efd63ce19cF0d7C29f7b9e",to:"0x0000000000000000000000000000000000000000",token:"0xB1A8e8b908F6c0c86052eA88892Bc7628a14B64A",tokenId:23}],erc721Count:[]}    

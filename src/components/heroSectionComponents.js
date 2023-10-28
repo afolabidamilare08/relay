@@ -2,8 +2,12 @@ import HeroBg from '../assets/images/hero_bg.png';
 import roundImg from '../assets/images/hero_vector.png'
 import HeroSprial from '../assets/images/hero_spiral.png'
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import AppContext from '../context/Appcontext';
 
 const HeroSectionComponents = () => {
+
+    const { comingsoon } = useContext(AppContext)
 
     return (
 
@@ -26,9 +30,9 @@ const HeroSectionComponents = () => {
 
                     </div>
 
-                    <Link to="/trades" className="hero_section_main_center_btn" >
-                        Open Dapp
-                    </Link>
+                        <Link to="#" onClick={ comingsoon } className="hero_section_main_center_btn" >
+                            Open Dapp
+                        </Link>
 
                 </div>
 

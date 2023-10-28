@@ -2,9 +2,13 @@ import { Link } from 'react-router-dom';
 import Logo from '../assets/images/logo.png';
 import { MdDehaze } from 'react-icons/md';
 import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/react";
+import { useContext } from 'react';
+import AppContext from '../context/Appcontext';
 
 
 const HeaderComponents = () => {
+
+    const { comingsoon } = useContext(AppContext)
 
     const content = (
         <PopoverContent>
@@ -28,7 +32,7 @@ const HeaderComponents = () => {
                     fontSize:'1rem'
                 }} >Docs</a>
 
-                <Link to={"/trades"} className='header_wallet' style={{
+                <Link to={"#"} className='header_wallet' onClick={ comingsoon } style={{
                     display:"block",
                     marginTop:".5rem",
                     fontSize:'1rem'
@@ -54,7 +58,7 @@ const HeaderComponents = () => {
                 <a href="https://relay-2.gitbook.io/relay/" >Docs</a>
             </nav>
 
-            <Link to={"/trades"} className='header_wallet' >
+            <Link to={"#"} onClick={ comingsoon } className='header_wallet' >
                 Open Dapp
             </Link>
 

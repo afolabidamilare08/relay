@@ -27,6 +27,7 @@ const TradeOtc = ({closeHeader}) => {
     const [ LoadingTransactions, setLoadingTransactions ] = useState(false)
     const [ Erorr, setErorr ] = useState(null)
     const [ successMsg, setsuccessMsg ] = useState(false)
+    const [ miniLoading, setminiLoading ] = useState(false)
 
 
     const { tradeId } = useParams()
@@ -101,7 +102,25 @@ const TradeOtc = ({closeHeader}) => {
 
         try{
 
+            setminiLoading(true)
+
             var id = parseInt(tradeId)
+
+            const hexToDecimal = hex => parseInt(hex, 16)
+            let value = hexToDecimal(Trade.givingToken.value._hex);
+
+            console.log(value)
+
+            // value = value / 1000000
+
+
+
+            const approveToken = new ethers.Contract(Trade.givingToken.tokenAddress,ERC20ABI,signer)
+            const approveResponse = await approveToken.approve(user_account,value)
+
+            if ( approveResponse ) {
+                
+            }
 
             const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
             const response = await contract.execute(id)
@@ -114,6 +133,7 @@ const TradeOtc = ({closeHeader}) => {
                 const response2 = await contrac2t.swap(id)
 
                 if ( response2 ) {
+                    setminiLoading(false)
                     GetTrade(id)
                     setsuccessMsg(true)
                 }
@@ -126,6 +146,7 @@ const TradeOtc = ({closeHeader}) => {
         catch(error){
             console.log(error)
             setopenModal(true)
+            setminiLoading(false)
         }
         
     }
@@ -225,6 +246,7 @@ const TradeOtc = ({closeHeader}) => {
                         trade={Trade}
                         withdrawalFunction={ () => WithdrawalHandler(Trade.tradeId) }
                         // cancelFunction={}
+                        loading={miniLoading}
                         acceptFunction={ () => acceptHandler(Trade.tradeId) }
                     />
              

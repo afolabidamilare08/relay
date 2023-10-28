@@ -16,6 +16,7 @@ import { useContext } from 'react';
 import AppContext from '../context/Appcontext';
 import { ERC20ABI } from '../constants/abi';
 import { Spinner } from '@nextui-org/react';
+import ComingSoonImg from '../assets/images/work-in-progress.png';
 
 
 
@@ -115,8 +116,12 @@ const SelectTokenBdrop = ({closeModal}) => {
 
             const symbol = await erc20.symbol()
             const name = await erc20.name()
+            // const decimals = await erc20.decimals()
             const tokenAddress = Query
 
+            // console.log(decimals)
+
+            
             setselectedToken([{
                 symbol:symbol,
                 name:name,
@@ -318,6 +323,49 @@ const ErrorModal = ({closeModal}) => {
 
 }
 
+
+const ComingSoonModal = ({closeModal}) => {
+
+    return (
+
+        <div className="backDrop" onClick={closeModal} style={{
+            width:"100%"
+        }} >
+
+            <motion.div className='backDrop_getToken' style={{
+                border:"2px solid white"
+            }}
+                        
+                initial={{ scale: 0.5,}}
+                whileInView={{ scale: 1, }}
+                transition={{ duration: 0.4 }}
+                viewport={{ once: true }}
+                
+            
+            >
+
+                <img className='errorImg' alt='' src={ComingSoonImg} />
+
+                <h3 className='errorImg_top' style={{
+                    fontWeight:"800",
+                    fontFamily:"Raleway', sans-serif",
+                    fontSize:'1.4rem'
+                }} >Coming Soon</h3>
+
+                <h2 className='errorImg_btm' >
+                    We're thrilled to announce that something exciting is on the horizon! 
+                    At Relay, we're diligently working behind the scenes to bring you a brand-new and 
+                    innovative experience. Stay tuned for our upcoming launch. Thank you for your continued support!
+                </h2>
+
+            </motion.div>
+
+        </div>
+
+    );
+
+}
+
 const SuccessModal = ({closeModal}) => {
 
 
@@ -432,4 +480,4 @@ const ErrorSlideModal = ({error_msg, display, closeModal}) => {
 }
 
 
-export { BackDrop, SelectTokenBdrop, ErrorModal, NormalBackdrop, SliderModal, ErrorSlideModal, SuccessModal };
+export { BackDrop, SelectTokenBdrop, ErrorModal, NormalBackdrop, SliderModal, ErrorSlideModal, SuccessModal, ComingSoonModal };

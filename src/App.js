@@ -16,6 +16,7 @@ import { useEffect } from 'react';
 import TradeOtc from './dapp/Trade.otc';
 import Logo from './assets/images/logo.png';
 import { Spinner } from '@nextui-org/react';
+import { ComingSoonModal, ErrorModal } from './components/backDropComponent';
 
 const projectId = 'a6b30bc12f5a5db7c09d0b165d354ca9'
 
@@ -45,6 +46,8 @@ function App() {
   const [ openSideNav, setopenSideNav ] = useState(false);
 
   const { open, close } = useWeb3Modal();
+
+  const [ openComingSoon, setOpenComingSoon ] = useState(false)
 
   const { address, chainId, isConnected,   } = useWeb3ModalAccount();
 
@@ -81,6 +84,9 @@ function App() {
 
   return (
       <div className='mainApp' >
+
+        { openComingSoon ? <ComingSoonModal closeModal={ () => setOpenComingSoon(false) } /> : <></> }
+
         <AppContext.Provider
           value={{
             sideNav: openSideNav,
@@ -94,7 +100,8 @@ function App() {
             walletProvider:walletProvider,
             TradeFactorycontractAddress:TradeFactorycontractAddress,
             MainControllercontractAddress:MainControllercontractAddress,
-            RpcUrl:RpcUrl
+            RpcUrl:RpcUrl,
+            comingsoon:() => setOpenComingSoon(true)
           }}
         >
 

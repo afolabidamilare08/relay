@@ -12,6 +12,7 @@ import { useContext } from 'react';
 import AppContext from '../context/Appcontext';
 import { ethers } from 'ethers';
 import { ERC20ABI } from '../constants/abi';
+import { Spinner } from '@nextui-org/react';
 
 
 const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction, cancelFunction  }) => {
@@ -157,7 +158,7 @@ const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction
 
 
 
-const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, cancelFunction, acceptFunction  }) => {
+const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, cancelFunction, acceptFunction, loading  }) => {
 
     const [ recieveTok, setrecieveTok ] = useState()
     const [ givingTok, setgivingTok ] = useState()
@@ -178,6 +179,9 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
 
             const hexToDecimal = hex => parseInt(hex, 16)
             let value = hexToDecimal(token.value._hex);
+
+            console.log(value)
+
             value = value / 1000000
 
             let tokendet = {
@@ -280,23 +284,23 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
 
                     { receivingToken.isSwapped && givingToken.isExecuted && receivingToken.isExecuted ?
                     
-                        <button className='trade_div_btn' onClick={withdrawalFunction} >
-                            Withdraw Token
+                        <button className='trade_div_btn' disabled={loading} onClick={withdrawalFunction} >
+                            { loading ? <Spinner size='sm' color='default' /> : 'Withdraw Token'}
                         </button> 
                     
                     :
 
                         !receivingToken.isExecuted ? 
 
-                            <button className='trade_div_btn' onClick={acceptFunction} >
-                                Accept Trade
+                            <button className='trade_div_btn' disabled={loading} onClick={acceptFunction} >
+                                { loading ? <Spinner size='sm' color='default' /> : 'Accept Trade'}
                             </button>
                         
                         :
 
 
-                        <button className='trade_div_btn' onClick={cancelFunction} >
-                            Cancel Trade
+                        <button className='trade_div_btn' disabled={loading} onClick={cancelFunction} >
+                            { loading ? <Spinner size='sm' color='default' /> : 'Cancel Trade' }
                         </button>
                     
                     }
