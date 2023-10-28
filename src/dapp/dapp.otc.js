@@ -50,7 +50,7 @@ const OtcDapp = ({closeHeader}) => {
             var PrivateTrades = []
 
             // if ( !initialTxlist ) {
-                const response = await fetch(`https://api-goerli.arbiscan.io/api?module=account&action=txlist&address=${user_account}&startblock=0&endblock=99999999&page=1&offset=990&sort=dsc&apikey=57M724ZAHNA23XSWNF7RTRP4AJRT17NB28`)
+                const response = await fetch(`https://api-goerli.arbiscan.io/api?module=account&action=txlist&address=${user_account}&startblock=0&endblock=99999999&page=1&offset=990&sort=desc&apikey=57M724ZAHNA23XSWNF7RTRP4AJRT17NB28`)
 
                 var json = await response.json()
 
@@ -71,13 +71,13 @@ const OtcDapp = ({closeHeader}) => {
 
             for (let f = 0; f < json.result.length; f++) {
                 var trx = json.result[f];                
+                // console.log(trx)
 
 
                 if ( trx ) {
                     
                     if ( trx.to === '0x84b4017433611e6e66fa20c6a425b1b291dd87e3' && trx.functionName === 'createTrade(tuple data)' ) {
 
-                        console.log(trx)
                     
                         const ethersScanProvider = await walletProvider.getTransactionReceipt(trx.hash)
     
@@ -97,8 +97,8 @@ const OtcDapp = ({closeHeader}) => {
                                 if ( response[1][0].owner === '0x0000000000000000000000000000000000000000' ) {
                                     
                                     PublicTrades.push({
-                                        receivingToken: response[1][0],
-                                        givingToken: response[1][1],
+                                        receivingToken: response[1][1],
+                                        givingToken: response[1][0],
                                         time:trx.timeStamp,
                                         tradeId:dec1,
                                         blockHash:trx.blockHash,
@@ -107,8 +107,8 @@ const OtcDapp = ({closeHeader}) => {
     
                                 }else{
                                     PrivateTrades.push({
-                                        receivingToken: response[1][0],
-                                        givingToken: response[1][1],
+                                        receivingToken: response[1][1],
+                                        givingToken: response[1][0],
                                         time:trx.timeStamp,
                                         tradeId:dec1,
                                         blockHash:trx.blockHash,

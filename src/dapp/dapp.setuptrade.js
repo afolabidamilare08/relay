@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import AppContext from '../context/Appcontext';
 import { ethers } from 'ethers';
-import {abi, abi2} from '../constants/abi';
+import {ERC20ABI, abi, abi2} from '../constants/abi';
 import {Spinner} from "@nextui-org/react";
 // import { useWeb3Contract } from 'react-moralis';
 
@@ -53,6 +53,7 @@ const SetuptradeDapp = ({closeHeader}) => {
             setisLoading(false)
             return
         }
+        
 
         try{
 
@@ -62,10 +63,10 @@ const SetuptradeDapp = ({closeHeader}) => {
     
             var owner2 = PrivateTrade ? recepientWalletAddress : '0x0000000000000000000000000000000000000000'
     
-            var count = parseInt(amountTokenToReceive)
+            var count = parseInt(amountTokenToReceive,10)
             count = count * 1000000
     
-            var count2 = parseInt(amountTokenToSwap)
+            var count2 = parseInt(amountTokenToSwap,10)
             count2 = count2 * 1000000
     
             if ( tokenToreceive.name === 'Ethereum' && tokenToswap.name !== 'Ethereum' ) {
@@ -138,11 +139,29 @@ const SetuptradeDapp = ({closeHeader}) => {
                 }
             }
 
+
+
+            // 0x810756d3aE32b8c0446e5E107c4e797022940258
+
             const response = await contract.createTrade(params)
 
+            console.log(response)
+
             if ( response.hash ) {
+
+                const ApproveToken = new ethers.Contract(tokenToswap.tokenAddress,ERC20ABI,signer)
+                const approveResponse = await ApproveToken.approve(
+                    user_account,
+                    count2
+                )
+    
+                if (approveResponse) {
+                    
+                }
                 
                 const ethersScanProvider = await walletProvider.getTransactionReceipt(response.hash)
+
+                console.log(ethersScanProvider)
 
                 if ( ethersScanProvider.logs[0].topics ) {
                     const hexToDecimal = hex => parseInt(hex, 16)
@@ -151,11 +170,13 @@ const SetuptradeDapp = ({closeHeader}) => {
 
                     TradeId = parseInt(TradeId)
 
-                    const executecontract = new ethers.Contract(MainControllercontractAddress,abi2,signer)
 
-                    const executeresponse = await executecontract.execute(TradeId)
 
-                    console.log(executeresponse)
+                    // const executecontract = new ethers.Contract(MainControllercontractAddress,abi2,signer)
+
+                    // const executeresponse = await executecontract.execute(TradeId)
+
+                    // console.log(executeresponse)
 
                     
                     setTradeCreated(true)
