@@ -302,16 +302,16 @@ const SetuptradeDapp = ({closeHeader}) => {
 
                 if ( tokenToswap.tokenId !== null ) {
                     var id = parseInt(tokenToswap.tokenId,10)
-                    const Approve71Token = new ethers.Contract('0xB1A8e8b908F6c0c86052eA88892Bc7628a14B64A',ERC721,signer)
+                    const Approve71Token = new ethers.Contract(tokenToswap.tokenAddress,ERC721,signer)
                     approveResponse = await Approve71Token.approve(
                         '0x86a04287dafc09b450bee2b5c99cee0b1ae20be7',
                         id
                     )
                 }else{
-                    const ApproveToken = new ethers.Contract('0xB1A8e8b908F6c0c86052eA88892Bc7628a14B64A',ERC721,signer)
+                    const ApproveToken = new ethers.Contract(tokenToswap.tokenAddress,ERC20ABI,signer)
                     approveResponse = await ApproveToken.approve(
-                        '0x86a04287dafc09b450bee2b5c99cee0b1ae20be7',
-                        id
+                        '0xfe815da50dbedbcb3d0f3e076821c98b294fd81c',
+                        count2
                     )
                 }
 
