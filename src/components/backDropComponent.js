@@ -188,7 +188,7 @@ const SelectTokenBdrop = ({closeModal}) => {
                     }} onClick={ () => {
                         setselectedToken(null)
                         setOption(false)
-                    } } >veToken</div>
+                    } } >Token</div>
 
                     <div style={{
                         padding:'.4rem',
@@ -202,7 +202,7 @@ const SelectTokenBdrop = ({closeModal}) => {
                     }} onClick={ () => {
                         setselectedToken(null)
                         setOption(true)
-                    } } >NFT</div>
+                    } } >veToken</div>
 
                 </div>
 

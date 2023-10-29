@@ -181,6 +181,11 @@ const SetuptradeDapp = ({closeHeader}) => {
             if ( tokenToreceive.name !== 'Ethereum' && tokenToswap.name !== 'Ethereum' ) {
 
                 if ( tokenToreceive.tokenId !== null && tokenToswap.tokenId === null ) {
+                    // console.log('diddi')
+                    // console.log({
+                    //     tokenToreceive:tokenToreceive,
+                    //     tokenToswap:tokenToswap
+                    // })
                     params = {
                         owner2:owner2,
                         erc721Item: [
@@ -205,6 +210,7 @@ const SetuptradeDapp = ({closeHeader}) => {
                 }
 
                 if ( tokenToreceive.tokenId === null && tokenToswap.tokenId !== null ) {
+                    console.log('dhdu')
                     params = {
                         owner2:owner2,
                         eth: [],
@@ -229,6 +235,7 @@ const SetuptradeDapp = ({closeHeader}) => {
                 }
 
                 if ( tokenToreceive.tokenId !== null && tokenToswap.tokenId !== null ) {
+                    console.log('gothere_')
                     params = {
                         owner2:owner2,
                         eth: [],
@@ -248,29 +255,6 @@ const SetuptradeDapp = ({closeHeader}) => {
                             },
                         ],
                         erc721Count: [],
-                    }
-                }
-
-                else{
-                    params = {
-                        owner2:owner2,
-                        eth: [],
-                        erc20: [
-                            {
-                                from: owner2,
-                                to:user_account,
-                                token:tokenToreceive.tokenAddress,
-                                count:count
-                            },
-                            {
-                                from: user_account,
-                                to: owner2,
-                                count: count2,
-                                token:tokenToswap.tokenAddress,
-                            }
-                        ],
-                        erc721Item: [],
-                        erc721Count: []
                     }
                 }
             }
