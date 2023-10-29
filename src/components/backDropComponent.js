@@ -5,7 +5,7 @@ import {BiChevronDown, BiSearch, BiSolidCopy} from 'react-icons/bi';
 import {  motion } from 'framer-motion';
 import ETHimg from '../assets/images/eth.png';
 import CloseImg from '../assets/images/close.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { commonToken } from '../constants/tokens';
 // import Moralis from 'moralis';
 // import { EvmChain } from '@moralisweb3/common-evm-utils';
@@ -14,7 +14,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import { ethers } from 'ethers';
 import { useContext } from 'react';
 import AppContext from '../context/Appcontext';
-import { ERC20ABI } from '../constants/abi';
+import { ERC20ABI, ERC721 } from '../constants/abi';
 import { Spinner } from '@nextui-org/react';
 import ComingSoonImg from '../assets/images/work-in-progress.png';
 
@@ -103,6 +103,9 @@ const SelectTokenBdrop = ({closeModal}) => {
     const [ Loading, setLoading ] = useState(false)
     const [ Query, setQuery ] = useState('')
     const [ selectedToken, setselectedToken ] = useState(null)
+    const [ Option, setOption ] = useState(false)
+    
+
     const { RpcUrl } = useContext(AppContext)
 
     const GetTokenbyAddress = async () => {
@@ -116,16 +119,14 @@ const SelectTokenBdrop = ({closeModal}) => {
 
             const symbol = await erc20.symbol()
             const name = await erc20.name()
-            // const decimals = await erc20.decimals()
             const tokenAddress = Query
-
-            // console.log(decimals)
 
             
             setselectedToken([{
                 symbol:symbol,
                 name:name,
-                tokenAddress:tokenAddress
+                tokenAddress:tokenAddress,
+                tokenId: Option ? '' : null
             }])
 
             setLoading(false)
@@ -138,45 +139,6 @@ const SelectTokenBdrop = ({closeModal}) => {
         }
 
     }
-
-    // const GetTokenbySymbol = async () => {
-
-    //     try{
-
-    //         const response = await fetch(`https://deep-index.moralis.io/api/v2.2/erc20/metadata/symbols?chain=eth&symbols=${Query}`,{
-    //             method: 'GET',
-    //             headers:{
-    //             "accept":"application/json",
-    //             "X-API-Key":"lAoj7I9S6dCu2l4jbbIUGDSyssYJ0Rxe6zaZhdlkhwZTj1ot8rtjuqE5x28Z9NRU"
-    //             }
-    //         })
-
-    //         const json = await response.json()
-
-    //         if ( json.length > 0 ) {
-    //             setselectedToken(json)
-    //         }
-
-
-    //     }
-    //     catch(error){
-    //         console.log(error)
-    //     }
-
-    // }
-
-
-
-    if ( Query.length === 42 && !selectedToken && !Loading  ) {
-        GetTokenbyAddress()
-    }
-
-    // if ( Query.length > 2 && !selectedToken && Query.length < 12 ) {
-    //     GetTokenbySymbol()
-    // }
-
-
-    
 
     return (
 
@@ -205,36 +167,54 @@ const SelectTokenBdrop = ({closeModal}) => {
                     }} onClick={ () => closeModal(selectedToken) } />
                 </div>
 
+                <div style={{
+                    // border:"2px solid lightgray",
+                    borderRadius:"10px",
+                    marginBottom:"1.5rem",
+                    padding:'.3rem',
+                    display:"flex",
+                    justifyContent:"space-between"
+                }} >
+
+                    <div style={{
+                        padding:'.4rem',
+                        backgroundColor: !Option ? "#161B2B" : 'transparent' ,
+                        color:!Option ? "white" : 'gray',
+                        width:"47%",
+                        borderRadius:"10px",
+                        textAlign:"center",
+                        cursor:"pointer",
+                        transition:"all .5s"
+                    }} onClick={ () => {
+                        setselectedToken(null)
+                        setOption(false)
+                    } } >Token</div>
+
+                    <div style={{
+                        padding:'.4rem',
+                        backgroundColor: Option ? "#161B2B" : 'transparent' ,
+                        color:Option ? "white" : 'gray',
+                        width:"47%",
+                        borderRadius:"10px",
+                        textAlign:"center",
+                        cursor:"pointer",
+                        transition:"all .5s"
+                    }} onClick={ () => {
+                        setselectedToken(null)
+                        setOption(true)
+                    } } >NFT</div>
+
+                </div>
+
                 <div className='backDrop_getToken_top' >
                     <BiSearch className='backDrop_getToken_top_ic' />
                     <input type='text' placeholder='Search name or paste address' value={Query} on onChange={ (e) => {
                         setQuery(e.target.value)
                         setselectedToken(null)
+                        GetTokenbyAddress()
+
                     } }  />
                 </div>
-
-                {/* <div className='backDrop_getToken_choices' style={{
-                    borderBottom: selectedToken ? '2px' : "0px"
-
-                }} >
-
-                    { commonToken.map( (token,index) => {
-                        return (
-
-                            <div className='backDrop_getToken_choices_div' key={index} onClick={ () => {
-                                setselectedToken(token)
-                                closeModal(token)
-                            } } >
-                                <img src={token.logo} alt='' style={{
-                                    width:"1.1rem"
-                                }} />
-                                <h5>{token.name}</h5>
-                            </div>
-
-                        );
-                    } ) }
-
-                </div> */}
 
                 <div className='backDrop_getToken_selections' style={{
                     maxHeight:"50vh",
@@ -284,6 +264,17 @@ const SelectTokenBdrop = ({closeModal}) => {
                     : <></> }
 
                 </div>
+
+                <button onClick={ () => GetTokenbyAddress() } style={{
+                    width:"100%",
+                    background:"linear-gradient(70deg, #7900D9 16.65%, #0097FF 78.93%)",
+                    padding:'.4rem',
+                    borderRadius:"6px",
+                    color:"white",
+                    marginTop:20,
+                    fontWeight:"600"
+                }} >Search</button>
+
             </motion.div>
 
         </div>

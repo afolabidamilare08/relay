@@ -40,19 +40,19 @@ const SetuptradeDapp = ({closeHeader}) => {
     const HandleCreateTrade = async () => {
         setisLoading(true)
 
-        // if ( !tokenToswap || !tokenToreceive || amountTokenToReceive === '0' || amountTokenToReceive === '' || amountTokenToSwap === '0' || amountTokenToSwap === '' ) {
-        //     setdisplayError(true)
-        //     seterrorMessage('Please fill all fields')
-        //     setisLoading(false)
-        //     return
-        // }
+        if ( !tokenToswap || !tokenToreceive ) {
+            setdisplayError(true)
+            seterrorMessage('Please fill all fields')
+            setisLoading(false)
+            return
+        }
 
-        // if ( PrivateTrade && recepientWalletAddress === '' ) {
-        //     setdisplayError(true)
-        //     seterrorMessage('Please fill all fields')
-        //     setisLoading(false)
-        //     return
-        // }
+        if ( PrivateTrade && recepientWalletAddress === '' ) {
+            setdisplayError(true)
+            seterrorMessage('Please fill all fields')
+            setisLoading(false)
+            return
+        }
         
 
         try{
@@ -69,100 +69,227 @@ const SetuptradeDapp = ({closeHeader}) => {
             var count2 = parseInt(amountTokenToSwap,10)
             count2 = count2 * 1000000
     
+
             if ( tokenToreceive.name === 'Ethereum' && tokenToswap.name !== 'Ethereum' ) {
-                params = {
-                    owner2:owner2,
-                    eth: [
-                        {
-                            from: owner2,
-                            to: user_account,
-                            count: count
-                        }
-                    ],
-                    erc20: [
-                        {
-                            from: user_account,
-                            to:owner2,
-                            token:tokenToswap.tokenAddress,
-                            count:count2
-                        }
-                    ],
-                    erc721Item: [],
-                    erc721Count: []
+                
+                if ( tokenToswap.TradeId !== null ) {
+                    params = {
+                        owner2:owner2,
+                        eth: [
+                            {
+                                from: owner2,
+                                to: user_account,
+                                count: count
+                            }
+                        ],
+                        erc20: [],
+                        erc721Item: [
+                            {
+                                from: user_account,
+                                to:owner2,
+                                token:tokenToswap.tokenAddress,
+                                tokenId: parseInt(tokenToswap.tokenId,10)
+                            }
+                        ],
+                        erc721Count: []
+                    }
+                }else{
+                    params = {
+                        owner2:owner2,
+                        eth: [
+                            {
+                                from: owner2,
+                                to: user_account,
+                                count: count
+                            }
+                        ],
+                        erc20: [
+                            {
+                                from: user_account,
+                                to:owner2,
+                                token:tokenToswap.tokenAddress,
+                                count:count2
+                            }
+                        ],
+                        erc721Item: [],
+                        erc721Count: []
+                    }
                 }
+
             }
     
             if ( tokenToreceive.name !== 'Ethereum' && tokenToswap.name === 'Ethereum' ) {
-                console.log('eefefef')
-                params = {
-                    owner2:owner2,
-                    erc20: [
-                        {
-                            from:owner2,
-                            to:user_account,
-                            token:tokenToreceive.tokenAddress,
-                            count:count
-                        }
-                    ],
-                    eth: [
-                        {
-                            from:user_account,
-                            to: owner2,
-                            count: count2
-                        }
-                    ],
-                    erc721Item: [],
-                    erc721Count: []
+
+                if ( tokenToreceive.tokenId !== null ) {
+                    
+                    params = {
+                        owner2:owner2,
+                        erc721Item: [
+                            {
+                                from:owner2,
+                                to:user_account,
+                                token:tokenToreceive.tokenAddress,
+                                tokenId:parseInt(tokenToreceive.tokenId,10)
+                            }
+                        ],
+                        erc721Count: [],
+                        erc20: [],
+                        eth: [
+                            {
+                                from:user_account,
+                                to: owner2,
+                                count: count2
+                            }
+                        ],
+                    }
+
+                }else{
+                    params = {
+                        owner2:owner2,
+                        erc20: [
+                            {
+                                from:owner2,
+                                to:user_account,
+                                token:tokenToreceive.tokenAddress,
+                                count:count
+                            }
+                        ],
+                        eth: [
+                            {
+                                from:user_account,
+                                to: owner2,
+                                count: count2
+                            }
+                        ],
+                        erc721Item: [],
+                        erc721Count: []
+                    }
                 }
+                
             }
     
             if ( tokenToreceive.name !== 'Ethereum' && tokenToswap.name !== 'Ethereum' ) {
-                params = {
-                    owner2:owner2,
-                    eth: [],
-                    erc20: [
-                        {
-                            from: owner2,
-                            to:user_account,
-                            token:tokenToreceive.tokenAddress,
-                            count:count
-                        },
-                        {
-                            from: user_account,
-                            to: owner2,
-                            count: count2,
-                            token:tokenToswap.tokenAddress,
-                        }
-                    ],
-                    erc721Item: [],
-                    erc721Count: []
+
+                if ( tokenToreceive.tokenId !== null && tokenToswap.tokenId === null ) {
+                    params = {
+                        owner2:owner2,
+                        erc721Item: [
+                            {
+                                from: owner2,
+                                to:user_account,
+                                token:tokenToreceive.tokenAddress,
+                                tokenId:parseInt(tokenToreceive.tokenId)
+                            },
+                        ],
+                        erc721Count: [],
+                        eth: [],
+                        erc20: [
+                            {
+                                from: user_account,
+                                to: owner2,
+                                count: count2,
+                                token:tokenToswap.tokenAddress,
+                            }
+                        ],
+                    }
+                }
+
+                if ( tokenToreceive.tokenId === null && tokenToswap.tokenId !== null ) {
+                    params = {
+                        owner2:owner2,
+                        eth: [],
+                        erc20: [
+                            {
+                                from: owner2,
+                                to: user_account,
+                                count: count2,
+                                token:tokenToreceive.tokenAddress,
+                            }
+                        ],
+                        erc721Item: [
+                            {
+                                from: user_account,
+                                to:owner2,
+                                token:tokenToswap.tokenAddress,
+                                tokenId:parseInt(tokenToswap.tokenId)
+                            },
+                        ],
+                        erc721Count: [],
+                    }
+                }
+
+                if ( tokenToreceive.tokenId !== null && tokenToswap.tokenId !== null ) {
+                    params = {
+                        owner2:owner2,
+                        eth: [],
+                        erc20: [],
+                        erc721Item: [
+                            {
+                                from: owner2,
+                                to:user_account,
+                                token:tokenToreceive.tokenAddress,
+                                tokenId:parseInt(tokenToreceive.tokenId)
+                            },
+                            {
+                                from: user_account,
+                                to:owner2,
+                                token:tokenToswap.tokenAddress,
+                                tokenId:parseInt(tokenToswap.tokenId)
+                            },
+                        ],
+                        erc721Count: [],
+                    }
+                }
+
+                else{
+                    params = {
+                        owner2:owner2,
+                        eth: [],
+                        erc20: [
+                            {
+                                from: owner2,
+                                to:user_account,
+                                token:tokenToreceive.tokenAddress,
+                                count:count
+                            },
+                            {
+                                from: user_account,
+                                to: owner2,
+                                count: count2,
+                                token:tokenToswap.tokenAddress,
+                            }
+                        ],
+                        erc721Item: [],
+                        erc721Count: []
+                    }
                 }
             }
 
 
-
-            // 0x810756d3aE32b8c0446e5E107c4e797022940258
+            // const response = await contract.createTrade(
+            //     {
+            //         owner2: '0x0000000000000000000000000000000000000000',
+            //         eth: [],
+            //         erc20: [
+            //           {
+            //             from: '0x0000000000000000000000000000000000000000',
+            //             to: user_account,
+            //             token: '0x810756d3aE32b8c0446e5E107c4e797022940258',
+            //             count: 90000000,
+            //           }
+            //         ],
+            //         erc721Item: [{
+            //           from: user_account,
+            //           to: "0x0000000000000000000000000000000000000000",
+            //           token: "0xB1A8e8b908F6c0c86052eA88892Bc7628a14B64A",
+            //           tokenId: 34
+            //         }],
+            //         erc721Count: []
+            //       }
+            // )
 
             const response = await contract.createTrade(
-                {
-                    owner2: '0x0000000000000000000000000000000000000000',
-                    eth: [],
-                    erc20: [
-                      {
-                        from: '0x0000000000000000000000000000000000000000',
-                        to: user_account,
-                        token: '0x810756d3aE32b8c0446e5E107c4e797022940258',
-                        count: 90000000,
-                      }
-                    ],
-                    erc721Item: [{
-                      from: user_account,
-                      to: "0x0000000000000000000000000000000000000000",
-                      token: "0xB1A8e8b908F6c0c86052eA88892Bc7628a14B64A",
-                      tokenId: 34
-                    }],
-                    erc721Count: []
-                  }
+                params
             )
 
             console.log(response)
@@ -171,11 +298,24 @@ const SetuptradeDapp = ({closeHeader}) => {
 
                 // count2  = count2 * 1000000
 
-                const ApproveToken = new ethers.Contract('0xB1A8e8b908F6c0c86052eA88892Bc7628a14B64A',ERC721,signer)
-                const approveResponse = await ApproveToken.approve(
-                    user_account,
-                    34
-                )
+                let approveResponse;
+
+                if ( tokenToswap.tokenId !== null ) {
+                    var id = parseInt(tokenToswap.tokenId,10)
+                    const Approve71Token = new ethers.Contract('0xB1A8e8b908F6c0c86052eA88892Bc7628a14B64A',ERC721,signer)
+                    approveResponse = await Approve71Token.approve(
+                        '0x86a04287dafc09b450bee2b5c99cee0b1ae20be7',
+                        id
+                    )
+                }else{
+                    const ApproveToken = new ethers.Contract('0xB1A8e8b908F6c0c86052eA88892Bc7628a14B64A',ERC721,signer)
+                    approveResponse = await ApproveToken.approve(
+                        '0x86a04287dafc09b450bee2b5c99cee0b1ae20be7',
+                        id
+                    )
+                }
+
+
                     
                 if (approveResponse) {
                     
@@ -323,12 +463,30 @@ const SetuptradeDapp = ({closeHeader}) => {
                         </div>
                     </div>
 
+                    { tokenToswap ?
+                    
+                        tokenToswap.tokenId !== null ?
+                        
+                            <div className="setupTrade_main" >
+                                <h5>Token Id:</h5>
+                                <input type='text' placeholder='0' value={tokenToswap.tokenId} onChange={ (e) => settokenToswap({
+                                    ...tokenToswap,
+                                    tokenId:e.target.value
+                                }) } style={{
+                                    textAlign:"right"
+                                }} />
+                            </div>
+                        
+                        :
+
                     <div className="setupTrade_main" >
                         <h5>Amount of token to swap:</h5>
                         <input type='text' placeholder='0' value={amountTokenToSwap} onChange={ (e) => setamountTokenToSwap(e.target.value) } style={{
                             textAlign:"right"
                         }} />
                     </div>
+                        
+                    : <></> }
 
                     <div className="setupTrade_main" >
                         <h5>Token wanted in exchange:</h5>
@@ -349,12 +507,41 @@ const SetuptradeDapp = ({closeHeader}) => {
                         </div>
                     </div>
 
-                    <div className="setupTrade_main" >
-                        <h5>Amount of token wanted in exchange:</h5>
-                        <input type='text' placeholder='0' value={amountTokenToReceive} onChange={ (e) => setamountTokenToReceive(e.target.value) } style={{
-                            textAlign:"right"
-                        }} />
-                    </div>
+                    { tokenToreceive ?
+                    
+                        tokenToreceive.tokenId !== null ?
+                        
+                            <div className="setupTrade_main" >
+                                <h5>Token Id:</h5>
+                                <input type='text' placeholder='0' value={tokenToreceive.tokenId} onChange={ (e) => settokenToreceive({
+                                    ...tokenToreceive,
+                                    tokenId:e.target.value
+                                }) } style={{
+                                    textAlign:"right"
+                                }} />
+                            </div>
+                        
+                        :
+
+                        <div className="setupTrade_main" >
+                            <h5>Amount of token wanted in exchange:</h5>
+                            <input type='text' placeholder='0' value={amountTokenToReceive} onChange={ (e) => setamountTokenToReceive(e.target.value) } style={{
+                                textAlign:"right"
+                            }} />
+                        </div>
+                    
+                    : 
+                    
+                        // <div className="setupTrade_main" >
+                        //     <h5>Amount of token wanted in exchange:</h5>
+                        //     <input type='text' placeholder='0' value={amountTokenToReceive} onChange={ (e) => setamountTokenToReceive(e.target.value) } style={{
+                        //         textAlign:"right"
+                        //     }} />
+                        // </div>
+                    
+                        <></>
+
+                    }
 
                     <div className="setupTrade_main" >
                         <h5>Performance tax</h5>

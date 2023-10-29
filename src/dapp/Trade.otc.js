@@ -113,10 +113,10 @@ const TradeOtc = ({closeHeader}) => {
 
             // value = value / 1000000
 
+            console.log(Trade.givingToken.tokenAddress)
 
-
-            const approveToken = new ethers.Contract(Trade.givingToken.tokenAddress,ERC20ABI,signer)
-            const approveResponse = await approveToken.approve(user_account,value)
+            const approveToken = new ethers.Contract(Trade.receivingToken.tokenAddress,ERC20ABI,signer)
+            const approveResponse = await approveToken.approve('0xfe815da50dbedbcb3d0f3e076821c98b294fd81c',value)
 
             if ( approveResponse ) {
                 
