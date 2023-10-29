@@ -90,11 +90,11 @@ const OtcDapp = ({closeHeader}) => {
                             const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
                             const response = await contract.getTrade(dec1)
     
-                            // console.log(response)
+                            console.log(response)
     
                             if ( response.length > 1 ) {
                                 
-                                if ( response[1][0].owner === '0x0000000000000000000000000000000000000000' ) {
+                                if ( response[0].owner2 === '0x0000000000000000000000000000000000000000' ) {
                                     
                                     PublicTrades.push({
                                         receivingToken: response[1][1],

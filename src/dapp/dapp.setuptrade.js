@@ -3,7 +3,7 @@ import {BsIncognito} from 'react-icons/bs';
 import {BiInfoCircle} from 'react-icons/bi';
 import { Link, useNavigate } from 'react-router-dom';
 import {IoMdMenu} from 'react-icons/io';
-import {ErrorModal, ErrorSlideModal, SelectTokenBdrop, SliderModal, SuccessModal} from '../components/backDropComponent';
+import {EditableSuccessModal, ErrorModal, ErrorModal2, ErrorSlideModal, SelectTokenBdrop, SliderModal, SuccessModal} from '../components/backDropComponent';
 import { useState } from 'react';
 import { useContext } from 'react';
 import AppContext from '../context/Appcontext';
@@ -53,7 +53,17 @@ const SetuptradeDapp = ({closeHeader}) => {
             setisLoading(false)
             return
         }
-        
+
+
+        let recepientAddress = recepientWalletAddress.toLowerCase()
+        let userAddress = user_account.toLowerCase()
+
+        if ( recepientAddress === userAddress ) {
+            setdisplayError(true)
+            seterrorMessage('You cannot be the recepiant of your own trade')
+            setisLoading(false)
+            return
+        }
 
         try{
 
@@ -288,9 +298,7 @@ const SetuptradeDapp = ({closeHeader}) => {
             //       }
             // )
 
-            const response = await contract.createTrade(
-                params
-            )
+            const response = await contract.createTrade(params)
 
             console.log(response)
 
@@ -356,26 +364,29 @@ const SetuptradeDapp = ({closeHeader}) => {
 
                     setTimeout(() => {
                         navigate('/trades')
-                    }, 2000);
+                    }, 4000);
 
                     return
                 }else{
                     setisLoading(false)
-                    setopenMessage(true)
+                    setdisplayError(true)
+                    seterrorMessage("Something went wrong while processing your transaction")
                     return
                 }
 
             }else{
                 setisLoading(false)
-                setopenMessage(true)
+                setdisplayError(true)
+                seterrorMessage("Something went wrong while processing your transaction")
                 return
             }
 
         }
         catch (error){
             setisLoading(false)
-            console.log(error)
-            setopenMessage(true)
+            setdisplayError(true)
+            seterrorMessage("Something went wrong while processing your transaction")
+            return
         }
 
     }
@@ -618,25 +629,32 @@ const SetuptradeDapp = ({closeHeader}) => {
 
             : <></> }
 
-            { openMessage ? 
+            { displayError ? 
                 
-                <ErrorModal closeModal={ () => {
+                <ErrorModal2 msg={errorMessage} closeModal={ () => {
                     setopenMessage(false)
                     setopenModal(false)
+                    setdisplayError(false)
                 } } />
 
             : <></> }
 
-            <ErrorSlideModal
+            {/* <ErrorSlideModal
                 display={ displayError }
                 error_msg={errorMessage}
                 closeModal={ () => setdisplayError(false) }
-            />
+            /> */}
 
             <SliderModal
                 closeModal={ () => setTradeCreated(false) }
                 display={TradeCreated}
             />
+
+            { TradeCreated ? <EditableSuccessModal
+                closeModal={ () => setTradeCreated(false) }
+                modal_message={"Your Trade was successfuly created"}
+                modal_title={"Trade Created"}
+            /> : <></> }
 
             {/* <SuccessModal/> */}
 

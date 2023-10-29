@@ -188,7 +188,7 @@ const SelectTokenBdrop = ({closeModal}) => {
                     }} onClick={ () => {
                         setselectedToken(null)
                         setOption(false)
-                    } } >Token</div>
+                    } } >veToken</div>
 
                     <div style={{
                         padding:'.4rem',
@@ -314,6 +314,36 @@ const ErrorModal = ({closeModal}) => {
 
 }
 
+const ErrorModal2 = ({closeModal,msg}) => {
+
+    return (
+
+        <div className="backDrop" onClick={closeModal} >
+
+            <motion.div className='backDrop_getToken'
+                        
+                initial={{ scale: 0.5,}}
+                whileInView={{ scale: 1, }}
+                transition={{ duration: 0.4 }}
+                viewport={{ once: true }}
+            
+            >
+
+                <img className='errorImg' alt='' src={CloseImg} />
+
+                <h3 className='errorImg_top' >There has been an error</h3>
+
+                <h2 className='errorImg_btm' >
+                {msg}
+                </h2>
+
+            </motion.div>
+
+        </div>
+
+    );
+
+}
 
 const ComingSoonModal = ({closeModal}) => {
 
@@ -418,6 +448,50 @@ const SuccessModal = ({closeModal}) => {
 
 }
 
+
+const EditableSuccessModal = ({closeModal,modal_title,modal_message}) => {
+
+
+    return (
+
+        <div className="backDrop" >
+
+            <motion.div className='backDrop_getToken'
+                        
+                initial={{ scale: 0.5,}}
+                whileInView={{ scale: 1, }}
+                transition={{ duration: 0.4 }}
+                viewport={{ once: true }}
+            
+            >
+
+                <div className="backDrop_getToken_close" style={{
+                    display:"flex",
+                    justifyContent:"flex-end",
+                    marginBottom:"1rem",
+                    alignItems:"center"
+                }} >
+                    <AiOutlineClose color='white' style={{
+                        cursor:"pointer"
+                    }} onClick={ closeModal } />
+                </div>
+
+
+                <img className='errorImg' alt='' src={CeleberationImg} />
+
+                <h3 className='errorImg_top' >{modal_title}</h3>
+
+                <h2 className='errorImg_btm' >
+                    {modal_message}  
+                </h2>
+            </motion.div>
+
+        </div>
+
+    );
+
+}
+
 const NormalBackdrop = ({closeModal}) => {
  
     return (
@@ -471,4 +545,4 @@ const ErrorSlideModal = ({error_msg, display, closeModal}) => {
 }
 
 
-export { BackDrop, SelectTokenBdrop, ErrorModal, NormalBackdrop, SliderModal, ErrorSlideModal, SuccessModal, ComingSoonModal };
+export { BackDrop, SelectTokenBdrop, ErrorModal, NormalBackdrop, SliderModal, ErrorSlideModal, SuccessModal, ComingSoonModal, ErrorModal2, EditableSuccessModal };
