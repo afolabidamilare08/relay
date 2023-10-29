@@ -334,7 +334,14 @@ const SetuptradeDapp = ({closeHeader}) => {
 
                     const executecontract = new ethers.Contract(MainControllercontractAddress,abi2,signer)
 
-                    const executeresponse = await executecontract.execute(TradeId)
+                    let executeresponse;
+
+                    // if ( tokenToswap.tokenId !== null ) {
+                    //     executeresponse = await.executecontract.createPoint
+                    // }
+
+
+                     executeresponse = await executecontract.execute(TradeId)
 
                     console.log(executeresponse)
 
