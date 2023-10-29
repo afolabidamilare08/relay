@@ -218,7 +218,7 @@ const SetuptradeDapp = ({closeHeader}) => {
                             {
                                 from: owner2,
                                 to: user_account,
-                                count: count2,
+                                count: count,
                                 token:tokenToreceive.tokenAddress,
                             }
                         ],
