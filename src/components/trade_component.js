@@ -172,7 +172,7 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
             const provider = new ethers.providers.JsonRpcProvider(RpcUrl)
             const erc20 = new ethers.Contract(token.tokenAddress,ERC20ABI,provider)
 
-            // const symbol = await erc20.symbol()
+            const symbol = await erc20.symbol()
             const name = await erc20.name()
             const tokenAddress = token.tokenAddress
 
@@ -186,7 +186,7 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
 
             let tokendet = {
                 name:name,
-                // symbol:symbol,
+                symbol:symbol,
                 tokenAddress:tokenAddress,
                 value: value
             }
@@ -239,7 +239,7 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
                             { recieveTok ? recieveTok.value : '' }
                         </h6>
                         <h6 className='trade_div_GW_txt' >
-                            <span>Wants:</span>
+                            <span>Receive:</span>
                             { givingTok ? givingTok.value : '' }
                         </h6>
                     </div>

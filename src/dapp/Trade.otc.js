@@ -88,6 +88,7 @@ const TradeOtc = ({closeHeader}) => {
             if ( response ) {
                 console.log(response)
                 setsuccessMsg(true)
+                window.location.reload()
             }
 
         }
@@ -107,13 +108,13 @@ const TradeOtc = ({closeHeader}) => {
             var id = parseInt(tradeId)
 
             const hexToDecimal = hex => parseInt(hex, 16)
-            let value = hexToDecimal(Trade.givingToken.value._hex);
+            let value = hexToDecimal(Trade.receivingToken.value._hex);
 
             console.log(value)
 
             // value = value / 1000000
 
-            console.log(Trade.givingToken.tokenAddress)
+            console.log(Trade.givingToken)
 
             const approveToken = new ethers.Contract(Trade.receivingToken.tokenAddress,ERC20ABI,signer)
             const approveResponse = await approveToken.approve('0xfe815da50dbedbcb3d0f3e076821c98b294fd81c',value)
@@ -136,6 +137,7 @@ const TradeOtc = ({closeHeader}) => {
                     setminiLoading(false)
                     GetTrade(id)
                     setsuccessMsg(true)
+                    window.location.reload()
                 }
 
             }

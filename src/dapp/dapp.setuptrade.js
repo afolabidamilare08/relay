@@ -332,8 +332,6 @@ const SetuptradeDapp = ({closeHeader}) => {
 
                     TradeId = parseInt(TradeId)
 
-
-
                     const executecontract = new ethers.Contract(MainControllercontractAddress,abi2,signer)
 
                     const executeresponse = await executecontract.execute(TradeId)
