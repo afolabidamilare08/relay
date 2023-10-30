@@ -10,7 +10,7 @@ import {IoMdMenu} from 'react-icons/io'
 import {BackDrop, ErrorModal, SuccessModal} from '../components/backDropComponent';
 import { useContext, useEffect, useState } from 'react';
 import AppContext from '../context/Appcontext';
-import { ethers } from 'ethers';
+import { ethers, utils } from 'ethers';
 import { ERC20ABI, ERC721, abi2 } from '../constants/abi';
 import {Spinner} from "@nextui-org/react";
 import TransactionImg from '../assets/images/transaction.png';
@@ -93,15 +93,24 @@ const TradeOtc = ({closeHeader}) => {
             let response ;
             const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
 
+            
+            
+            // ethers.g
 
             if ( value < 1000000 ) {
-                
+                // console.l
+
+
                 response = await contract.withdraw(id,{
-                    gasLimit:1000000
+                    value:ethers.utils.parseEther("0.01"),
                 })  
+                
+
 
             }else{
-                response = await contract.withdraw(id)
+                response = await contract.withdraw(id,{
+                    value:ethers.utils.parseEther('0'),
+                })
             }
 
             

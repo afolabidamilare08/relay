@@ -367,7 +367,6 @@ const SetuptradeDapp = ({closeHeader}) => {
                      executeresponse = await executecontract.execute(TradeId)
 
                     console.log(executeresponse)
-
                     
                     setTradeCreated(true)
                     setisLoading(false)

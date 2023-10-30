@@ -165,24 +165,60 @@ const OtcDapp = ({closeHeader}) => {
     }
 
 
-    const WithdrawalHandler = async (tradeID) => {
+    const WithdrawalHandler = async (trade) => {
+
+        // setminiLoading(true)
 
         try{
 
-            var id = parseInt(tradeID)
+            var id = parseInt(trade.tradeId)
 
+            const hexToDecimal = hex => parseInt(hex, 16)
+            let value = hexToDecimal(trade.givingToken.value._hex);
+
+            console.log(value)
+
+
+            let response ;
             const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
-            const response = await contract.withdraw(id)
 
-            if (response) {
-                // GetUserTransactions
+
+            // ethers.g
+
+            if ( value < 1000000 ) {
+                
+                response = await contract.withdraw(id,{
+                    value: ethers.utils.parseEther('0.01')
+                })  
+
+            }else{
+                response = await contract.withdraw(id,{
+                    value: ethers.utils.parseEther('0')
+                })
+            }
+
+            
+
+            if ( response ) {
+                console.log(response)
                 setsuccessMsg(true)
-                GetUserTransactions()
+                // setminiLoading(false)
+                
+                setTimeout(() => {
+                    window.location.reload()
+                }, 4000);
+
             }
 
         }
         catch(error){
+
+            // var id = parseInt(tradeId)
+
+            // setminiLoading(false)
             console.log(error)
+            setopenModal(true)
+        
         }
         
     }
@@ -479,7 +515,7 @@ const OtcDapp = ({closeHeader}) => {
                                             key={index}
                                             trade={trade}
                                             givingToken={trade.givingToken}
-                                            withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
+                                            withdrawalFunction={ () => WithdrawalHandler(trade) }
                                             receivingToken={trade.receivingToken}
                                             // cancelFunction={}
                                         />
@@ -494,7 +530,7 @@ const OtcDapp = ({closeHeader}) => {
                                         key={index}
                                         trade={trade}
                                         givingToken={trade.givingToken}
-                                        withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
+                                        withdrawalFunction={ () => WithdrawalHandler(trade) }
                                         receivingToken={trade.receivingToken}
                                         // cancelFunction={}
                                     />
