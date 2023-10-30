@@ -645,7 +645,7 @@ const SetuptradeDapp = ({ closeHeader }) => {
 
           {PrivateTrade ? (
             <div className="setupTrade_main">
-              <h5>Recepient Wallet Address:</h5>
+              <h5>Receipant Wallet Address:</h5>
               <input
                 type="text"
                 placeholder="0x000...000"
