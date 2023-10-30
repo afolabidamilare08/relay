@@ -15,7 +15,7 @@ const ContactSectionComponents = () => {
 
                <h5>Relay</h5> 
 
-               <Link to={"#"} onClick={ comingsoon } className="contact_us_center_button" >
+               <Link to={"/setuptrade"} className="contact_us_center_button" >
                 Try Now
                </Link>
 

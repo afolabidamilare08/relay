@@ -30,7 +30,7 @@ const HeroSectionComponents = () => {
 
                     </div>
 
-                        <Link to="#" onClick={ comingsoon } className="hero_section_main_center_btn" >
+                        <Link to="/setuptrade" className="hero_section_main_center_btn" >
                             Open Dapp
                         </Link>
 

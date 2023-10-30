@@ -100,11 +100,11 @@ const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction
                     <div className='trade_div_GW' >
                         <h6 className='trade_div_GW_txt' >
                             <span>Gives:</span>
-                            { recieveTok ? recieveTok.value : '' }
+                            { recieveTok ? recieveTok.isToken ? 'Nft' : recieveTok.value : '' }
                         </h6>
                         <h6 className='trade_div_GW_txt' >
                             <span>Wants:</span>
-                            { givingTok ? givingTok.value : '' }
+                            { givingTok ? givingTok.isToken ? 'Nft' : givingTok.value : '' }
                         </h6>
                     </div>
 
@@ -205,7 +205,14 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
             const hexToDecimal = hex => parseInt(hex, 16)
             let value = hexToDecimal(token.value._hex);
 
-            console.log(value)
+            let isToken;
+
+            if ( value < 1000000 ) {
+                isToken = true
+            }else{
+                isToken = false
+                value = value / 1000000
+            }
 
             value = value / 1000000
 
@@ -213,7 +220,8 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
                 name:name,
                 symbol:symbol,
                 tokenAddress:tokenAddress,
-                value: value
+                value: value,
+                isToken:isToken
             }
 
             if ( number === 1 ) {
@@ -261,21 +269,21 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
                     <div className='trade_div_GW' >
                         <h6 className='trade_div_GW_txt' >
                             <span>Gives:</span>
-                            { recieveTok ? recieveTok.value : '' }
+                            { recieveTok ? receivingToken.isToken ? 'Nft' : recieveTok.value : '' }
                         </h6>
                         <h6 className='trade_div_GW_txt' >
                             <span>Receive:</span>
-                            { givingTok ? givingTok.value : '' }
+                            { givingTok ? givingTok.isToken ? 'Nft' : givingTok.value : '' }
                         </h6>
                     </div>
 
                     <div className='trade_div_mid' >
 
-                        <h5>(${ recieveTok ? Math.round(recieveTok.value * 1) : '' })</h5>
+                        <h5>(${ recieveTok ? recieveTok.isToken ? '' : Math.round(recieveTok.value * 1) : '' })</h5>
 
                         <FaExchangeAlt className='trade_div_mid_ic' />
 
-                        <h5>(${ givingTok ? Math.round(givingTok.value * 1) : '' })</h5>
+                        <h5>(${ givingTok ? givingTok.isToken ? '' : Math.round(givingTok.value * 1) : '' })</h5>
 
                     </div>
 

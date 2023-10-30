@@ -93,20 +93,13 @@ const TradeOtc = ({closeHeader}) => {
             let response ;
             const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
 
-            
-            
             // ethers.g
-
             if ( value < 1000000 ) {
                 // console.l
-
-
                 response = await contract.withdraw(id,{
                     value:ethers.utils.parseEther("0.01"),
                 })  
-                
-
-
+              
             }else{
                 response = await contract.withdraw(id,{
                     value:ethers.utils.parseEther('0'),

@@ -32,7 +32,7 @@ const HeaderComponents = () => {
                     fontSize:'1rem'
                 }} >Docs</a>
 
-                <Link to={"#"} className='header_wallet' onClick={ comingsoon } style={{
+                <Link to={"/setuptrade"} className='header_wallet' style={{
                     display:"block",
                     marginTop:".5rem",
                     fontSize:'1rem'
@@ -58,7 +58,7 @@ const HeaderComponents = () => {
                 <a href="https://relay-2.gitbook.io/relay/" >Docs</a>
             </nav>
 
-            <Link to={"#"} onClick={ comingsoon } className='header_wallet' >
+            <Link to={"/setuptrade"} className='header_wallet' >
                 Open Dapp
             </Link>
 
