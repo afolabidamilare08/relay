@@ -395,7 +395,7 @@ const OtcDapp = ({closeHeader}) => {
 
                                     if ( Filters === 'completed' ) {
                                         
-                                        if ( trade.givingToken.isSwapped || trade.receivingToken.isSwapped ) {
+                                        if ( trade.givingToken.isSwapped && trade.receivingToken.isSwapped && trade.givingToken.isExecuted && trade.receivingToken.isExecuted ) {
                                             return (
                                                 <TradeComponent 
                                                     key={index}
@@ -473,7 +473,7 @@ const OtcDapp = ({closeHeader}) => {
 
                             if ( Filters === 'completed' ) {
                                 
-                                if ( trade.givingToken.isSwapped || trade.receivingToken.isSwapped ) {
+                                if ( trade.givingToken.isSwapped && trade.receivingToken.isSwapped && trade.givingToken.isExecuted && trade.receivingToken.isExecuted ) {
                                     return (
                                         <TradeComponent 
                                             key={index}

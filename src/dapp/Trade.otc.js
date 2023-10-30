@@ -78,26 +78,52 @@ const TradeOtc = ({closeHeader}) => {
 
     const WithdrawalHandler = async (tradeID) => {
 
+        setminiLoading(true)
+
         try{
 
             var id = parseInt(tradeId)
 
             const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
-            const response = await contract.withdraw({
-                payableAmount:0.01,
-                TradeId:id
-            })
+            const response = await contract.withdraw(
+                id
+            )
 
             if ( response ) {
                 console.log(response)
                 setsuccessMsg(true)
-                window.location.reload()
+                setminiLoading(false)
+                
+                setTimeout(() => {
+                    window.location.reload()
+                }, 4000);
+
             }
 
         }
         catch(error){
+
+            // var id = parseInt(tradeId)
+
+            const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
+            const response = await contract.withdraw(id)
+
+            if ( response ) {
+                console.log(response)
+                setsuccessMsg(true)
+                setminiLoading(false)
+                
+                setTimeout(() => {
+                    window.location.reload()
+                }, 4000);
+
+            }else{
+                setminiLoading(false)
             console.log(error)
             setopenModal(true)
+            }
+
+            
         }
         
     }
@@ -140,7 +166,7 @@ const TradeOtc = ({closeHeader}) => {
                     setminiLoading(false)
                     GetTrade(id)
                     setsuccessMsg(true)
-                    window.location.reload()
+                    // window.location.reload()
                 }
 
             }

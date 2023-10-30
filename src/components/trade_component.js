@@ -15,7 +15,7 @@ import { ERC20ABI } from '../constants/abi';
 import { Spinner } from '@nextui-org/react';
 
 
-const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction, cancelFunction  }) => {
+const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction, cancelFunction, loading, acceptFunction  }) => {
 
     const [ recieveTok, setrecieveTok ] = useState()
     const [ givingTok, setgivingTok ] = useState()
@@ -136,18 +136,33 @@ const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction
 
                     </div>
 
-                    { givingToken.isSwapped && givingToken.isExecuted && receivingToken.isExecuted ?
-                    
-                        <button className='trade_div_btn' onClick={withdrawalFunction} >
-                            Withdraw Token
+                    { receivingToken.isSwapped && givingToken.isExecuted && receivingToken.isExecuted ?
+                                        
+                        receivingToken.isSwapped && givingToken.isExecuted && receivingToken.isExecuted && givingToken.isExecuted ?
+                        
+                        <button className='trade_div_btn' disabled={loading} onClick={withdrawalFunction} >
+                            { loading ? <Spinner size='sm' color='default' /> : 'Withdraw Token'}
                         </button> 
-                    
+                        :
+
+                        <button className='trade_div_btn' disabled={loading} onClick={withdrawalFunction} >
+                            { loading ? <Spinner size='sm' color='default' /> : 'Withdraw Token'}
+                        </button> 
                     :
 
-                        <button className='trade_div_btn' onClick={cancelFunction} >
-                            Cancel Trade
+                        !receivingToken.isExecuted ? 
+
+                            <button className='trade_div_btn' disabled={loading} onClick={acceptFunction} >
+                                { loading ? <Spinner size='sm' color='default' /> : 'Accept Trade'}
+                            </button>
+                        
+                        :
+
+
+                        <button className='trade_div_btn' disabled={loading} onClick={cancelFunction} >
+                            { loading ? <Spinner size='sm' color='default' /> : 'Cancel Trade' }
                         </button>
-                    
+
                     }
 
                 </motion.div>
@@ -284,10 +299,17 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
 
                     { receivingToken.isSwapped && givingToken.isExecuted && receivingToken.isExecuted ?
                     
+                        receivingToken.isSwapped && givingToken.isExecuted && receivingToken.isExecuted && givingToken.isExecuted ?
+                        
                         <button className='trade_div_btn' disabled={loading} onClick={withdrawalFunction} >
                             { loading ? <Spinner size='sm' color='default' /> : 'Withdraw Token'}
                         </button> 
+
+                        :
                     
+                        <button className='trade_div_btn' disabled={loading} onClick={withdrawalFunction} >
+                            { loading ? <Spinner size='sm' color='default' /> : 'Withdraw Token'}
+                        </button> 
                     :
 
                         !receivingToken.isExecuted ? 
