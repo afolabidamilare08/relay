@@ -36,13 +36,23 @@ const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction
 
             const hexToDecimal = hex => parseInt(hex, 16)
             let value = hexToDecimal(token.value._hex);
-            value = value / 1000000
+
+            let isToken;
+
+            if ( value < 1000000 ) {
+                isToken = true
+            }else{
+                isToken = false
+                value = value / 1000000
+            }
+
 
             let tokendet = {
                 name:name,
                 symbol:symbol,
                 tokenAddress:tokenAddress,
-                value: value
+                value: value,
+                isToken:isToken
             }
 
             if ( number === 1 ) {
@@ -100,11 +110,11 @@ const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction
 
                     <div className='trade_div_mid' >
 
-                        <h5>(${ recieveTok ? Math.round(recieveTok.value * 1) : '' })</h5>
+                        <h5>(${ recieveTok ? recieveTok.isToken ? '' : Math.round(recieveTok.value * 1) : '' })</h5>
 
                         <FaExchangeAlt className='trade_div_mid_ic' />
 
-                        <h5>(${ givingTok ? Math.round(givingTok.value * 1) : '' })</h5>
+                        <h5>(${ givingTok ? givingTok.isToken ? '' : Math.round(givingTok.value * 1) : '' })</h5>
 
                     </div>
 
