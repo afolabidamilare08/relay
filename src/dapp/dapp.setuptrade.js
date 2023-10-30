@@ -40,6 +40,13 @@ const SetuptradeDapp = ({closeHeader}) => {
     const HandleCreateTrade = async () => {
         setisLoading(true)
 
+        if( !user_account ){
+            setdisplayError(true)
+            seterrorMessage('Please connect your wallet')
+            setisLoading(false)
+            return
+        }
+
         if ( !tokenToswap || !tokenToreceive ) {
             setdisplayError(true)
             seterrorMessage('Please fill all fields')
