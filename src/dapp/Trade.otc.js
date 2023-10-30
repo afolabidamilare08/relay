@@ -83,7 +83,10 @@ const TradeOtc = ({closeHeader}) => {
             var id = parseInt(tradeId)
 
             const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
-            const response = await contract.withdraw(id)
+            const response = await contract.withdraw({
+                payableAmount:0.01,
+                TradeId:id
+            })
 
             if ( response ) {
                 console.log(response)

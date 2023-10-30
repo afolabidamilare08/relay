@@ -83,6 +83,8 @@ const SetuptradeDapp = ({closeHeader}) => {
             if ( tokenToreceive.name === 'Ethereum' && tokenToswap.name !== 'Ethereum' ) {
                 
                 if ( tokenToswap.TradeId !== null ) {
+                    console.log('gothere_')
+
                     params = {
                         owner2:owner2,
                         eth: [
@@ -129,8 +131,10 @@ const SetuptradeDapp = ({closeHeader}) => {
             }
     
             if ( tokenToreceive.name !== 'Ethereum' && tokenToswap.name === 'Ethereum' ) {
+                console.log('gothere_')
 
                 if ( tokenToreceive.tokenId !== null ) {
+                    console.log('gothere_')
                     
                     params = {
                         owner2:owner2,
@@ -153,7 +157,11 @@ const SetuptradeDapp = ({closeHeader}) => {
                         ],
                     }
 
-                }else{
+                }
+                
+                if ( tokenToreceive.tokenId == null ){
+                    console.log('gothere_')
+
                     params = {
                         owner2:owner2,
                         erc20: [
@@ -181,11 +189,8 @@ const SetuptradeDapp = ({closeHeader}) => {
             if ( tokenToreceive.name !== 'Ethereum' && tokenToswap.name !== 'Ethereum' ) {
 
                 if ( tokenToreceive.tokenId !== null && tokenToswap.tokenId === null ) {
-                    // console.log('diddi')
-                    // console.log({
-                    //     tokenToreceive:tokenToreceive,
-                    //     tokenToswap:tokenToswap
-                    // })
+                    console.log('gothere_')
+
                     params = {
                         owner2:owner2,
                         erc721Item: [
@@ -235,7 +240,7 @@ const SetuptradeDapp = ({closeHeader}) => {
                 }
 
                 if ( tokenToreceive.tokenId !== null && tokenToswap.tokenId !== null ) {
-                    console.log('gothere_')
+
                     params = {
                         owner2:owner2,
                         eth: [],
@@ -254,6 +259,32 @@ const SetuptradeDapp = ({closeHeader}) => {
                                 tokenId:parseInt(tokenToswap.tokenId)
                             },
                         ],
+                        erc721Count: [],
+                    }
+                }
+
+                if ( tokenToreceive.tokenId === null && tokenToswap.tokenId === null ) {
+
+                    params = {
+                        owner2:owner2,
+                        eth: [],
+                        erc20: [
+
+                            {
+                                from: owner2,
+                                to:user_account,
+                                token:tokenToreceive.tokenAddress,
+                                count:count
+                            },
+                            {
+                                from: user_account,
+                                to:owner2,
+                                token:tokenToswap.tokenAddress,
+                                count:count2
+                            },
+
+                        ],
+                        erc721Item: [],
                         erc721Count: [],
                     }
                 }
@@ -367,6 +398,7 @@ const SetuptradeDapp = ({closeHeader}) => {
 
         }
         catch (error){
+            console.log(error)
             setisLoading(false)
             setdisplayError(true)
             seterrorMessage("Something went wrong while processing your transaction")

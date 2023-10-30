@@ -94,26 +94,30 @@ const OtcDapp = ({closeHeader}) => {
     
                             if ( response.length > 1 ) {
                                 
-                                if ( response[0].owner2 === '0x0000000000000000000000000000000000000000' ) {
+                                if ( response[1][0].isExecuted || response[1][1].isExecuted  ) {
+                                 
+                                    if ( response[0].owner2 === '0x0000000000000000000000000000000000000000' ) {
                                     
-                                    PublicTrades.push({
-                                        receivingToken: response[1][1],
-                                        givingToken: response[1][0],
-                                        time:trx.timeStamp,
-                                        tradeId:dec1,
-                                        blockHash:trx.blockHash,
-                                        hash:trx.hash
-                                    })
-    
-                                }else{
-                                    PrivateTrades.push({
-                                        receivingToken: response[1][1],
-                                        givingToken: response[1][0],
-                                        time:trx.timeStamp,
-                                        tradeId:dec1,
-                                        blockHash:trx.blockHash,
-                                        hash:trx.hash
-                                    })
+                                        PublicTrades.push({
+                                            receivingToken: response[1][1],
+                                            givingToken: response[1][0],
+                                            time:trx.timeStamp,
+                                            tradeId:dec1,
+                                            blockHash:trx.blockHash,
+                                            hash:trx.hash
+                                        })
+        
+                                    }else{
+                                        PrivateTrades.push({
+                                            receivingToken: response[1][1],
+                                            givingToken: response[1][0],
+                                            time:trx.timeStamp,
+                                            tradeId:dec1,
+                                            blockHash:trx.blockHash,
+                                            hash:trx.hash
+                                        })
+                                    }
+                                    
                                 }
     
                             }
@@ -323,7 +327,7 @@ const OtcDapp = ({closeHeader}) => {
                         <PopoverTrigger>
                             <div className='Otc_main_options_cov' >
                                 <button className='Otc_main_options_cov_btn' >
-                                    All Trades
+                                    { Filters === '' ? 'All Trades' : Filters }
                                     <BsChevronDown className='Otc_main_options_cov_btn_ic' />
                                 </button>
                             </div>
