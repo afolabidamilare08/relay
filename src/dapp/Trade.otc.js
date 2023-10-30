@@ -11,7 +11,7 @@ import {BackDrop, ErrorModal, SuccessModal} from '../components/backDropComponen
 import { useContext, useEffect, useState } from 'react';
 import AppContext from '../context/Appcontext';
 import { ethers } from 'ethers';
-import { ERC20ABI, abi2 } from '../constants/abi';
+import { ERC20ABI, ERC721, abi2 } from '../constants/abi';
 import {Spinner} from "@nextui-org/react";
 import TransactionImg from '../assets/images/transaction.png';
 
@@ -84,10 +84,27 @@ const TradeOtc = ({closeHeader}) => {
 
             var id = parseInt(tradeId)
 
+            const hexToDecimal = hex => parseInt(hex, 16)
+            let value = hexToDecimal(Trade.receivingToken.value._hex);
+
+            console.log(value)
+
+
+            let response ;
             const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
-            const response = await contract.withdraw(
-                id
-            )
+
+
+            if ( value < 1000000 ) {
+                
+                response = await contract.withdraw(id,{
+                    gasLimit:1000000
+                })  
+
+            }else{
+                response = await contract.withdraw(id)
+            }
+
+            
 
             if ( response ) {
                 console.log(response)
@@ -105,25 +122,10 @@ const TradeOtc = ({closeHeader}) => {
 
             // var id = parseInt(tradeId)
 
-            const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
-            const response = await contract.withdraw(id)
-
-            if ( response ) {
-                console.log(response)
-                setsuccessMsg(true)
-                setminiLoading(false)
-                
-                setTimeout(() => {
-                    window.location.reload()
-                }, 4000);
-
-            }else{
-                setminiLoading(false)
+            setminiLoading(false)
             console.log(error)
             setopenModal(true)
-            }
-
-            
+        
         }
         
     }
@@ -143,10 +145,21 @@ const TradeOtc = ({closeHeader}) => {
 
             // value = value / 1000000
 
-            console.log(Trade.givingToken)
+            // console.log(Trade.givingToken)
 
-            const approveToken = new ethers.Contract(Trade.receivingToken.tokenAddress,ERC20ABI,signer)
-            const approveResponse = await approveToken.approve('0xfe815da50dbedbcb3d0f3e076821c98b294fd81c',value)
+            let approveResponse ;
+
+            if ( value < 1000000 ) {
+                
+                const approveToken = new ethers.Contract(Trade.receivingToken.tokenAddress,ERC721,signer)
+                approveResponse = await approveToken.approve('0x86a04287dafc09b450bee2b5c99cee0b1ae20be7',value)    
+
+            }else{
+
+                const approveToken = new ethers.Contract(Trade.receivingToken.tokenAddress,ERC20ABI,signer)
+                approveResponse = await approveToken.approve('0xfe815da50dbedbcb3d0f3e076821c98b294fd81c',value)    
+
+            }
 
             if ( approveResponse ) {
                 
