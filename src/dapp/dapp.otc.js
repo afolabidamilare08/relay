@@ -39,6 +39,11 @@ const OtcDapp = ({closeHeader}) => {
 
     const [ Filters, setFilters ] = useState('')
 
+    const [ Miniloading, setMiniloading ] = useState({
+        status:false,
+        id:''
+    })
+
 
     const GetUserTransactions = async () => {
 
@@ -90,7 +95,7 @@ const OtcDapp = ({closeHeader}) => {
                             const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
                             const response = await contract.getTrade(dec1)
     
-                            console.log(response)
+                            // console.log(response)
     
                             if ( response.length > 1 ) {
                                 
@@ -157,7 +162,7 @@ const OtcDapp = ({closeHeader}) => {
 
         }
         catch(error){
-            console.log(error)
+            // console.log(error)
             setLoadingTransactions(false)
             setErorr('Could not get transactions')
         }
@@ -168,24 +173,23 @@ const OtcDapp = ({closeHeader}) => {
     const WithdrawalHandler = async (trade) => {
 
         // setminiLoading(true)
+        setMiniloading({
+            status:true,
+            id:trade.tradeId
+        })
 
         try{
-
             var id = parseInt(trade.tradeId)
-
             const hexToDecimal = hex => parseInt(hex, 16)
             let value = hexToDecimal(trade.givingToken.value._hex);
-
-            console.log(value)
-
+            // console.log(value)
 
             let response ;
             const contract = new ethers.Contract('0xa138a388cbd9796e9C08A159c40b6896b8538115',abi2,signer)
 
-
             // ethers.g
 
-            if ( value < 1000000 ) {
+            if ( trade.givingToken.controller === '0x86A04287DAFC09B450BEe2B5C99cee0B1aE20Be7' ) {
                 
                 response = await contract.withdraw(id,{
                     value: ethers.utils.parseEther('0.01')
@@ -200,7 +204,7 @@ const OtcDapp = ({closeHeader}) => {
             
 
             if ( response ) {
-                console.log(response)
+                // console.log(response)
                 setsuccessMsg(true)
                 // setminiLoading(false)
                 
@@ -214,10 +218,14 @@ const OtcDapp = ({closeHeader}) => {
         catch(error){
 
             // var id = parseInt(tradeId)
-
             // setminiLoading(false)
-            console.log(error)
-            setopenModal(true)
+            // console.log(error)
+            setMiniloading({
+                status:false,
+                id:""
+            })
+            alert("Something went wrong")
+            // setopenModal(true)
         
         }
         
@@ -414,9 +422,10 @@ const OtcDapp = ({closeHeader}) => {
 
                                     if ( Filters === 'pending' ) {
                                         
-                                        if ( !trade.givingToken.isSwapped || !trade.receivingToken.isSwapped ) {
+                                        if ( !trade.givingToken.isSwapped || !trade.receivingToken.isSwapped || !trade.givingToken.isExecuted || !trade.receivingToken.isExecuted ) {
                                             return (
                                                 <TradeComponent 
+                                                    loading={ Miniloading.status && Miniloading.id === trade.tradeId ? true : false }
                                                     key={index}
                                                     trade={trade}
                                                     givingToken={trade.givingToken}
@@ -435,6 +444,7 @@ const OtcDapp = ({closeHeader}) => {
                                             return (
                                                 <TradeComponent 
                                                     key={index}
+                                                    loading={ Miniloading.status && Miniloading.id === trade.tradeId ? true : false }
                                                     trade={trade}
                                                     givingToken={trade.givingToken}
                                                     withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
@@ -451,6 +461,7 @@ const OtcDapp = ({closeHeader}) => {
                                             <TradeComponent 
                                                 key={index}
                                                 trade={trade}
+                                                loading={ Miniloading.status && Miniloading.id === trade.tradeId ? true : false }
                                                 givingToken={trade.givingToken}
                                                 withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
                                                 receivingToken={trade.receivingToken}
@@ -464,7 +475,7 @@ const OtcDapp = ({closeHeader}) => {
                         : <div onClick={ 
                         () => console.log(UserPublicTrades)
 
-                         } >clclcl</div>
+                         } ></div>
                     
                     : LoadingTransactions ?
                     
@@ -492,11 +503,12 @@ const OtcDapp = ({closeHeader}) => {
 
                             if ( Filters === 'pending' ) {
                                         
-                                if ( !trade.givingToken.isSwapped || !trade.receivingToken.isSwapped ) {
+                                if ( !trade.givingToken.isSwapped || !trade.receivingToken.isSwapped || !trade.givingToken.isExecuted || !trade.receivingToken.isExecuted ) {
                                     return (
                                         <TradeComponent 
                                             key={index}
                                             trade={trade}
+                                            loading={ Miniloading.status && Miniloading.id === trade.tradeId ? true : false }
                                             givingToken={trade.givingToken}
                                             withdrawalFunction={ () => WithdrawalHandler(trade.tradeId) }
                                             receivingToken={trade.receivingToken}
@@ -514,6 +526,7 @@ const OtcDapp = ({closeHeader}) => {
                                         <TradeComponent 
                                             key={index}
                                             trade={trade}
+                                            loading={ Miniloading.status && Miniloading.id === trade.tradeId ? true : false }
                                             givingToken={trade.givingToken}
                                             withdrawalFunction={ () => WithdrawalHandler(trade) }
                                             receivingToken={trade.receivingToken}
@@ -529,6 +542,7 @@ const OtcDapp = ({closeHeader}) => {
                                     <TradeComponent 
                                         key={index}
                                         trade={trade}
+                                        loading={ Miniloading.status && Miniloading.id === trade.tradeId ? true : false }
                                         givingToken={trade.givingToken}
                                         withdrawalFunction={ () => WithdrawalHandler(trade) }
                                         receivingToken={trade.receivingToken}

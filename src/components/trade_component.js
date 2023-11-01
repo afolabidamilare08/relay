@@ -64,7 +64,7 @@ const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction
 
         }
         catch(error){
-            console.log(error)
+            // console.log(error)
         }
 
     }
@@ -89,7 +89,7 @@ const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction
                         <h5 className='trade_div_top_left' >{ recieveTok ? recieveTok.symbol : '' } / { givingTok ? givingTok.symbol : '' }</h5>
                         <div className='trade_div_top_right'  >
                             <h6 className='trade_div_top_right_txt' >Copy Trade URL</h6>
-                            <CopyToClipboard text={`https://relay-three.vercel.app/trade_detail/${trade.tradeId}`} onCopy={ () => alert("Link Copied") } >
+                            <CopyToClipboard text={`https://www.relaydapp.xyz/trade_detail/${trade.tradeId}`} onCopy={ () => alert("Link Copied") } >
                                 <BiSolidCopy className='trade_div_top_right_ic' style={{
                                     cursor:"pointer"
                                 }} />
@@ -100,11 +100,11 @@ const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction
                     <div className='trade_div_GW' >
                         <h6 className='trade_div_GW_txt' >
                             <span>Gives:</span>
-                            { recieveTok ? recieveTok.isToken ? 'Nft' : recieveTok.value : '' }
+                            { recieveTok ? recieveTok.isToken ? `Nft ${recieveTok.value}` : recieveTok.value : '' }
                         </h6>
                         <h6 className='trade_div_GW_txt' >
                             <span>Wants:</span>
-                            { givingTok ? givingTok.isToken ? 'Nft' : givingTok.value : '' }
+                            { givingTok ? givingTok.isToken ? `Nft ${givingTok.value}` : givingTok.value : '' }
                         </h6>
                     </div>
 
@@ -153,6 +153,7 @@ const TradeComponent = ({ receivingToken, givingToken, trade, withdrawalFunction
                         <button className='trade_div_btn' disabled={loading} onClick={withdrawalFunction} >
                             { loading ? <Spinner size='sm' color='default' /> : 'Withdraw Token'}
                         </button> 
+
                         :
 
                         <button className='trade_div_btn' disabled={loading} onClick={withdrawalFunction} >
@@ -207,6 +208,8 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
 
             let isToken;
 
+            // console.log(value)
+
             if ( value < 1000000 ) {
                 isToken = true
             }else{
@@ -214,7 +217,7 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
                 value = value / 1000000
             }
 
-            value = value / 1000000
+            // value = value / 1000000
 
             let tokendet = {
                 name:name,
@@ -233,7 +236,7 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
 
         }
         catch(error){
-            console.log(error)
+            // console.log(error)
         }
 
     }
@@ -258,7 +261,7 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
                         <h5 className='trade_div_top_left' >{ recieveTok ? recieveTok.symbol : '' } / { givingTok ? givingTok.symbol : '' }</h5>
                         <div className='trade_div_top_right'  >
                             <h6 className='trade_div_top_right_txt' >Copy Trade URL</h6>
-                            <CopyToClipboard text={`https://relay-three.vercel.app/trade_detail/${trade.tradeId}`} onCopy={ () => alert("Link Copied") } >
+                            <CopyToClipboard text={`https://www.relaydapp.xyz/trade_detail/${trade.tradeId}`} onCopy={ () => alert("Link Copied") } >
                                 <BiSolidCopy className='trade_div_top_right_ic' style={{
                                     cursor:"pointer"
                                 }} />
@@ -269,11 +272,11 @@ const TradeDetail = ({ receivingToken, givingToken, trade, withdrawalFunction, c
                     <div className='trade_div_GW' >
                         <h6 className='trade_div_GW_txt' >
                             <span>Gives:</span>
-                            { recieveTok ? receivingToken.isToken ? 'Nft' : recieveTok.value : '' }
+                            { recieveTok ? recieveTok.isToken ? `Nft ${recieveTok.value}` : recieveTok.value : '' }
                         </h6>
                         <h6 className='trade_div_GW_txt' >
                             <span>Receive:</span>
-                            { givingTok ? givingTok.isToken ? 'Nft' : givingTok.value : '' }
+                            { givingTok ? givingTok.isToken ? `Nft ${givingTok.value} ` : givingTok.value : '' }
                         </h6>
                     </div>
 

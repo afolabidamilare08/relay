@@ -105,7 +105,7 @@ const SetuptradeDapp = ({ closeHeader }) => {
         tokenToswap.name !== "Ethereum"
       ) {
         if (tokenToswap.TradeId !== null) {
-          console.log("gothere_");
+          // console.log("gothere_");
 
           params = {
             owner2: owner2,
@@ -155,10 +155,10 @@ const SetuptradeDapp = ({ closeHeader }) => {
         tokenToreceive.name !== "Ethereum" &&
         tokenToswap.name === "Ethereum"
       ) {
-        console.log("gothere_");
+        // console.log("gothere_");
 
         if (tokenToreceive.tokenId !== null) {
-          console.log("gothere_");
+          // console.log("gothere_");
 
           params = {
             owner2: owner2,
@@ -183,7 +183,7 @@ const SetuptradeDapp = ({ closeHeader }) => {
         }
 
         if (tokenToreceive.tokenId == null) {
-          console.log("gothere_");
+          // console.log("gothere_");
 
           params = {
             owner2: owner2,
@@ -213,7 +213,7 @@ const SetuptradeDapp = ({ closeHeader }) => {
         tokenToswap.name !== "Ethereum"
       ) {
         if (tokenToreceive.tokenId !== null && tokenToswap.tokenId === null) {
-          console.log("gothere_");
+          // console.log("gothere_");
 
           params = {
             owner2: owner2,
@@ -239,7 +239,7 @@ const SetuptradeDapp = ({ closeHeader }) => {
         }
 
         if (tokenToreceive.tokenId === null && tokenToswap.tokenId !== null) {
-          console.log("dhdu");
+          // console.log("dhdu");
           params = {
             owner2: owner2,
             eth: [],
@@ -334,20 +334,25 @@ const SetuptradeDapp = ({ closeHeader }) => {
 
       const response = await contract.createTrade(params);
 
-      console.log(response);
-
       if (response.hash) {
         // count2  = count2 * 1000000
 
         let approveResponse;
 
+        // console.log(tokenToswap.tokenId)
+
         if (tokenToswap.tokenId !== null) {
+
           var id = parseInt(tokenToswap.tokenId, 10);
+
+
+
           const Approve71Token = new ethers.Contract(
             tokenToswap.tokenAddress,
             ERC721,
             signer
           );
+
           approveResponse = await Approve71Token.approve(
             "0x86a04287dafc09b450bee2b5c99cee0b1ae20be7",
             id
@@ -364,6 +369,7 @@ const SetuptradeDapp = ({ closeHeader }) => {
           );
         }
 
+
         if (approveResponse) {
         }
 
@@ -371,7 +377,7 @@ const SetuptradeDapp = ({ closeHeader }) => {
           response.hash
         );
 
-        console.log(ethersScanProvider);
+        // console.log(ethersScanProvider);
 
         if (ethersScanProvider.logs[0].topics) {
           const hexToDecimal = (hex) => parseInt(hex, 16);
@@ -395,6 +401,56 @@ const SetuptradeDapp = ({ closeHeader }) => {
           executeresponse = await executecontract.execute(TradeId);
 
           console.log(executeresponse);
+
+          if ( tokenToreceive.tokenId ) {
+            
+            var address3 = tokenToreceive.tokenAddress
+            address3 = address3.toLowerCase()
+      
+            // console.log(address3);
+      
+      
+            const submit2 = await fetch('http://localhost:5001/auth/add_nft',{
+              method:"POST",
+              headers:{
+              "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                address:address3,
+                name: "tokenToswap.name",
+                symbol:"next"
+              })
+            })
+      
+            const response2 = await submit2.json()
+            // console.log(response2)
+
+          }
+
+          if ( tokenToswap.tokenId ) {
+            
+              var address2 = tokenToswap.tokenAddress
+              address2 = address2.toLowerCase()
+        
+              // console.log(address2);
+        
+        
+              const submit2 = await fetch('http://localhost:5001/auth/add_nft',{
+                method:"POST",
+                headers:{
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  address:address2,
+                  name: "tokenToswap.name",
+                  symbol:"next"
+                })
+              })
+        
+              const response2 = await submit2.json()
+              console.log(response2)
+
+          }
 
           setTradeCreated(true);
           setisLoading(false);
@@ -426,7 +482,7 @@ const SetuptradeDapp = ({ closeHeader }) => {
         return;
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setisLoading(false);
       setdisplayError(true);
       seterrorMessage("Something went wrong while processing your transaction");

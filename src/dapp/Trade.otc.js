@@ -24,6 +24,7 @@ import { ethers, utils } from "ethers";
 import { ERC20ABI, ERC721, abi2 } from "../constants/abi";
 import { Spinner } from "@nextui-org/react";
 import TransactionImg from "../assets/images/transaction.png";
+import { CheckNft } from "../constants/check";
 
 const TradeOtc = ({ closeHeader }) => {
   const [openModal, setopenModal] = useState(false);
@@ -35,6 +36,7 @@ const TradeOtc = ({ closeHeader }) => {
     walletProvider,
     signer,
     UpdatesideNav,
+    RpcUrl
   } = useContext(AppContext);
 
   const [Trade, setTrade] = useState(null);
@@ -56,7 +58,7 @@ const TradeOtc = ({ closeHeader }) => {
     var TradeID = parseInt(tradeId);
 
     try {
-      console.log(signer);
+      // console.log(signer);
 
       const contract = new ethers.Contract(
         "0xa138a388cbd9796e9C08A159c40b6896b8538115",
@@ -75,7 +77,7 @@ const TradeOtc = ({ closeHeader }) => {
         setLoadingTransactions(false);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setLoadingTransactions(false);
       setErorr("Could not get transactions");
     }
@@ -94,9 +96,9 @@ const TradeOtc = ({ closeHeader }) => {
       var id = parseInt(tradeId);
 
       const hexToDecimal = (hex) => parseInt(hex, 16);
-      let value = hexToDecimal(Trade.receivingToken.value._hex);
+      let value = hexToDecimal(Trade.givingToken.value._hex);
 
-      console.log(value);
+      // console.log(value);
 
       let response;
       const contract = new ethers.Contract(
@@ -118,19 +120,17 @@ const TradeOtc = ({ closeHeader }) => {
       }
 
       if (response) {
-        console.log(response);
+        // console.log(response);
         setsuccessMsg(true);
         setminiLoading(false);
-
         setMessage({
-            message:"You ve successfully accepted the trade, the page will refres in 5s",
-            title:"Trade Accepted"
-          })
-          setsuccessMsg(true);
+          message:"You ve successfully withdrawn",
+          title:"Trade Successful"
+        })
 
-          setTimeout(() => {
-            window.location.reload()
-          }, 5000);
+        setTimeout(() => {
+          window.location.reload();
+        }, 4000);
       }
     } catch (error) {
       // var id = parseInt(tradeId)
@@ -150,15 +150,14 @@ const TradeOtc = ({ closeHeader }) => {
       const hexToDecimal = (hex) => parseInt(hex, 16);
       let value = hexToDecimal(Trade.receivingToken.value._hex);
 
-      console.log(value);
+      // console.log(value);
 
-      // value = value / 1000000
-
-      // console.log(Trade.givingToken)
+      // return
 
       let approveResponse;
 
-      if (value < 1000000) {
+ 
+      if ( value < 1000000 ) {
         const approveToken = new ethers.Contract(
           Trade.receivingToken.tokenAddress,
           ERC721,
@@ -218,7 +217,7 @@ const TradeOtc = ({ closeHeader }) => {
 
       // setsuccessMsg(true)
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setopenModal(true);
       setminiLoading(false);
     }

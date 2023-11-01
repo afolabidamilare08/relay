@@ -27,7 +27,7 @@ const chains = [42161]
 const metadata = {
   name: 'Relay',
   description: 'Innovative DeFi tool for secure OTC trading experience',
-  url: 'https://relay-three.vercel.app',
+  url: 'https://www.relaydapp.xyz',
   // url: 'http://localhost:3000',
   icons: ['https://avatars.mywebsite.com/']
 }

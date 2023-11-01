@@ -10,11 +10,12 @@ const OurTokennomicsComponents = () => {
 
     const Details = [
 
-        { title: "Staking Rewards", percentage: '45%' },
-        { title: "Tresury", percentage: '17%' },
-        { title: "Presale", percentage: '15%' },
+        { title: "Staking Rewards", percentage: '20%' },
+        { title: "Initial Liquidity", percentage: '18.5%' },
+        { title: "Private Sale", percentage: '17.5%' },
+        { title: "Public Sale", percentage: '19%' },
+        { title: "Tresury", percentage: '10%' },
         { title: "Team", percentage: '15%' },
-        { title: "Initial Liquidity", percentage: '13%' }
 
     ]
 
