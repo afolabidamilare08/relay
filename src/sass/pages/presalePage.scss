@@ -1,0 +1,177 @@
+.presale{
+
+    &_header{
+        border: 1px solid white;
+        position: fixed;
+        top: 2rem;
+        width: 70%;
+        left: 15%;
+
+    }
+
+}
+
+.presale_hero_section{
+    // border: 1px solid red; 
+    // padding-top: 3rem;
+    position: relative;
+    // height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    padding: 20vh 0rem;
+
+    &_top{
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+        
+
+        & img{
+            width: 4rem;
+            height: 4rem;
+            object-fit: contain;
+        }
+
+        & h4{
+            margin-left: 1rem;
+            color: white;
+            font-family: var(--syne);
+            font-size: 2rem;
+            font-weight: 400;
+        }
+
+    }
+
+    &_main{
+        margin-top: 3rem;
+        width: 60%;
+        position: relative;
+        z-index: 10;
+        color: white;
+        font-family: var(--syne);
+        font-size: 4rem;
+        line-height: 3.3rem;
+        text-align: center;
+    }
+
+    &_bg{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        object-fit: cover;
+        object-position: top;
+        height: 100%;
+    }
+
+    &_spiral{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 40%;
+        object-fit: contain;
+        object-position: top;
+        height: 100%;
+    }
+
+}
+
+
+@media (max-width:1024px){
+
+    .presale_hero_section_top{
+
+    }
+
+    .presale_hero_section_main{
+        width: 70%;
+    }
+
+}
+
+
+@media (max-width:768px){
+
+    .presale_hero_section_top{
+
+        & img{
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        & h4{
+            margin-left: .9rem;
+            font-size: 1.6rem;
+        }
+
+    }
+
+    .presale_hero_section_main{
+        width:80%;
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+    }
+
+}
+
+@media (max-width:425px){
+
+    .presale_hero_section{
+        padding: 15vh 0;
+    }
+
+    .presale_hero_section_top{
+
+        & img{
+            width: 1.8rem;
+            height: 1.8rem;
+        }
+
+        & h4{
+            margin-left: .9rem;
+            font-size: 1.4rem;
+        }
+
+    }
+
+    .presale_hero_section_main{
+        width:80%;
+        margin-top: 1.3rem;
+        font-size: 1.3rem;
+        line-height: 1.6rem;
+    }
+
+}
+
+@media (max-width:375px){
+
+    .presale_hero_section{
+        padding: 15vh 0;
+    }
+
+    .presale_hero_section_top{
+
+        & img{
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        & h4{
+            margin-left: .7rem;
+            font-size: 1.3rem;
+        }
+
+    }
+
+    .presale_hero_section_main{
+        width:80%;
+        margin-top: 1.3rem;
+        font-size: 1.2rem;
+        line-height: 1.4rem;
+    }
+
+}

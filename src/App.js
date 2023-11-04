@@ -17,6 +17,7 @@ import TradeOtc from './dapp/Trade.otc';
 import Logo from './assets/images/logo.png';
 import { Spinner } from '@nextui-org/react';
 import { ComingSoonModal, ErrorModal } from './components/backDropComponent';
+import PresalePage from './pages/presalePage';
 
 const projectId = 'a6b30bc12f5a5db7c09d0b165d354ca9'
 
@@ -28,7 +29,6 @@ const metadata = {
   name: 'Relay',
   description: 'Innovative DeFi tool for secure OTC trading experience',
   url: 'https://www.relaydapp.xyz',
-  // url: 'http://localhost:3000',
   icons: ['https://avatars.mywebsite.com/']
 }
 
@@ -131,6 +131,8 @@ function App() {
       :
         <Routes>
           <Route path='/' element={ <LandingPage/> } />
+
+          <Route path='/presale' element={ <PresalePage/> } />
 
           <Route path='/staking' element={ <DappIndex
             component={<StakingPage closeHeader={ () => setopenSideNav(!openSideNav) } />}
