@@ -5,9 +5,58 @@ import RightEcliImg from '../assets/images/Ellipse_28.png';
 import LeftEcliImg from '../assets/images/Ellipse_29.png';
 import {  motion } from 'framer-motion';
 import { PiWarningOctagonFill } from 'react-icons/pi'
-
+import { useContext, useState } from 'react';
+import AppContext from '../context/Appcontext';
+import { ethers } from 'ethers';
+import { ERC20ABI, PRESALEABI, VESTINGABI } from '../constants/abi';
+import { Spinner } from '@nextui-org/react';
+import { EditableSuccessModal, ErrorModal2 } from './backDropComponent';
 
 const ClaimTokenComponent = () => {
+
+    const { user_account, enableWeb3, signer } = useContext(AppContext)
+    const [ isLoading, setisLoading ] = useState(false)
+    const [ iserror, setiserror ] = useState({
+        status:false,
+        title:"",
+        message:""
+    })
+    const [ isSuccess, setisSuccess ] = useState({
+        status:false,
+        title:"",
+        message:""
+    })
+
+    const claimHandler = async () => {
+
+        setisLoading(true)
+
+        try{
+
+            const claim = new ethers.Contract('0x679E06CB1D115f612cba350659959Ad29C619Bb8',VESTINGABI,signer)
+
+            const claimResponse = await claim.claim()
+
+            if( claimResponse ){
+                setisLoading(false)
+                setisSuccess({
+                    status:true,
+                    title:"Success",
+                    message:"You have successfully contributed to this project"
+                })
+            }
+
+        }
+        catch(error){
+            setisLoading(false)
+            setiserror({
+                status:true,
+                title:"Something went wrong",
+                message:"error message"
+            })
+        }
+
+    }
 
     return (
 
@@ -43,9 +92,11 @@ const ClaimTokenComponent = () => {
 
                 </div>
 
-                <button className='presale_publicsale_div_btnBm' >
-                    Claim Tokens
-                </button>
+                { user_account ? <button disabled={isLoading} className='presale_publicsale_div_btnBm'  onClick={ () => claimHandler() } >
+                    { isLoading ? <Spinner color="default" size="sm" /> : 'Claim Tokens' }
+                </button> : <button onClick={ () => enableWeb3() } className='presale_publicsale_div_btnBm' >
+                    Connect Wallet
+                </button> }
 
             </div>
 
@@ -55,6 +106,35 @@ const ClaimTokenComponent = () => {
             <img src={RightEcliImg} alt="ss" className='presale_publicsale_div_miniRight' />
             <img src={LeftEcliImg} alt="ss" className='presale_publicsale_div_miniLeft' /> */}
 
+{ isSuccess.status ? 
+            
+            <EditableSuccessModal
+                closeModal={ () => setisSuccess({
+                    status:false,
+                    title:"",
+                    message:""
+                }) }
+                modal_message={ isSuccess.message }
+                modal_title={isSuccess.title}
+                presale={true}
+            />
+        
+        : <></> }
+
+        { iserror.status ?
+        
+        
+            <ErrorModal2
+                closeModal={ () => setiserror({
+                    status:false,
+                    title:"",
+                    message:""
+                }) }
+                msg={iserror.message}
+                presale={true}
+            />
+
+        : <></> }
 
         </div>
 

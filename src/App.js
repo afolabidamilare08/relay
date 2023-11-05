@@ -57,6 +57,8 @@ function App() {
 
   const MainControllercontractAddress = '0xa138a388cbd9796e9C08A159c40b6896b8538115'
 
+  const PresaleSmartContractAddress = '0xf9d301f3A4C3839A4D44cb8B9d98D238ca43F0a0'
+
   const RpcUrl = 'https://arbitrum-goerli.infura.io/v3/a9999d0d4a744c9b893ae34318117d25'
 
   const [ preLoader, setpreLoader ] = useState(true)
@@ -101,6 +103,7 @@ function App() {
             TradeFactorycontractAddress:TradeFactorycontractAddress,
             MainControllercontractAddress:MainControllercontractAddress,
             RpcUrl:RpcUrl,
+            PresaleSmartContractAddress:PresaleSmartContractAddress,
             comingsoon:() => setOpenComingSoon(true)
           }}
         >

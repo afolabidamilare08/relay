@@ -12,6 +12,7 @@ const AppContext = React.createContext({
   walletProvider:false,
   TradeFactorycontractAddress:false,
   MainControllercontractAddress:false,
+  PresaleSmartContractAddress:false,
   RpcUrl: false,
   comingsoon:false
 });

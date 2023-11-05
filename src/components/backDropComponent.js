@@ -315,11 +315,13 @@ const ErrorModal = ({closeModal}) => {
 
 }
 
-const ErrorModal2 = ({closeModal,msg}) => {
+const ErrorModal2 = ({closeModal,msg,presale}) => {
 
     return (
 
-        <div className="backDrop" onClick={closeModal} >
+        <div className="backDrop" style={{
+            width: presale ? "100%" : ''
+        }} onClick={closeModal} >
 
             <motion.div className='backDrop_getToken'
                         
@@ -450,12 +452,14 @@ const SuccessModal = ({closeModal}) => {
 }
 
 
-const EditableSuccessModal = ({closeModal,modal_title,modal_message}) => {
+const EditableSuccessModal = ({closeModal,modal_title,modal_message, presale}) => {
 
 
     return (
 
-        <div className="backDrop" >
+        <div className="backDrop" style={{
+            width: presale ? "100%" : ''
+        }} >
 
             <motion.div className='backDrop_getToken'
                         
