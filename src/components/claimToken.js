@@ -5,7 +5,7 @@ import RightEcliImg from '../assets/images/Ellipse_28.png';
 import LeftEcliImg from '../assets/images/Ellipse_29.png';
 import {  motion } from 'framer-motion';
 import { PiWarningOctagonFill } from 'react-icons/pi'
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AppContext from '../context/Appcontext';
 import { ethers } from 'ethers';
 import { ERC20ABI, PRESALEABI, VESTINGABI } from '../constants/abi';
@@ -26,6 +26,9 @@ const ClaimTokenComponent = () => {
         title:"",
         message:""
     })
+
+    const [ Claimed, setClaimed ] = useState('')
+    const [ Outstanding, setOutstanding ] = useState('')
 
     const claimHandler = async () => {
 
@@ -58,6 +61,50 @@ const ClaimTokenComponent = () => {
 
     }
 
+
+    const HandleGetclaimed = async () => {
+
+        try{
+
+            const claim = new ethers.Contract('0x679E06CB1D115f612cba350659959Ad29C619Bb8',VESTINGABI,signer)
+
+            const claimResponse = await claim.claimed(user_account)
+
+            if( claimResponse ){
+
+                const hexToDecimal = (hex) => parseInt(hex, 16);
+                let number = hexToDecimal(claimResponse._hex);
+                // console.log(number)
+
+                setClaimed(number)
+
+                const OutstandingResponse = await claim.outstanding(user_account)
+                
+                if ( OutstandingResponse ){
+                    let out = hexToDecimal(OutstandingResponse._hex);
+                    // console.log(out)
+    
+                    setOutstanding(out)
+                }
+
+
+            }
+
+
+        }
+        catch(error){
+
+        }
+
+    }
+
+    useEffect( () => {
+        if (user_account && Claimed === '' ) {
+            HandleGetclaimed()
+        }
+    }, [user_account] )
+
+
     return (
 
         <div className='presale_publicsale_div' >
@@ -82,12 +129,12 @@ const ClaimTokenComponent = () => {
 
                     <div className='presale_publicsale_div_claim_div' >
                         <h5>Amount of tokens claimed:</h5>
-                        <h6>XXX</h6>
+                        <h6>{ Claimed }</h6>
                     </div>
 
                     <div className='presale_publicsale_div_claim_div' >
                         <h5>Ammount of tokens yet to be claimed:</h5>
-                        <h6>XXX</h6>
+                        <h6>{Outstanding}</h6>
                     </div>
 
                 </div>
