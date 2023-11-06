@@ -41,7 +41,10 @@ const PublicSaleComponent = () => {
             }
 
             let wei = parseInt(amountToContribute,10)
-            // wei = wei * 10^18
+            // wei = wei * 10000000000000000000
+            wei = ethers.utils.parseEther(amountToContribute)
+
+            console.log(wei)
 
             const ApproveToken = new ethers.Contract('0x034f47c9c0B3489b12B82Fa0e280C4fdC0Addac7',ERC20ABI,signer)
 
@@ -87,7 +90,9 @@ const PublicSaleComponent = () => {
             }
 
             let wei = parseInt(amountToContribute,10)
-            // wei = wei * 10^18
+            // wei = wei * 10000000000000000000
+            wei = ethers.utils.parseEther(amountToContribute)
+
 
             const contribute = new ethers.Contract(PresaleSmartContractAddress,PRESALEABI,signer)
 
