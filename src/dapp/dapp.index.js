@@ -5,6 +5,7 @@ import '../sass/main.scss';
 import LogoImg from '../assets/images/logo.png';
 import TwitterImg from '../assets/images/twitter.png';
 import TelegramImg from '../assets/images/telegram.png';
+import RelayImg from '../assets/images/relay_ic.png';
 import MyGImg from '../assets/images/my_g.png';
 import DiscordImg from '../assets/images/discord.png';
 import { AiOutlineCopyrightCircle} from 'react-icons/ai';
@@ -61,7 +62,10 @@ function DappIndex({ component }) {
                     </NavLink>
 
                     <Link className='dappIndex_left_div_link' >
-                        <span>🪙</span>Get $RLY
+                    <img src={RelayImg} alt="" style={{
+                            display:"inline-block",
+                            marginRight:'1rem'
+                        }} />Get $RLY
                     </Link>
 
                     <a href="https://relay-2.gitbook.io/relay/" className='dappIndex_left_div_link' >
@@ -175,7 +179,10 @@ function DappIndex({ component }) {
                         className='dappIndex_left_div_link'
                         onClick={ () => UpdatesideNav() }
                      >
-                        <span>🪙</span>Get $RLY
+                        <img src={RelayImg} alt="" style={{
+                            display:"inline-block",
+                            marginRight:'1rem'
+                        }} />Get $RLY
                     </Link>
 
                     <a href="https://relay-2.gitbook.io/relay/" 
