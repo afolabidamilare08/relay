@@ -20,8 +20,8 @@ const HeroSectionComponents = () => {
                     <div className="hero_section_main_center_txt" >
 
                         <h5>
-                            Innovative DeFi tool for
-                            secure OTC trading 
+                            Innovative DeFi tools for
+                            a secure OTC trading 
                             <h5 style={{position:"relative"}} >  experience.
                                 <img src={roundImg} alt='vexxf' />
                             </h5>
